@@ -1,0 +1,17 @@
+[project]
+name = "reliora-ai-support-platform"
+version = "0.1.0"
+description = "A production-engineering case study for reliable, observable, and safely controlled AI-assisted customer support on AWS."
+readme = "README.md"
+authors = [
+    { name = "Aaron Malunga" }
+]
+requires-python = ">=3.12,<3.13"
+dependencies = []
+
+[build-system]
+requires = ["uv_build>=0.12.7,<0.13.0"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "reliora"
