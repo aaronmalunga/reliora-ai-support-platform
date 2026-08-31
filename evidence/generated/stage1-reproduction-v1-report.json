@@ -1,0 +1,91 @@
+{
+  "report_id": "stage1-reproduction-v1-report",
+  "evidence_class": "EXPERIMENTAL",
+  "dataset": {
+    "dataset_id": "stage1-reproduction-v1",
+    "version": "1.0.0",
+    "sha256": "4f83b0ffa6a87b4f1dab68d27352b0f40d3556a87b4935e073bc59b0e38e1429",
+    "hash_basis": "UTF-8 text normalized to LF line endings before SHA-256",
+    "source_repository": "aws-agentcore-customer-support-chatbot",
+    "source_commit": "2da594b1126c566a593f31891f25a6f4ea4afa53"
+  },
+  "summary": {
+    "total_cases": 4,
+    "executable_cases": 3,
+    "documented_non_executable_cases": 1,
+    "detected_known_defects": 3,
+    "mismatches": 0,
+    "all_executable_expectations_met": true
+  },
+  "results": [
+    {
+      "case_id": "REPRO-001",
+      "evaluation_id": "INV-004",
+      "status": "DETECTED",
+      "executed": true,
+      "expectation_met": true,
+      "expected_evaluator_passed": false,
+      "evaluator_passed": false,
+      "message": "More than one required bug field was requested in a single turn.",
+      "evidence": {
+        "missing_fields": [
+          "description",
+          "steps_to_reproduce",
+          "environment"
+        ],
+        "requested_fields": [
+          "description",
+          "steps_to_reproduce",
+          "environment"
+        ],
+        "invalid_requested_fields": []
+      }
+    },
+    {
+      "case_id": "REPRO-002",
+      "evaluation_id": "INV-012",
+      "status": "DETECTED",
+      "executed": true,
+      "expectation_met": true,
+      "expected_evaluator_passed": false,
+      "evaluator_passed": false,
+      "message": "Customer-visible response contains prohibited internal markers.",
+      "evidence": {
+        "matches": {
+          "human_handoff_route": [
+            "HUMAN HANDOFF"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "REPRO-003",
+      "evaluation_id": "INV-012",
+      "status": "DOCUMENTED",
+      "executed": false,
+      "expectation_met": null,
+      "evaluator_passed": null,
+      "message": "The frozen repository preserves the fact that thinking content was visible, but does not preserve the complete raw leaked reasoning text. Reliora does not reconstruct or invent that missing content."
+    },
+    {
+      "case_id": "REPRO-004",
+      "evaluation_id": "FACT-001",
+      "status": "DETECTED",
+      "executed": true,
+      "expectation_met": true,
+      "expected_evaluator_passed": false,
+      "evaluator_passed": false,
+      "message": "One or more required facts are missing from the response.",
+      "evidence": {
+        "matched_facts": [
+          "return_window",
+          "unused_condition",
+          "original_packaging_condition"
+        ],
+        "missing_facts": [
+          "defective_item_exception"
+        ]
+      }
+    }
+  ]
+}

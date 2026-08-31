@@ -14,7 +14,7 @@ def test_clean_customer_response_passes() -> None:
     result = evaluate_internal_information_leakage(response)
 
     assert result.passed is True
-    assert result.invariant_id == "INV-012"
+    assert result.evaluation_id == "INV-012"
     assert result.evidence["matches"] == {}
 
 

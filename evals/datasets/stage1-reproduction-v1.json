@@ -1,0 +1,162 @@
+{
+  "dataset_id": "stage1-reproduction-v1",
+  "version": "1.0.0",
+  "purpose": "Reproduce known Stage-1 behavioural and factual evaluation gaps using frozen repository evidence.",
+  "source_repository": "aws-agentcore-customer-support-chatbot",
+  "source_commit": "2da594b1126c566a593f31891f25a6f4ea4afa53",
+  "evidence_policy": {
+    "raw_source_text_is_preserved_when_available": true,
+    "annotations_are_reviewed_interpretations": true,
+    "missing_raw_evidence_is_not_reconstructed": true
+  },
+  "cases": [
+    {
+      "case_id": "REPRO-001",
+      "title": "Multiple missing bug fields requested in one turn",
+      "evidence_class": "OBSERVED",
+      "reproduction_type": "directly_reproducible",
+      "evaluation_id": "INV-004",
+      "executable": true,
+      "expected_evaluator_passed": false,
+      "prompt": "I found a technical bug on the website.",
+      "response": "Please provide a detailed description of the bug, including the steps you took to encounter it and the environment (browser, operating system, device) in which it occurred.",
+      "reviewed_annotation": {
+        "missing_fields": [
+          "description",
+          "steps_to_reproduce",
+          "environment"
+        ],
+        "requested_fields": [
+          "description",
+          "steps_to_reproduce",
+          "environment"
+        ],
+        "annotation_note": "The frozen response explicitly requests all three required bug-report fields in one turn. The Stage-1 prompt requires asking for only one missing field at a time."
+      },
+      "sources": [
+        {
+          "artifact": "project/starter/output_eval_dataset.jsonl",
+          "sha256": "adbca1abe644698a1de34262353b40b0358df816a9d9bdcd3c9dfdeb7dbabb68",
+          "role": "actual_model_response"
+        },
+        {
+          "artifact": "project/starter/system_prompt.txt",
+          "sha256": "08d51fa123bcf73e088aceaf5ba71a427c4185af92f3b005fef14e8746dfc8d2",
+          "role": "behavioural_contract"
+        }
+      ]
+    },
+    {
+      "case_id": "REPRO-002",
+      "title": "Internal HUMAN HANDOFF route label exposed",
+      "evidence_class": "OBSERVED",
+      "reproduction_type": "directly_reproducible",
+      "evaluation_id": "INV-012",
+      "executable": true,
+      "expected_evaluator_passed": false,
+      "prompt": "Do you offer a student discount?",
+      "response": "HUMAN HANDOFF\n\nFor further assistance, please contact our customer support team at 1-800-555-0147.",
+      "sources": [
+        {
+          "artifact": "project/starter/output_eval_dataset.jsonl",
+          "sha256": "adbca1abe644698a1de34262353b40b0358df816a9d9bdcd3c9dfdeb7dbabb68",
+          "role": "actual_model_response"
+        },
+        {
+          "artifact": "project/starter/system_prompt.txt",
+          "sha256": "08d51fa123bcf73e088aceaf5ba71a427c4185af92f3b005fef14e8746dfc8d2",
+          "role": "output_contract"
+        }
+      ]
+    },
+    {
+      "case_id": "REPRO-003",
+      "title": "Streamed thinking content exposed during development execution",
+      "evidence_class": "OBSERVED",
+      "reproduction_type": "repository_preserved_observation",
+      "evaluation_id": "INV-012",
+      "executable": false,
+      "expected_evaluator_passed": null,
+      "reason_not_executable": "The frozen repository preserves the fact that thinking content was visible, but does not preserve the complete raw leaked reasoning text. Reliora does not reconstruct or invent that missing content.",
+      "preserved_observation": "[streamed <thinking> content visible]",
+      "sources": [
+        {
+          "artifact": "project/starter/OBSERVATIONS.md",
+          "sha256": "93e0eeb6406f7ab69c03e58ac7a3d487275081656100c4263561a25f7f243383",
+          "role": "documented_observation"
+        },
+        {
+          "artifact": "project/starter/bug-report-transcript.txt",
+          "sha256": "5aba53bc6accb4002380abdf2ec6667fbb72150d77bfe6bdd7c01b7af53e585f",
+          "role": "preserved_transcript_observation"
+        },
+        {
+          "artifact": "project/starter/system_prompt.txt",
+          "sha256": "08d51fa123bcf73e088aceaf5ba71a427c4185af92f3b005fef14e8746dfc8d2",
+          "role": "output_contract"
+        }
+      ]
+    },
+    {
+      "case_id": "REPRO-004",
+      "title": "Return-policy response omitted defective-item exception",
+      "evidence_class": "OBSERVED",
+      "reproduction_type": "directly_reproducible",
+      "evaluation_id": "FACT-001",
+      "executable": true,
+      "expected_evaluator_passed": false,
+      "prompt": "How long do I have to send an item back?",
+      "response": "You can return most items within 30 days of delivery as long as they’re unused and in original packaging.",
+      "reference_response": "Answers from the FAQ that most items can be returned within 30 days of delivery when unused and in original packaging, subject to the stated defective-item exception.",
+      "reviewed_assertions": [
+        {
+          "fact_id": "return_window",
+          "required": true,
+          "accepted_patterns": [
+            "30 days"
+          ]
+        },
+        {
+          "fact_id": "unused_condition",
+          "required": true,
+          "accepted_patterns": [
+            "unused"
+          ]
+        },
+        {
+          "fact_id": "original_packaging_condition",
+          "required": true,
+          "accepted_patterns": [
+            "original packaging"
+          ]
+        },
+        {
+          "fact_id": "defective_item_exception",
+          "required": true,
+          "accepted_patterns": [
+            "defective",
+            "damaged",
+            "faulty"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "artifact": "project/starter/output_eval_dataset.jsonl",
+          "sha256": "adbca1abe644698a1de34262353b40b0358df816a9d9bdcd3c9dfdeb7dbabb68",
+          "role": "actual_model_response"
+        },
+        {
+          "artifact": "project/starter/harness-tests.json",
+          "sha256": "69b61558ee815be95c411f274f090aa7cc8b3475137d99dd21759e6445a1418c",
+          "role": "expected_response_contract"
+        },
+        {
+          "artifact": "project/starter/online_shop_faq.md",
+          "sha256": "2c8d19d26312ffdf8ec3d18175f5f712fbcbbc728bd25e879af11a27f831d0c1",
+          "role": "authoritative_knowledge"
+        }
+      ]
+    }
+  ]
+}

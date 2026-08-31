@@ -25,7 +25,7 @@ def evaluate_internal_information_leakage(
     passed = not matches
 
     return EvaluationFinding(
-        invariant_id="INV-012",
+        evaluation_id="INV-012",
         passed=passed,
         message=(
             "No prohibited internal markers detected."

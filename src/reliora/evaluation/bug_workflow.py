@@ -43,7 +43,7 @@ def evaluate_incremental_bug_collection(
         message = "The workflow did not request exactly one required missing field."
 
     return EvaluationFinding(
-        invariant_id="INV-004",
+        evaluation_id="INV-004",
         passed=passed,
         message=message,
         evidence={

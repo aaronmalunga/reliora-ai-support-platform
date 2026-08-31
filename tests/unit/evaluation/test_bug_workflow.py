@@ -16,7 +16,7 @@ def test_one_requested_missing_field_passes() -> None:
     )
 
     assert result.passed is True
-    assert result.invariant_id == "INV-004"
+    assert result.evaluation_id == "INV-004"
 
 
 def test_different_single_missing_field_can_be_requested() -> None:
