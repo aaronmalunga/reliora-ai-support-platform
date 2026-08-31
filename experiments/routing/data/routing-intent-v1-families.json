@@ -1,0 +1,551 @@
+{
+  "manifest_id": "routing-intent-v1-families",
+  "dataset_id": "routing-intent-v1",
+  "version": "1.0.0",
+  "status": "DESIGN_IN_PROGRESS",
+  "provenance": "SYNTHETIC_ASSUMPTION",
+  "split_policy": {
+    "unit": "semantic_family",
+    "train_families_per_intent": 9,
+    "validation_families_per_intent": 3,
+    "test_families_per_intent": 3,
+    "variants_per_family": 4
+  },
+  "families": [
+    {
+      "family_id": "bug-checkout-crash",
+      "intent": "BUG",
+      "split": "train",
+      "scenario": "Checkout or payment page crashes while the customer attempts to complete an order.",
+      "label_rationale": "The customer is reporting an apparent technical malfunction during checkout.",
+      "stressors": [
+        "checkout vocabulary",
+        "payment vocabulary",
+        "crash phrasing"
+      ]
+    },
+    {
+      "family_id": "bug-login-loop",
+      "intent": "BUG",
+      "split": "train",
+      "scenario": "Correct login attempts repeatedly return the customer to the sign-in screen.",
+      "label_rationale": "The customer is reporting malfunctioning authentication behaviour rather than asking how login works.",
+      "stressors": [
+        "authentication",
+        "repeated behaviour",
+        "may resemble account-help question"
+      ]
+    },
+    {
+      "family_id": "bug-cart-quantity-update",
+      "intent": "BUG",
+      "split": "train",
+      "scenario": "Changing an item's quantity in the cart does not update correctly.",
+      "label_rationale": "An interactive platform control is behaving incorrectly.",
+      "stressors": [
+        "cart vocabulary",
+        "quantity operations",
+        "functional malfunction"
+      ]
+    },
+    {
+      "family_id": "bug-search-malfunction",
+      "intent": "BUG",
+      "split": "train",
+      "scenario": "Product search fails to return expected results or produces a technical failure.",
+      "label_rationale": "The request reports incorrect search functionality rather than asking about product availability.",
+      "stressors": [
+        "search",
+        "product vocabulary",
+        "BUG versus PLATFORM boundary"
+      ]
+    },
+    {
+      "family_id": "bug-coupon-apply-failure",
+      "intent": "BUG",
+      "split": "train",
+      "scenario": "A coupon or promotion control fails technically when the customer attempts to apply it.",
+      "label_rationale": "The customer is reporting broken application behaviour, not asking whether a discount exists.",
+      "stressors": [
+        "discount vocabulary",
+        "promotion vocabulary",
+        "BUG versus PLATFORM boundary"
+      ]
+    },
+    {
+      "family_id": "bug-payment-button-unresponsive",
+      "intent": "BUG",
+      "split": "train",
+      "scenario": "The payment or purchase button does nothing when activated.",
+      "label_rationale": "A platform control is unresponsive during a supported workflow.",
+      "stressors": [
+        "payment",
+        "button interaction",
+        "short-message variants"
+      ]
+    },
+    {
+      "family_id": "bug-order-history-error",
+      "intent": "BUG",
+      "split": "train",
+      "scenario": "The customer's order-history page fails to load or displays a technical error.",
+      "label_rationale": "The request reports malfunctioning platform behaviour.",
+      "stressors": [
+        "order vocabulary",
+        "technical error",
+        "BUG versus PLATFORM boundary"
+      ]
+    },
+    {
+      "family_id": "bug-address-save-failure",
+      "intent": "BUG",
+      "split": "train",
+      "scenario": "A new or edited delivery address cannot be saved because the interface fails.",
+      "label_rationale": "The customer is reporting failed functionality rather than asking whether an address can be changed.",
+      "stressors": [
+        "address-change vocabulary",
+        "BUG versus PLATFORM boundary",
+        "workflow failure"
+      ]
+    },
+    {
+      "family_id": "bug-mobile-app-crash",
+      "intent": "BUG",
+      "split": "train",
+      "scenario": "The mobile application closes or crashes during ordinary use.",
+      "label_rationale": "Unexpected application termination is an apparent technical defect.",
+      "stressors": [
+        "mobile terminology",
+        "crash synonyms",
+        "device context"
+      ]
+    },
+
+    {
+      "family_id": "bug-password-reset-link-failure",
+      "intent": "BUG",
+      "split": "validation",
+      "scenario": "A password-reset link is broken, invalid immediately, or fails to open the intended workflow.",
+      "label_rationale": "The customer is reporting failure of an account-recovery mechanism.",
+      "stressors": [
+        "account assistance",
+        "link failure",
+        "may resemble procedural question"
+      ]
+    },
+    {
+      "family_id": "bug-wishlist-sync-failure",
+      "intent": "BUG",
+      "split": "validation",
+      "scenario": "Wishlist changes fail to persist or synchronize correctly.",
+      "label_rationale": "The platform is not preserving an expected user action.",
+      "stressors": [
+        "state persistence",
+        "wishlist vocabulary",
+        "sync terminology"
+      ]
+    },
+    {
+      "family_id": "bug-notification-link-broken",
+      "intent": "BUG",
+      "split": "validation",
+      "scenario": "A link from a platform notification opens an error page or incorrect destination.",
+      "label_rationale": "The customer reports malfunctioning navigation from a platform-generated notification.",
+      "stressors": [
+        "notifications",
+        "navigation",
+        "error-page wording"
+      ]
+    },
+
+    {
+      "family_id": "bug-product-filter-stuck",
+      "intent": "BUG",
+      "split": "test",
+      "scenario": "Product filters cannot be changed, cleared, or applied correctly.",
+      "label_rationale": "An interactive product-discovery control is malfunctioning.",
+      "stressors": [
+        "product vocabulary",
+        "filter controls",
+        "held-out interaction scenario"
+      ]
+    },
+    {
+      "family_id": "bug-profile-update-not-persisting",
+      "intent": "BUG",
+      "split": "test",
+      "scenario": "Profile changes appear to save but disappear or revert afterward.",
+      "label_rationale": "The customer reports incorrect state persistence in the platform.",
+      "stressors": [
+        "profile settings",
+        "silent failure",
+        "held-out persistence scenario"
+      ]
+    },
+    {
+      "family_id": "bug-tracking-page-blank",
+      "intent": "BUG",
+      "split": "test",
+      "scenario": "The order-tracking interface opens but fails to render its expected content.",
+      "label_rationale": "The customer reports a malfunctioning tracking page rather than requesting shipping-policy information.",
+      "stressors": [
+        "tracking vocabulary",
+        "shipping lexical overlap",
+        "BUG versus PLATFORM boundary"
+      ]
+    },
+
+    {
+      "family_id": "platform-return-policy",
+      "intent": "PLATFORM",
+      "split": "train",
+      "scenario": "The customer asks about return eligibility, return windows, or general return rules.",
+      "label_rationale": "The customer is requesting platform-policy information.",
+      "stressors": [
+        "policy language",
+        "returns",
+        "possible refund vocabulary"
+      ]
+    },
+    {
+      "family_id": "platform-shipping-times",
+      "intent": "PLATFORM",
+      "split": "train",
+      "scenario": "The customer asks how long delivery or shipping normally takes.",
+      "label_rationale": "The customer requests information about platform fulfilment expectations.",
+      "stressors": [
+        "shipping",
+        "delivery",
+        "time-related questions"
+      ]
+    },
+    {
+      "family_id": "platform-payment-methods",
+      "intent": "PLATFORM",
+      "split": "train",
+      "scenario": "The customer asks which payment methods the platform accepts.",
+      "label_rationale": "This is an informational question about supported platform capabilities.",
+      "stressors": [
+        "payment vocabulary",
+        "PLATFORM versus BUG boundary"
+      ]
+    },
+    {
+      "family_id": "platform-change-shipping-address",
+      "intent": "PLATFORM",
+      "split": "train",
+      "scenario": "The customer asks whether or how a shipping address can be changed.",
+      "label_rationale": "The customer is asking about a supported workflow rather than reporting that the address feature is broken.",
+      "stressors": [
+        "address vocabulary",
+        "procedural wording",
+        "PLATFORM versus BUG boundary"
+      ]
+    },
+    {
+      "family_id": "platform-warranty-information",
+      "intent": "PLATFORM",
+      "split": "train",
+      "scenario": "The customer asks about warranty coverage or warranty duration.",
+      "label_rationale": "The request seeks product or platform policy information.",
+      "stressors": [
+        "warranty",
+        "policy semantics"
+      ]
+    },
+    {
+      "family_id": "platform-loyalty-program",
+      "intent": "PLATFORM",
+      "split": "train",
+      "scenario": "The customer asks how loyalty points, rewards, or membership benefits work.",
+      "label_rationale": "The request seeks information about a platform service.",
+      "stressors": [
+        "rewards",
+        "points",
+        "membership"
+      ]
+    },
+    {
+      "family_id": "platform-student-discount",
+      "intent": "PLATFORM",
+      "split": "train",
+      "scenario": "The customer asks whether a student discount exists or how it works.",
+      "label_rationale": "The subject is a platform promotion or policy even if the approved knowledge source later lacks the answer.",
+      "stressors": [
+        "discount vocabulary",
+        "knowledge-coverage separation",
+        "possible historical handoff association"
+      ]
+    },
+    {
+      "family_id": "platform-supported-countries",
+      "intent": "PLATFORM",
+      "split": "train",
+      "scenario": "The customer asks where the platform ships, sells, or provides service.",
+      "label_rationale": "The request asks about supported platform operations.",
+      "stressors": [
+        "geography",
+        "shipping",
+        "service availability"
+      ]
+    },
+    {
+      "family_id": "platform-order-cancellation",
+      "intent": "PLATFORM",
+      "split": "train",
+      "scenario": "The customer asks whether an order can be cancelled and under what conditions.",
+      "label_rationale": "The request seeks information about an order-management policy or workflow.",
+      "stressors": [
+        "orders",
+        "cancellation",
+        "procedural request"
+      ]
+    },
+
+    {
+      "family_id": "platform-gift-cards",
+      "intent": "PLATFORM",
+      "split": "validation",
+      "scenario": "The customer asks whether gift cards are available, accepted, or subject to usage rules.",
+      "label_rationale": "The request concerns a platform payment or product capability.",
+      "stressors": [
+        "gift cards",
+        "payment lexical overlap"
+      ]
+    },
+    {
+      "family_id": "platform-product-availability",
+      "intent": "PLATFORM",
+      "split": "validation",
+      "scenario": "The customer asks about stock, restocking, or product availability behaviour.",
+      "label_rationale": "The customer requests platform or product information rather than reporting search malfunction.",
+      "stressors": [
+        "product vocabulary",
+        "availability",
+        "PLATFORM versus BUG boundary"
+      ]
+    },
+    {
+      "family_id": "platform-refund-timing",
+      "intent": "PLATFORM",
+      "split": "validation",
+      "scenario": "The customer asks how long an approved refund normally takes.",
+      "label_rationale": "This is an informational policy/process question, not a report that the refund mechanism is broken.",
+      "stressors": [
+        "refund terminology",
+        "timing",
+        "policy versus incident"
+      ]
+    },
+
+    {
+      "family_id": "platform-order-tracking-process",
+      "intent": "PLATFORM",
+      "split": "test",
+      "scenario": "The customer asks how to track an order or where tracking information should appear.",
+      "label_rationale": "The customer requests workflow information rather than reporting a broken tracking page.",
+      "stressors": [
+        "tracking vocabulary",
+        "held-out BUG versus PLATFORM boundary"
+      ]
+    },
+    {
+      "family_id": "platform-account-deletion",
+      "intent": "PLATFORM",
+      "split": "test",
+      "scenario": "The customer asks whether or how an account can be deleted.",
+      "label_rationale": "The request concerns a platform account-management capability or policy.",
+      "stressors": [
+        "account settings",
+        "procedural request",
+        "held-out account scenario"
+      ]
+    },
+    {
+      "family_id": "platform-exchange-policy",
+      "intent": "PLATFORM",
+      "split": "test",
+      "scenario": "The customer asks whether an item can be exchanged and what conditions apply.",
+      "label_rationale": "The request is about a platform policy rather than a technical malfunction.",
+      "stressors": [
+        "exchange",
+        "returns lexical overlap",
+        "held-out policy scenario"
+      ]
+    },
+
+    {
+      "family_id": "other-general-knowledge",
+      "intent": "OTHER",
+      "split": "train",
+      "scenario": "The customer asks an unrelated general-knowledge question.",
+      "label_rationale": "The request is neither a platform-information request nor a technical bug report.",
+      "stressors": [
+        "general knowledge",
+        "clearly off-domain"
+      ]
+    },
+    {
+      "family_id": "other-creative-writing",
+      "intent": "OTHER",
+      "split": "train",
+      "scenario": "The customer asks for a poem, story, slogan, or other unrelated creative-writing task.",
+      "label_rationale": "The requested task is outside the support platform domain.",
+      "stressors": [
+        "creative request",
+        "may contain commerce vocabulary"
+      ]
+    },
+    {
+      "family_id": "other-personal-advice",
+      "intent": "OTHER",
+      "split": "train",
+      "scenario": "The customer asks for general personal or lifestyle advice unrelated to the platform.",
+      "label_rationale": "The request is off-domain and not a platform-support question.",
+      "stressors": [
+        "advice language",
+        "conversational wording"
+      ]
+    },
+    {
+      "family_id": "other-unrelated-math",
+      "intent": "OTHER",
+      "split": "train",
+      "scenario": "The customer asks for an unrelated arithmetic or mathematics calculation.",
+      "label_rationale": "The task is outside customer-support routing for the platform.",
+      "stressors": [
+        "numbers",
+        "short messages",
+        "task-oriented wording"
+      ]
+    },
+    {
+      "family_id": "other-external-company-support",
+      "intent": "OTHER",
+      "split": "train",
+      "scenario": "The customer asks about the policies, orders, or support process of another named company.",
+      "label_rationale": "Platform-like vocabulary is present, but the request concerns an external organization.",
+      "stressors": [
+        "policy lexical overlap",
+        "order lexical overlap",
+        "off-domain entity"
+      ]
+    },
+    {
+      "family_id": "other-home-technology-help",
+      "intent": "OTHER",
+      "split": "train",
+      "scenario": "The customer asks for help troubleshooting unrelated personal technology such as a home router or printer.",
+      "label_rationale": "Technical malfunction vocabulary is present, but the problem is unrelated to the supported platform.",
+      "stressors": [
+        "technical vocabulary",
+        "BUG lexical overlap",
+        "domain boundary"
+      ]
+    },
+    {
+      "family_id": "other-travel-planning",
+      "intent": "OTHER",
+      "split": "train",
+      "scenario": "The customer asks for unrelated travel planning or destination advice.",
+      "label_rationale": "The request is outside the platform-support domain.",
+      "stressors": [
+        "planning request",
+        "destination language"
+      ]
+    },
+    {
+      "family_id": "other-programming-help",
+      "intent": "OTHER",
+      "split": "train",
+      "scenario": "The customer asks for programming or software-development assistance unrelated to the platform.",
+      "label_rationale": "Technical language does not make an unrelated programming request a platform BUG.",
+      "stressors": [
+        "technical language",
+        "error vocabulary",
+        "BUG lexical overlap"
+      ]
+    },
+    {
+      "family_id": "other-movie-recommendation",
+      "intent": "OTHER",
+      "split": "train",
+      "scenario": "The customer asks for entertainment or movie recommendations.",
+      "label_rationale": "The request is unrelated to platform support.",
+      "stressors": [
+        "recommendation language",
+        "possible similarity to product recommendation wording"
+      ]
+    },
+
+    {
+      "family_id": "other-translation-request",
+      "intent": "OTHER",
+      "split": "validation",
+      "scenario": "The customer asks to translate unrelated text between languages.",
+      "label_rationale": "Translation is outside the top-level support intents.",
+      "stressors": [
+        "imperative request",
+        "short-message variants"
+      ]
+    },
+    {
+      "family_id": "other-resignation-email",
+      "intent": "OTHER",
+      "split": "validation",
+      "scenario": "The customer asks for help drafting an unrelated professional email or letter.",
+      "label_rationale": "The request is a writing task outside platform support.",
+      "stressors": [
+        "writing assistance",
+        "formal language"
+      ]
+    },
+    {
+      "family_id": "other-recipe-request",
+      "intent": "OTHER",
+      "split": "validation",
+      "scenario": "The customer asks for cooking instructions or a recipe.",
+      "label_rationale": "The task is unrelated to platform support.",
+      "stressors": [
+        "instructions",
+        "ingredient/product nouns"
+      ]
+    },
+
+    {
+      "family_id": "other-stock-market-question",
+      "intent": "OTHER",
+      "split": "test",
+      "scenario": "The customer asks about an unrelated company's stock price or market performance.",
+      "label_rationale": "The request is an external financial-information question.",
+      "stressors": [
+        "company terminology",
+        "price vocabulary",
+        "held-out off-domain information request"
+      ]
+    },
+    {
+      "family_id": "other-food-order-request",
+      "intent": "OTHER",
+      "split": "test",
+      "scenario": "The customer asks the support agent to order food or arrange an unrelated purchase.",
+      "label_rationale": "Order and purchase vocabulary is present, but the requested action is outside the supported platform.",
+      "stressors": [
+        "order vocabulary",
+        "purchase terminology",
+        "held-out domain-boundary case"
+      ]
+    },
+    {
+      "family_id": "other-chess-advice",
+      "intent": "OTHER",
+      "split": "test",
+      "scenario": "The customer asks for help choosing or analyzing a chess move.",
+      "label_rationale": "The request is unrelated to the support platform.",
+      "stressors": [
+        "advice request",
+        "held-out reasoning task"
+      ]
+    }
+  ]
+}
