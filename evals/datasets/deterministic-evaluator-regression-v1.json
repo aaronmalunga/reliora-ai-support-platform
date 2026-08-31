@@ -1,0 +1,289 @@
+{
+  "dataset_id": "deterministic-evaluator-regression-v1",
+  "version": "1.0.0",
+  "purpose": "Exercise currently implemented deterministic Reliora evaluators across reviewed positive, negative, boundary, and control fixtures.",
+  "fixture_policy": {
+    "origin": "designed_regression_fixture",
+    "historical_observation": false,
+    "expected_results_are_reviewed": true,
+    "production_frequency_is_not_implied": true
+  },
+  "coverage": {
+    "evaluation_ids": [
+      "INV-004",
+      "INV-012",
+      "FACT-001"
+    ],
+    "scope_note": "This version covers only deterministic evaluator capabilities implemented at the time the dataset was created. It does not imply complete coverage of every documented behavioural invariant."
+  },
+  "cases": [
+    {
+      "case_id": "REG-INV004-001",
+      "title": "Exactly one currently missing bug field requested",
+      "evaluation_id": "INV-004",
+      "case_type": "positive",
+      "expected_evaluator_passed": true,
+      "rationale": "The incremental collection policy permits one required missing field to be requested in the turn.",
+      "inputs": {
+        "missing_fields": [
+          "steps_to_reproduce",
+          "environment"
+        ],
+        "requested_fields": [
+          "steps_to_reproduce"
+        ]
+      }
+    },
+    {
+      "case_id": "REG-INV004-002",
+      "title": "No bug field requested while required fields remain missing",
+      "evaluation_id": "INV-004",
+      "case_type": "negative",
+      "expected_evaluator_passed": false,
+      "rationale": "When required fields remain missing, the workflow must request exactly one required missing field.",
+      "inputs": {
+        "missing_fields": [
+          "steps_to_reproduce",
+          "environment"
+        ],
+        "requested_fields": []
+      }
+    },
+    {
+      "case_id": "REG-INV004-003",
+      "title": "Multiple missing bug fields requested in one turn",
+      "evaluation_id": "INV-004",
+      "case_type": "negative",
+      "expected_evaluator_passed": false,
+      "rationale": "The initial collection policy allows no more than one required missing field to be requested in a single turn.",
+      "inputs": {
+        "missing_fields": [
+          "steps_to_reproduce",
+          "environment"
+        ],
+        "requested_fields": [
+          "steps_to_reproduce",
+          "environment"
+        ]
+      }
+    },
+    {
+      "case_id": "REG-INV004-004",
+      "title": "Workflow requests a bug field that is not missing",
+      "evaluation_id": "INV-004",
+      "case_type": "negative",
+      "expected_evaluator_passed": false,
+      "rationale": "The requested field must be one of the fields currently missing from workflow state.",
+      "inputs": {
+        "missing_fields": [
+          "environment"
+        ],
+        "requested_fields": [
+          "description"
+        ]
+      }
+    },
+    {
+      "case_id": "REG-INV004-005",
+      "title": "No additional field requested after bug data is complete",
+      "evaluation_id": "INV-004",
+      "case_type": "control",
+      "expected_evaluator_passed": true,
+      "rationale": "When no required fields are missing, the workflow should not request another required bug field.",
+      "inputs": {
+        "missing_fields": [],
+        "requested_fields": []
+      }
+    },
+    {
+      "case_id": "REG-INV012-001",
+      "title": "Normal customer-facing support response contains no prohibited marker",
+      "evaluation_id": "INV-012",
+      "case_type": "control",
+      "expected_evaluator_passed": true,
+      "rationale": "Ordinary customer-facing support language should not trigger the currently implemented leakage detector.",
+      "inputs": {
+        "response": "I don't have enough approved information to answer that question. I can direct you to customer support for further assistance."
+      }
+    },
+    {
+      "case_id": "REG-INV012-002",
+      "title": "Internal human-handoff route label is exposed",
+      "evaluation_id": "INV-012",
+      "case_type": "negative",
+      "expected_evaluator_passed": false,
+      "rationale": "The literal internal HUMAN HANDOFF route label must not appear in customer-visible text.",
+      "inputs": {
+        "response": "HUMAN HANDOFF: Please contact our customer support team for further assistance."
+      }
+    },
+    {
+      "case_id": "REG-INV012-003",
+      "title": "Thinking tags are exposed in customer-visible text",
+      "evaluation_id": "INV-012",
+      "case_type": "negative",
+      "expected_evaluator_passed": false,
+      "rationale": "Customer-visible responses must not expose thinking markers.",
+      "inputs": {
+        "response": "<thinking>I should send this customer to support.</thinking> Please contact customer support."
+      }
+    },
+    {
+      "case_id": "REG-INV012-004",
+      "title": "Mixed-case thinking tag with attributes is exposed",
+      "evaluation_id": "INV-012",
+      "case_type": "boundary",
+      "expected_evaluator_passed": false,
+      "rationale": "The current thinking-tag detector is intended to be case-insensitive and tolerate tag attributes.",
+      "inputs": {
+        "response": "<THINKING data-source=\"internal\">Review route.</THINKING> I can help with your request."
+      }
+    },
+    {
+      "case_id": "REG-INV012-005",
+      "title": "Multiple currently detectable internal markers are exposed",
+      "evaluation_id": "INV-012",
+      "case_type": "negative",
+      "expected_evaluator_passed": false,
+      "rationale": "A response remains invalid when more than one currently detectable prohibited marker appears.",
+      "inputs": {
+        "response": "HUMAN HANDOFF <thinking>Escalate this request.</thinking> Please contact customer support."
+      }
+    },
+    {
+      "case_id": "REG-FACT001-001",
+      "title": "All required return-policy facts are represented",
+      "evaluation_id": "FACT-001",
+      "case_type": "positive",
+      "expected_evaluator_passed": true,
+      "rationale": "Every reviewed required fact has at least one accepted textual representation.",
+      "inputs": {
+        "response": "Most items can be returned within 30 days when unused and in original packaging, unless the item arrived defective.",
+        "required_facts": {
+          "return_window": [
+            "30 days"
+          ],
+          "unused_condition": [
+            "unused"
+          ],
+          "original_packaging_condition": [
+            "original packaging"
+          ],
+          "defective_item_exception": [
+            "defective",
+            "damaged",
+            "faulty"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "REG-FACT001-002",
+      "title": "Accepted alternative wording satisfies a required fact",
+      "evaluation_id": "FACT-001",
+      "case_type": "positive",
+      "expected_evaluator_passed": true,
+      "rationale": "FACT-001 allows reviewed alternative textual patterns for the same required fact.",
+      "inputs": {
+        "response": "Returns are accepted within 30 days when products are unused and in original packaging. Damaged items are an exception.",
+        "required_facts": {
+          "return_window": [
+            "30 days"
+          ],
+          "unused_condition": [
+            "unused"
+          ],
+          "original_packaging_condition": [
+            "original packaging"
+          ],
+          "defective_item_exception": [
+            "defective",
+            "damaged",
+            "faulty"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "REG-FACT001-003",
+      "title": "One required return-policy fact is omitted",
+      "evaluation_id": "FACT-001",
+      "case_type": "negative",
+      "expected_evaluator_passed": false,
+      "rationale": "The response omits every accepted representation of the defective-item exception.",
+      "inputs": {
+        "response": "Most items can be returned within 30 days when unused and in original packaging.",
+        "required_facts": {
+          "return_window": [
+            "30 days"
+          ],
+          "unused_condition": [
+            "unused"
+          ],
+          "original_packaging_condition": [
+            "original packaging"
+          ],
+          "defective_item_exception": [
+            "defective",
+            "damaged",
+            "faulty"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "REG-FACT001-004",
+      "title": "Multiple required return-policy facts are omitted",
+      "evaluation_id": "FACT-001",
+      "case_type": "negative",
+      "expected_evaluator_passed": false,
+      "rationale": "The response represents the return window but omits multiple other reviewed required facts.",
+      "inputs": {
+        "response": "Most items can be returned within 30 days.",
+        "required_facts": {
+          "return_window": [
+            "30 days"
+          ],
+          "unused_condition": [
+            "unused"
+          ],
+          "original_packaging_condition": [
+            "original packaging"
+          ],
+          "defective_item_exception": [
+            "defective",
+            "damaged",
+            "faulty"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "REG-FACT001-005",
+      "title": "Empty response contains none of the required facts",
+      "evaluation_id": "FACT-001",
+      "case_type": "boundary",
+      "expected_evaluator_passed": false,
+      "rationale": "An empty customer-visible response cannot satisfy any of the reviewed required textual facts.",
+      "inputs": {
+        "response": "",
+        "required_facts": {
+          "return_window": [
+            "30 days"
+          ],
+          "unused_condition": [
+            "unused"
+          ],
+          "original_packaging_condition": [
+            "original packaging"
+          ],
+          "defective_item_exception": [
+            "defective",
+            "damaged",
+            "faulty"
+          ]
+        }
+      }
+    }
+  ]
+}

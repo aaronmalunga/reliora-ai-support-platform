@@ -1,0 +1,329 @@
+{
+  "report_id": "deterministic-evaluator-regression-v1-report",
+  "evidence_class": "EXPERIMENTAL",
+  "dataset": {
+    "dataset_id": "deterministic-evaluator-regression-v1",
+    "version": "1.0.0",
+    "sha256": "c0a3acce63e7af5176de0cceda20a8de54fdc90cdafc59e1c4a1679ab9fd6dbc",
+    "hash_basis": "UTF-8 text normalized to LF line endings before SHA-256"
+  },
+  "summary": {
+    "total_cases": 15,
+    "matched_expectations": 15,
+    "mismatches": 0,
+    "all_expectations_met": true,
+    "by_evaluation_id": {
+      "INV-004": {
+        "total_cases": 5,
+        "matched_expectations": 5,
+        "mismatches": 0
+      },
+      "INV-012": {
+        "total_cases": 5,
+        "matched_expectations": 5,
+        "mismatches": 0
+      },
+      "FACT-001": {
+        "total_cases": 5,
+        "matched_expectations": 5,
+        "mismatches": 0
+      }
+    }
+  },
+  "results": [
+    {
+      "case_id": "REG-INV004-001",
+      "title": "Exactly one currently missing bug field requested",
+      "evaluation_id": "INV-004",
+      "case_type": "positive",
+      "status": "PASS",
+      "expectation_met": true,
+      "expected_evaluator_passed": true,
+      "evaluator_passed": true,
+      "message": "Bug-field collection satisfies the incremental collection policy.",
+      "evidence": {
+        "missing_fields": [
+          "steps_to_reproduce",
+          "environment"
+        ],
+        "requested_fields": [
+          "steps_to_reproduce"
+        ],
+        "invalid_requested_fields": []
+      }
+    },
+    {
+      "case_id": "REG-INV004-002",
+      "title": "No bug field requested while required fields remain missing",
+      "evaluation_id": "INV-004",
+      "case_type": "negative",
+      "status": "PASS",
+      "expectation_met": true,
+      "expected_evaluator_passed": false,
+      "evaluator_passed": false,
+      "message": "The workflow did not request exactly one required missing field.",
+      "evidence": {
+        "missing_fields": [
+          "steps_to_reproduce",
+          "environment"
+        ],
+        "requested_fields": [],
+        "invalid_requested_fields": []
+      }
+    },
+    {
+      "case_id": "REG-INV004-003",
+      "title": "Multiple missing bug fields requested in one turn",
+      "evaluation_id": "INV-004",
+      "case_type": "negative",
+      "status": "PASS",
+      "expectation_met": true,
+      "expected_evaluator_passed": false,
+      "evaluator_passed": false,
+      "message": "More than one required bug field was requested in a single turn.",
+      "evidence": {
+        "missing_fields": [
+          "steps_to_reproduce",
+          "environment"
+        ],
+        "requested_fields": [
+          "steps_to_reproduce",
+          "environment"
+        ],
+        "invalid_requested_fields": []
+      }
+    },
+    {
+      "case_id": "REG-INV004-004",
+      "title": "Workflow requests a bug field that is not missing",
+      "evaluation_id": "INV-004",
+      "case_type": "negative",
+      "status": "PASS",
+      "expectation_met": true,
+      "expected_evaluator_passed": false,
+      "evaluator_passed": false,
+      "message": "The workflow requested a field that was not currently missing.",
+      "evidence": {
+        "missing_fields": [
+          "environment"
+        ],
+        "requested_fields": [
+          "description"
+        ],
+        "invalid_requested_fields": [
+          "description"
+        ]
+      }
+    },
+    {
+      "case_id": "REG-INV004-005",
+      "title": "No additional field requested after bug data is complete",
+      "evaluation_id": "INV-004",
+      "case_type": "control",
+      "status": "PASS",
+      "expectation_met": true,
+      "expected_evaluator_passed": true,
+      "evaluator_passed": true,
+      "message": "Bug-field collection satisfies the incremental collection policy.",
+      "evidence": {
+        "missing_fields": [],
+        "requested_fields": [],
+        "invalid_requested_fields": []
+      }
+    },
+    {
+      "case_id": "REG-INV012-001",
+      "title": "Normal customer-facing support response contains no prohibited marker",
+      "evaluation_id": "INV-012",
+      "case_type": "control",
+      "status": "PASS",
+      "expectation_met": true,
+      "expected_evaluator_passed": true,
+      "evaluator_passed": true,
+      "message": "No prohibited internal markers detected.",
+      "evidence": {
+        "matches": {}
+      }
+    },
+    {
+      "case_id": "REG-INV012-002",
+      "title": "Internal human-handoff route label is exposed",
+      "evaluation_id": "INV-012",
+      "case_type": "negative",
+      "status": "PASS",
+      "expectation_met": true,
+      "expected_evaluator_passed": false,
+      "evaluator_passed": false,
+      "message": "Customer-visible response contains prohibited internal markers.",
+      "evidence": {
+        "matches": {
+          "human_handoff_route": [
+            "HUMAN HANDOFF"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "REG-INV012-003",
+      "title": "Thinking tags are exposed in customer-visible text",
+      "evaluation_id": "INV-012",
+      "case_type": "negative",
+      "status": "PASS",
+      "expectation_met": true,
+      "expected_evaluator_passed": false,
+      "evaluator_passed": false,
+      "message": "Customer-visible response contains prohibited internal markers.",
+      "evidence": {
+        "matches": {
+          "thinking_tag": [
+            "<thinking>",
+            "</thinking>"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "REG-INV012-004",
+      "title": "Mixed-case thinking tag with attributes is exposed",
+      "evaluation_id": "INV-012",
+      "case_type": "boundary",
+      "status": "PASS",
+      "expectation_met": true,
+      "expected_evaluator_passed": false,
+      "evaluator_passed": false,
+      "message": "Customer-visible response contains prohibited internal markers.",
+      "evidence": {
+        "matches": {
+          "thinking_tag": [
+            "<THINKING data-source=\"internal\">",
+            "</THINKING>"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "REG-INV012-005",
+      "title": "Multiple currently detectable internal markers are exposed",
+      "evaluation_id": "INV-012",
+      "case_type": "negative",
+      "status": "PASS",
+      "expectation_met": true,
+      "expected_evaluator_passed": false,
+      "evaluator_passed": false,
+      "message": "Customer-visible response contains prohibited internal markers.",
+      "evidence": {
+        "matches": {
+          "human_handoff_route": [
+            "HUMAN HANDOFF"
+          ],
+          "thinking_tag": [
+            "<thinking>",
+            "</thinking>"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "REG-FACT001-001",
+      "title": "All required return-policy facts are represented",
+      "evaluation_id": "FACT-001",
+      "case_type": "positive",
+      "status": "PASS",
+      "expectation_met": true,
+      "expected_evaluator_passed": true,
+      "evaluator_passed": true,
+      "message": "All required facts are represented in the response.",
+      "evidence": {
+        "matched_facts": [
+          "return_window",
+          "unused_condition",
+          "original_packaging_condition",
+          "defective_item_exception"
+        ],
+        "missing_facts": []
+      }
+    },
+    {
+      "case_id": "REG-FACT001-002",
+      "title": "Accepted alternative wording satisfies a required fact",
+      "evaluation_id": "FACT-001",
+      "case_type": "positive",
+      "status": "PASS",
+      "expectation_met": true,
+      "expected_evaluator_passed": true,
+      "evaluator_passed": true,
+      "message": "All required facts are represented in the response.",
+      "evidence": {
+        "matched_facts": [
+          "return_window",
+          "unused_condition",
+          "original_packaging_condition",
+          "defective_item_exception"
+        ],
+        "missing_facts": []
+      }
+    },
+    {
+      "case_id": "REG-FACT001-003",
+      "title": "One required return-policy fact is omitted",
+      "evaluation_id": "FACT-001",
+      "case_type": "negative",
+      "status": "PASS",
+      "expectation_met": true,
+      "expected_evaluator_passed": false,
+      "evaluator_passed": false,
+      "message": "One or more required facts are missing from the response.",
+      "evidence": {
+        "matched_facts": [
+          "return_window",
+          "unused_condition",
+          "original_packaging_condition"
+        ],
+        "missing_facts": [
+          "defective_item_exception"
+        ]
+      }
+    },
+    {
+      "case_id": "REG-FACT001-004",
+      "title": "Multiple required return-policy facts are omitted",
+      "evaluation_id": "FACT-001",
+      "case_type": "negative",
+      "status": "PASS",
+      "expectation_met": true,
+      "expected_evaluator_passed": false,
+      "evaluator_passed": false,
+      "message": "One or more required facts are missing from the response.",
+      "evidence": {
+        "matched_facts": [
+          "return_window"
+        ],
+        "missing_facts": [
+          "unused_condition",
+          "original_packaging_condition",
+          "defective_item_exception"
+        ]
+      }
+    },
+    {
+      "case_id": "REG-FACT001-005",
+      "title": "Empty response contains none of the required facts",
+      "evaluation_id": "FACT-001",
+      "case_type": "boundary",
+      "status": "PASS",
+      "expectation_met": true,
+      "expected_evaluator_passed": false,
+      "evaluator_passed": false,
+      "message": "One or more required facts are missing from the response.",
+      "evidence": {
+        "matched_facts": [],
+        "missing_facts": [
+          "return_window",
+          "unused_condition",
+          "original_packaging_condition",
+          "defective_item_exception"
+        ]
+      }
+    }
+  ]
+}
