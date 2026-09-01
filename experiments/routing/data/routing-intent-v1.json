@@ -1,0 +1,1630 @@
+{
+  "dataset_id": "routing-intent-v1",
+  "version": "1.0.0",
+  "status": "FROZEN",
+  "provenance": "SYNTHETIC_ASSUMPTION",
+  "family_manifest_id": "routing-intent-v1-families",
+  "record_count": 180,
+  "records": [
+    {
+      "case_id": "ROUTE-BUG-001-A",
+      "family_id": "bug-checkout-crash",
+      "variant_id": "A",
+      "message": "Checkout crashes whenever I press Pay.",
+      "expected_intent": "BUG",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-001-B",
+      "family_id": "bug-checkout-crash",
+      "variant_id": "B",
+      "message": "Every time I try to finish my order, the app closes on the payment step.",
+      "expected_intent": "BUG",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-001-C",
+      "family_id": "bug-checkout-crash",
+      "variant_id": "C",
+      "message": "Is the checkout page supposed to freeze and kick me out after I submit payment?",
+      "expected_intent": "BUG",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-001-D",
+      "family_id": "bug-checkout-crash",
+      "variant_id": "D",
+      "message": "cant finish checkout, it keeps crashing right after i hit pay",
+      "expected_intent": "BUG",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-002-A",
+      "family_id": "bug-login-loop",
+      "variant_id": "A",
+      "message": "I sign in with the right password but it keeps sending me back to the login screen.",
+      "expected_intent": "BUG",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-002-B",
+      "family_id": "bug-login-loop",
+      "variant_id": "B",
+      "message": "Login seems to work for a second, then I'm dumped straight back at sign in.",
+      "expected_intent": "BUG",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-002-C",
+      "family_id": "bug-login-loop",
+      "variant_id": "C",
+      "message": "Why does the site keep asking me to log in again after it says I was signed in?",
+      "expected_intent": "BUG",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-002-D",
+      "family_id": "bug-login-loop",
+      "variant_id": "D",
+      "message": "im stuck in a login loop, credentials are correct but it just returns to sign in",
+      "expected_intent": "BUG",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-003-A",
+      "family_id": "bug-cart-quantity-update",
+      "variant_id": "A",
+      "message": "Changing an item from one to two in my cart does not update the quantity.",
+      "expected_intent": "BUG",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-003-B",
+      "family_id": "bug-cart-quantity-update",
+      "variant_id": "B",
+      "message": "My cart keeps reverting the quantity after I change it.",
+      "expected_intent": "BUG",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-003-C",
+      "family_id": "bug-cart-quantity-update",
+      "variant_id": "C",
+      "message": "Is the quantity selector broken? I choose three but the cart still shows one.",
+      "expected_intent": "BUG",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-003-D",
+      "family_id": "bug-cart-quantity-update",
+      "variant_id": "D",
+      "message": "cart qty wont change, i tap plus and nothing sticks",
+      "expected_intent": "BUG",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-004-A",
+      "family_id": "bug-search-malfunction",
+      "variant_id": "A",
+      "message": "Product search returns an error whenever I enter a keyword.",
+      "expected_intent": "BUG",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-004-B",
+      "family_id": "bug-search-malfunction",
+      "variant_id": "B",
+      "message": "The search box stopped working and gives me no results even for products I can see on the homepage.",
+      "expected_intent": "BUG",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-004-C",
+      "family_id": "bug-search-malfunction",
+      "variant_id": "C",
+      "message": "Is search broken? Every query I try ends on an error page.",
+      "expected_intent": "BUG",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-004-D",
+      "family_id": "bug-search-malfunction",
+      "variant_id": "D",
+      "message": "search isnt working, typing anything just spins forever",
+      "expected_intent": "BUG",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-005-A",
+      "family_id": "bug-coupon-apply-failure",
+      "variant_id": "A",
+      "message": "The Apply Coupon button does nothing when I enter my code.",
+      "expected_intent": "BUG",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-005-B",
+      "family_id": "bug-coupon-apply-failure",
+      "variant_id": "B",
+      "message": "I can type the promo code, but clicking apply just leaves the checkout unchanged.",
+      "expected_intent": "BUG",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-005-C",
+      "family_id": "bug-coupon-apply-failure",
+      "variant_id": "C",
+      "message": "Why does the discount field keep throwing an error when I try to apply a code?",
+      "expected_intent": "BUG",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-005-D",
+      "family_id": "bug-coupon-apply-failure",
+      "variant_id": "D",
+      "message": "promo box is bugging out, code goes in but apply wont work",
+      "expected_intent": "BUG",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-006-A",
+      "family_id": "bug-payment-button-unresponsive",
+      "variant_id": "A",
+      "message": "The Pay Now button is completely unresponsive.",
+      "expected_intent": "BUG",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-006-B",
+      "family_id": "bug-payment-button-unresponsive",
+      "variant_id": "B",
+      "message": "I filled in my payment details, but pressing the purchase button does nothing.",
+      "expected_intent": "BUG",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-006-C",
+      "family_id": "bug-payment-button-unresponsive",
+      "variant_id": "C",
+      "message": "Can you help me understand why the payment button does nothing when I click it?",
+      "expected_intent": "BUG",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-006-D",
+      "family_id": "bug-payment-button-unresponsive",
+      "variant_id": "D",
+      "message": "pay now wont respond at all, tried clicking it a bunch of times",
+      "expected_intent": "BUG",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-007-A",
+      "family_id": "bug-order-history-error",
+      "variant_id": "A",
+      "message": "My order history page fails to load and shows an error.",
+      "expected_intent": "BUG",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-007-B",
+      "family_id": "bug-order-history-error",
+      "variant_id": "B",
+      "message": "I can open my account, but the orders section keeps crashing.",
+      "expected_intent": "BUG",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-007-C",
+      "family_id": "bug-order-history-error",
+      "variant_id": "C",
+      "message": "Why am I getting a technical error every time I try to view past orders?",
+      "expected_intent": "BUG",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-007-D",
+      "family_id": "bug-order-history-error",
+      "variant_id": "D",
+      "message": "order history is broken for me, just errors out",
+      "expected_intent": "BUG",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-008-A",
+      "family_id": "bug-address-save-failure",
+      "variant_id": "A",
+      "message": "I edit my delivery address and click save, but the old address stays there.",
+      "expected_intent": "BUG",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-008-B",
+      "family_id": "bug-address-save-failure",
+      "variant_id": "B",
+      "message": "The address form accepts my changes but they disappear as soon as I refresh.",
+      "expected_intent": "BUG",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-008-C",
+      "family_id": "bug-address-save-failure",
+      "variant_id": "C",
+      "message": "Is the address update feature broken? It says saved but nothing changes.",
+      "expected_intent": "BUG",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-008-D",
+      "family_id": "bug-address-save-failure",
+      "variant_id": "D",
+      "message": "cant save my new shipping address, it keeps reverting",
+      "expected_intent": "BUG",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-009-A",
+      "family_id": "bug-mobile-app-crash",
+      "variant_id": "A",
+      "message": "The mobile app closes by itself whenever I open a product page.",
+      "expected_intent": "BUG",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-009-B",
+      "family_id": "bug-mobile-app-crash",
+      "variant_id": "B",
+      "message": "Your app keeps crashing on my phone during normal browsing.",
+      "expected_intent": "BUG",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-009-C",
+      "family_id": "bug-mobile-app-crash",
+      "variant_id": "C",
+      "message": "Why does the app suddenly exit every few minutes?",
+      "expected_intent": "BUG",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-009-D",
+      "family_id": "bug-mobile-app-crash",
+      "variant_id": "D",
+      "message": "app keeps force closing on me, no warning",
+      "expected_intent": "BUG",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-010-A",
+      "family_id": "bug-password-reset-link-failure",
+      "variant_id": "A",
+      "message": "The password reset link in the email opens an error page.",
+      "expected_intent": "BUG",
+      "split": "validation",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-010-B",
+      "family_id": "bug-password-reset-link-failure",
+      "variant_id": "B",
+      "message": "I requested a reset email twice, but both links say they are invalid immediately.",
+      "expected_intent": "BUG",
+      "split": "validation",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-010-C",
+      "family_id": "bug-password-reset-link-failure",
+      "variant_id": "C",
+      "message": "Is the reset-password link broken? It never opens the page where I can choose a new password.",
+      "expected_intent": "BUG",
+      "split": "validation",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-010-D",
+      "family_id": "bug-password-reset-link-failure",
+      "variant_id": "D",
+      "message": "password reset email comes through but the link doesnt work",
+      "expected_intent": "BUG",
+      "split": "validation",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-011-A",
+      "family_id": "bug-wishlist-sync-failure",
+      "variant_id": "A",
+      "message": "Items I add to my wishlist disappear after I reopen the app.",
+      "expected_intent": "BUG",
+      "split": "validation",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-011-B",
+      "family_id": "bug-wishlist-sync-failure",
+      "variant_id": "B",
+      "message": "My wishlist changes are not syncing between the website and mobile app.",
+      "expected_intent": "BUG",
+      "split": "validation",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-011-C",
+      "family_id": "bug-wishlist-sync-failure",
+      "variant_id": "C",
+      "message": "Why does removing something from my wishlist come back after I refresh?",
+      "expected_intent": "BUG",
+      "split": "validation",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-011-D",
+      "family_id": "bug-wishlist-sync-failure",
+      "variant_id": "D",
+      "message": "wishlist wont save my changes, stuff keeps reappearing",
+      "expected_intent": "BUG",
+      "split": "validation",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-012-A",
+      "family_id": "bug-notification-link-broken",
+      "variant_id": "A",
+      "message": "The link in my order notification takes me to a 404 page.",
+      "expected_intent": "BUG",
+      "split": "validation",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-012-B",
+      "family_id": "bug-notification-link-broken",
+      "variant_id": "B",
+      "message": "I tap the delivery notification, but it opens the wrong page.",
+      "expected_intent": "BUG",
+      "split": "validation",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-012-C",
+      "family_id": "bug-notification-link-broken",
+      "variant_id": "C",
+      "message": "Is the link in your email alert broken? It sends me to an error screen.",
+      "expected_intent": "BUG",
+      "split": "validation",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-012-D",
+      "family_id": "bug-notification-link-broken",
+      "variant_id": "D",
+      "message": "notification link goes nowhere, just get an error page",
+      "expected_intent": "BUG",
+      "split": "validation",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-013-A",
+      "family_id": "bug-product-filter-stuck",
+      "variant_id": "A",
+      "message": "The product filters are stuck and I cannot clear the selected brand.",
+      "expected_intent": "BUG",
+      "split": "test",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-013-B",
+      "family_id": "bug-product-filter-stuck",
+      "variant_id": "B",
+      "message": "I change the price filter, but the results never update.",
+      "expected_intent": "BUG",
+      "split": "test",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-013-C",
+      "family_id": "bug-product-filter-stuck",
+      "variant_id": "C",
+      "message": "Why won't the size filter turn off after I deselect it?",
+      "expected_intent": "BUG",
+      "split": "test",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-013-D",
+      "family_id": "bug-product-filter-stuck",
+      "variant_id": "D",
+      "message": "filters are frozen, clear all does nothing",
+      "expected_intent": "BUG",
+      "split": "test",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-014-A",
+      "family_id": "bug-profile-update-not-persisting",
+      "variant_id": "A",
+      "message": "My profile says the changes were saved, but my old details return when I sign in again.",
+      "expected_intent": "BUG",
+      "split": "test",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-014-B",
+      "family_id": "bug-profile-update-not-persisting",
+      "variant_id": "B",
+      "message": "I updated my phone number yesterday and the account keeps reverting to the previous one.",
+      "expected_intent": "BUG",
+      "split": "test",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-014-C",
+      "family_id": "bug-profile-update-not-persisting",
+      "variant_id": "C",
+      "message": "Is profile editing broken? The new information disappears after a refresh.",
+      "expected_intent": "BUG",
+      "split": "test",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-014-D",
+      "family_id": "bug-profile-update-not-persisting",
+      "variant_id": "D",
+      "message": "profile changes dont stick even though it says saved",
+      "expected_intent": "BUG",
+      "split": "test",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-015-A",
+      "family_id": "bug-tracking-page-blank",
+      "variant_id": "A",
+      "message": "The tracking page opens but it is completely blank.",
+      "expected_intent": "BUG",
+      "split": "test",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-015-B",
+      "family_id": "bug-tracking-page-blank",
+      "variant_id": "B",
+      "message": "I can click Track Order, but the page loads with no information at all.",
+      "expected_intent": "BUG",
+      "split": "test",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-015-C",
+      "family_id": "bug-tracking-page-blank",
+      "variant_id": "C",
+      "message": "Why is my order tracking screen just a white page?",
+      "expected_intent": "BUG",
+      "split": "test",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-BUG-015-D",
+      "family_id": "bug-tracking-page-blank",
+      "variant_id": "D",
+      "message": "tracking page is empty, nothing renders",
+      "expected_intent": "BUG",
+      "split": "test",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-001-A",
+      "family_id": "platform-return-policy",
+      "variant_id": "A",
+      "message": "What is your return policy?",
+      "expected_intent": "PLATFORM",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-001-B",
+      "family_id": "platform-return-policy",
+      "variant_id": "B",
+      "message": "How many days do I have to return an item after delivery?",
+      "expected_intent": "PLATFORM",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-001-C",
+      "family_id": "platform-return-policy",
+      "variant_id": "C",
+      "message": "Can you explain the conditions for sending a purchase back?",
+      "expected_intent": "PLATFORM",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-001-D",
+      "family_id": "platform-return-policy",
+      "variant_id": "D",
+      "message": "whats the return window if i change my mind",
+      "expected_intent": "PLATFORM",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-002-A",
+      "family_id": "platform-shipping-times",
+      "variant_id": "A",
+      "message": "How long does standard shipping usually take?",
+      "expected_intent": "PLATFORM",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-002-B",
+      "family_id": "platform-shipping-times",
+      "variant_id": "B",
+      "message": "When should I expect an order placed today to arrive?",
+      "expected_intent": "PLATFORM",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-002-C",
+      "family_id": "platform-shipping-times",
+      "variant_id": "C",
+      "message": "What are your typical delivery times?",
+      "expected_intent": "PLATFORM",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-002-D",
+      "family_id": "platform-shipping-times",
+      "variant_id": "D",
+      "message": "roughly how many days does shipping take",
+      "expected_intent": "PLATFORM",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-003-A",
+      "family_id": "platform-payment-methods",
+      "variant_id": "A",
+      "message": "Which payment methods do you accept?",
+      "expected_intent": "PLATFORM",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-003-B",
+      "family_id": "platform-payment-methods",
+      "variant_id": "B",
+      "message": "Can I pay with a debit card or digital wallet?",
+      "expected_intent": "PLATFORM",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-003-C",
+      "family_id": "platform-payment-methods",
+      "variant_id": "C",
+      "message": "What payment options are available on the checkout page?",
+      "expected_intent": "PLATFORM",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-003-D",
+      "family_id": "platform-payment-methods",
+      "variant_id": "D",
+      "message": "what can i use to pay on here",
+      "expected_intent": "PLATFORM",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-004-A",
+      "family_id": "platform-change-shipping-address",
+      "variant_id": "A",
+      "message": "Can I change my shipping address after placing an order?",
+      "expected_intent": "PLATFORM",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-004-B",
+      "family_id": "platform-change-shipping-address",
+      "variant_id": "B",
+      "message": "How do I update the delivery address on an order?",
+      "expected_intent": "PLATFORM",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-004-C",
+      "family_id": "platform-change-shipping-address",
+      "variant_id": "C",
+      "message": "Is there a point after checkout when the shipping address can no longer be edited?",
+      "expected_intent": "PLATFORM",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-004-D",
+      "family_id": "platform-change-shipping-address",
+      "variant_id": "D",
+      "message": "i just need to change where my order is going, is that allowed",
+      "expected_intent": "PLATFORM",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-005-A",
+      "family_id": "platform-warranty-information",
+      "variant_id": "A",
+      "message": "How long is the warranty on products bought here?",
+      "expected_intent": "PLATFORM",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-005-B",
+      "family_id": "platform-warranty-information",
+      "variant_id": "B",
+      "message": "What does your warranty normally cover?",
+      "expected_intent": "PLATFORM",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-005-C",
+      "family_id": "platform-warranty-information",
+      "variant_id": "C",
+      "message": "Can you tell me the warranty terms for an item purchased through the store?",
+      "expected_intent": "PLATFORM",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-005-D",
+      "family_id": "platform-warranty-information",
+      "variant_id": "D",
+      "message": "do purchases come with a warranty",
+      "expected_intent": "PLATFORM",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-006-A",
+      "family_id": "platform-loyalty-program",
+      "variant_id": "A",
+      "message": "Can you help me understand how your loyalty program works?",
+      "expected_intent": "PLATFORM",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-006-B",
+      "family_id": "platform-loyalty-program",
+      "variant_id": "B",
+      "message": "When do I earn reward points on purchases?",
+      "expected_intent": "PLATFORM",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-006-C",
+      "family_id": "platform-loyalty-program",
+      "variant_id": "C",
+      "message": "What can membership points be used for?",
+      "expected_intent": "PLATFORM",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-006-D",
+      "family_id": "platform-loyalty-program",
+      "variant_id": "D",
+      "message": "how do the rewards points work",
+      "expected_intent": "PLATFORM",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-007-A",
+      "family_id": "platform-student-discount",
+      "variant_id": "A",
+      "message": "Do you offer a student discount?",
+      "expected_intent": "PLATFORM",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-007-B",
+      "family_id": "platform-student-discount",
+      "variant_id": "B",
+      "message": "How can a student qualify for any discount you provide?",
+      "expected_intent": "PLATFORM",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-007-C",
+      "family_id": "platform-student-discount",
+      "variant_id": "C",
+      "message": "Is there a student pricing program on the store?",
+      "expected_intent": "PLATFORM",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-007-D",
+      "family_id": "platform-student-discount",
+      "variant_id": "D",
+      "message": "got any discount for students",
+      "expected_intent": "PLATFORM",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-008-A",
+      "family_id": "platform-supported-countries",
+      "variant_id": "A",
+      "message": "Which countries do you ship to?",
+      "expected_intent": "PLATFORM",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-008-B",
+      "family_id": "platform-supported-countries",
+      "variant_id": "B",
+      "message": "Can orders be delivered outside my country?",
+      "expected_intent": "PLATFORM",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-008-C",
+      "family_id": "platform-supported-countries",
+      "variant_id": "C",
+      "message": "Where is your delivery service currently available?",
+      "expected_intent": "PLATFORM",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-008-D",
+      "family_id": "platform-supported-countries",
+      "variant_id": "D",
+      "message": "what countries can i order from",
+      "expected_intent": "PLATFORM",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-009-A",
+      "family_id": "platform-order-cancellation",
+      "variant_id": "A",
+      "message": "Can I cancel an order after placing it?",
+      "expected_intent": "PLATFORM",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-009-B",
+      "family_id": "platform-order-cancellation",
+      "variant_id": "B",
+      "message": "What are the rules for cancelling an order before it ships?",
+      "expected_intent": "PLATFORM",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-009-C",
+      "family_id": "platform-order-cancellation",
+      "variant_id": "C",
+      "message": "How do I stop an order I no longer want?",
+      "expected_intent": "PLATFORM",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-009-D",
+      "family_id": "platform-order-cancellation",
+      "variant_id": "D",
+      "message": "is it possible to cancel my order",
+      "expected_intent": "PLATFORM",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-010-A",
+      "family_id": "platform-gift-cards",
+      "variant_id": "A",
+      "message": "Do you sell or accept gift cards?",
+      "expected_intent": "PLATFORM",
+      "split": "validation",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-010-B",
+      "family_id": "platform-gift-cards",
+      "variant_id": "B",
+      "message": "Can a gift card be used together with another payment method?",
+      "expected_intent": "PLATFORM",
+      "split": "validation",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-010-C",
+      "family_id": "platform-gift-cards",
+      "variant_id": "C",
+      "message": "What are the rules for using gift cards on an order?",
+      "expected_intent": "PLATFORM",
+      "split": "validation",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-010-D",
+      "family_id": "platform-gift-cards",
+      "variant_id": "D",
+      "message": "can i pay with a gift card here",
+      "expected_intent": "PLATFORM",
+      "split": "validation",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-011-A",
+      "family_id": "platform-product-availability",
+      "variant_id": "A",
+      "message": "How can I tell when an out-of-stock item will be available again?",
+      "expected_intent": "PLATFORM",
+      "split": "validation",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-011-B",
+      "family_id": "platform-product-availability",
+      "variant_id": "B",
+      "message": "Do you restock products that are currently unavailable?",
+      "expected_intent": "PLATFORM",
+      "split": "validation",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-011-C",
+      "family_id": "platform-product-availability",
+      "variant_id": "C",
+      "message": "Is there a way to check whether this item will come back in stock?",
+      "expected_intent": "PLATFORM",
+      "split": "validation",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-011-D",
+      "family_id": "platform-product-availability",
+      "variant_id": "D",
+      "message": "when do sold out items usually come back",
+      "expected_intent": "PLATFORM",
+      "split": "validation",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-012-A",
+      "family_id": "platform-refund-timing",
+      "variant_id": "A",
+      "message": "How long does an approved refund usually take to arrive?",
+      "expected_intent": "PLATFORM",
+      "split": "validation",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-012-B",
+      "family_id": "platform-refund-timing",
+      "variant_id": "B",
+      "message": "When should I expect the money back after a refund is processed?",
+      "expected_intent": "PLATFORM",
+      "split": "validation",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-012-C",
+      "family_id": "platform-refund-timing",
+      "variant_id": "C",
+      "message": "What is the normal refund processing time?",
+      "expected_intent": "PLATFORM",
+      "split": "validation",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-012-D",
+      "family_id": "platform-refund-timing",
+      "variant_id": "D",
+      "message": "how many days till a refund shows up",
+      "expected_intent": "PLATFORM",
+      "split": "validation",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-013-A",
+      "family_id": "platform-order-tracking-process",
+      "variant_id": "A",
+      "message": "How do I track an order after it has shipped?",
+      "expected_intent": "PLATFORM",
+      "split": "test",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-013-B",
+      "family_id": "platform-order-tracking-process",
+      "variant_id": "B",
+      "message": "Where on the order page should I look for my parcel tracking information?",
+      "expected_intent": "PLATFORM",
+      "split": "test",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-013-C",
+      "family_id": "platform-order-tracking-process",
+      "variant_id": "C",
+      "message": "When an order is dispatched, where does the tracking number appear?",
+      "expected_intent": "PLATFORM",
+      "split": "test",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-013-D",
+      "family_id": "platform-order-tracking-process",
+      "variant_id": "D",
+      "message": "where do i find tracking for my order",
+      "expected_intent": "PLATFORM",
+      "split": "test",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-014-A",
+      "family_id": "platform-account-deletion",
+      "variant_id": "A",
+      "message": "How can I delete my account?",
+      "expected_intent": "PLATFORM",
+      "split": "test",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-014-B",
+      "family_id": "platform-account-deletion",
+      "variant_id": "B",
+      "message": "Is there a way to permanently close my customer profile?",
+      "expected_intent": "PLATFORM",
+      "split": "test",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-014-C",
+      "family_id": "platform-account-deletion",
+      "variant_id": "C",
+      "message": "What is the process for removing my account from the platform?",
+      "expected_intent": "PLATFORM",
+      "split": "test",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-014-D",
+      "family_id": "platform-account-deletion",
+      "variant_id": "D",
+      "message": "can i completely get rid of my account",
+      "expected_intent": "PLATFORM",
+      "split": "test",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-015-A",
+      "family_id": "platform-exchange-policy",
+      "variant_id": "A",
+      "message": "Can I exchange an item instead of returning it for a refund?",
+      "expected_intent": "PLATFORM",
+      "split": "test",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-015-B",
+      "family_id": "platform-exchange-policy",
+      "variant_id": "B",
+      "message": "What are the rules for product exchanges?",
+      "expected_intent": "PLATFORM",
+      "split": "test",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-015-C",
+      "family_id": "platform-exchange-policy",
+      "variant_id": "C",
+      "message": "If I ordered the wrong size, am I allowed to swap it for another one?",
+      "expected_intent": "PLATFORM",
+      "split": "test",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-PLATFORM-015-D",
+      "family_id": "platform-exchange-policy",
+      "variant_id": "D",
+      "message": "do you allow exchanges for a different size",
+      "expected_intent": "PLATFORM",
+      "split": "test",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-001-A",
+      "family_id": "other-general-knowledge",
+      "variant_id": "A",
+      "message": "What is the capital of Argentina?",
+      "expected_intent": "OTHER",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-001-B",
+      "family_id": "other-general-knowledge",
+      "variant_id": "B",
+      "message": "Who wrote The Great Gatsby?",
+      "expected_intent": "OTHER",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-001-C",
+      "family_id": "other-general-knowledge",
+      "variant_id": "C",
+      "message": "Why is the sky blue?",
+      "expected_intent": "OTHER",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-001-D",
+      "family_id": "other-general-knowledge",
+      "variant_id": "D",
+      "message": "tell me the tallest mountain in africa",
+      "expected_intent": "OTHER",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-002-A",
+      "family_id": "other-creative-writing",
+      "variant_id": "A",
+      "message": "Write me a short poem about rainy mornings.",
+      "expected_intent": "OTHER",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-002-B",
+      "family_id": "other-creative-writing",
+      "variant_id": "B",
+      "message": "Can you make up a bedtime story about a lost robot?",
+      "expected_intent": "OTHER",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-002-C",
+      "family_id": "other-creative-writing",
+      "variant_id": "C",
+      "message": "Give me a catchy slogan for my school club.",
+      "expected_intent": "OTHER",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-002-D",
+      "family_id": "other-creative-writing",
+      "variant_id": "D",
+      "message": "write a funny story about a cat running a shop",
+      "expected_intent": "OTHER",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-003-A",
+      "family_id": "other-personal-advice",
+      "variant_id": "A",
+      "message": "How can I stay motivated to exercise regularly?",
+      "expected_intent": "OTHER",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-003-B",
+      "family_id": "other-personal-advice",
+      "variant_id": "B",
+      "message": "What should I do if I am nervous before a presentation?",
+      "expected_intent": "OTHER",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-003-C",
+      "family_id": "other-personal-advice",
+      "variant_id": "C",
+      "message": "Can you give me advice on balancing study and free time?",
+      "expected_intent": "OTHER",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-003-D",
+      "family_id": "other-personal-advice",
+      "variant_id": "D",
+      "message": "any tips for getting into a better sleep routine",
+      "expected_intent": "OTHER",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-004-A",
+      "family_id": "other-unrelated-math",
+      "variant_id": "A",
+      "message": "What is 17 times 24?",
+      "expected_intent": "OTHER",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-004-B",
+      "family_id": "other-unrelated-math",
+      "variant_id": "B",
+      "message": "Can you calculate 15 percent of 860?",
+      "expected_intent": "OTHER",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-004-C",
+      "family_id": "other-unrelated-math",
+      "variant_id": "C",
+      "message": "Solve 3x + 9 = 30.",
+      "expected_intent": "OTHER",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-004-D",
+      "family_id": "other-unrelated-math",
+      "variant_id": "D",
+      "message": "whats 144 divided by 12",
+      "expected_intent": "OTHER",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-005-A",
+      "family_id": "other-external-company-support",
+      "variant_id": "A",
+      "message": "What is Amazon's return policy for electronics?",
+      "expected_intent": "OTHER",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-005-B",
+      "family_id": "other-external-company-support",
+      "variant_id": "B",
+      "message": "How do I cancel an order I placed on eBay?",
+      "expected_intent": "OTHER",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-005-C",
+      "family_id": "other-external-company-support",
+      "variant_id": "C",
+      "message": "Can you tell me whether Nike offers free returns?",
+      "expected_intent": "OTHER",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-005-D",
+      "family_id": "other-external-company-support",
+      "variant_id": "D",
+      "message": "need help with an order from another store, can you fix it",
+      "expected_intent": "OTHER",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-006-A",
+      "family_id": "other-home-technology-help",
+      "variant_id": "A",
+      "message": "My home Wi-Fi router keeps dropping the connection. How do I fix it?",
+      "expected_intent": "OTHER",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-006-B",
+      "family_id": "other-home-technology-help",
+      "variant_id": "B",
+      "message": "Why is my printer showing offline even though it is switched on?",
+      "expected_intent": "OTHER",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-006-C",
+      "family_id": "other-home-technology-help",
+      "variant_id": "C",
+      "message": "Can you help troubleshoot a smart TV that will not connect to Wi-Fi?",
+      "expected_intent": "OTHER",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-006-D",
+      "family_id": "other-home-technology-help",
+      "variant_id": "D",
+      "message": "my laptop bluetooth stopped seeing my headphones, any ideas",
+      "expected_intent": "OTHER",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-007-A",
+      "family_id": "other-travel-planning",
+      "variant_id": "A",
+      "message": "Plan a three-day itinerary for Cape Town.",
+      "expected_intent": "OTHER",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-007-B",
+      "family_id": "other-travel-planning",
+      "variant_id": "B",
+      "message": "What should I visit on a weekend trip to Lisbon?",
+      "expected_intent": "OTHER",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-007-C",
+      "family_id": "other-travel-planning",
+      "variant_id": "C",
+      "message": "Can you suggest a good route for travelling through Italy by train?",
+      "expected_intent": "OTHER",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-007-D",
+      "family_id": "other-travel-planning",
+      "variant_id": "D",
+      "message": "i just need help planning a short holiday in zanzibar",
+      "expected_intent": "OTHER",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-008-A",
+      "family_id": "other-programming-help",
+      "variant_id": "A",
+      "message": "Why am I getting a KeyError in this Python dictionary lookup?",
+      "expected_intent": "OTHER",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-008-B",
+      "family_id": "other-programming-help",
+      "variant_id": "B",
+      "message": "Can you explain how a JavaScript promise works?",
+      "expected_intent": "OTHER",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-008-C",
+      "family_id": "other-programming-help",
+      "variant_id": "C",
+      "message": "Help me debug a SQL query that returns duplicate rows.",
+      "expected_intent": "OTHER",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-008-D",
+      "family_id": "other-programming-help",
+      "variant_id": "D",
+      "message": "my python loop keeps throwing an error, can you help",
+      "expected_intent": "OTHER",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-009-A",
+      "family_id": "other-movie-recommendation",
+      "variant_id": "A",
+      "message": "Recommend a good science-fiction movie for tonight.",
+      "expected_intent": "OTHER",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-009-B",
+      "family_id": "other-movie-recommendation",
+      "variant_id": "B",
+      "message": "What films should I watch if I liked Interstellar?",
+      "expected_intent": "OTHER",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-009-C",
+      "family_id": "other-movie-recommendation",
+      "variant_id": "C",
+      "message": "Can you suggest a funny movie that is not too long?",
+      "expected_intent": "OTHER",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-009-D",
+      "family_id": "other-movie-recommendation",
+      "variant_id": "D",
+      "message": "need a movie recommendation for the weekend",
+      "expected_intent": "OTHER",
+      "split": "train",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-010-A",
+      "family_id": "other-translation-request",
+      "variant_id": "A",
+      "message": "Translate 'good morning' into French.",
+      "expected_intent": "OTHER",
+      "split": "validation",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-010-B",
+      "family_id": "other-translation-request",
+      "variant_id": "B",
+      "message": "Can you translate this sentence from Spanish to English?",
+      "expected_intent": "OTHER",
+      "split": "validation",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-010-C",
+      "family_id": "other-translation-request",
+      "variant_id": "C",
+      "message": "How would I say 'see you tomorrow' in German?",
+      "expected_intent": "OTHER",
+      "split": "validation",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-010-D",
+      "family_id": "other-translation-request",
+      "variant_id": "D",
+      "message": "translate this for me: thank you for your help",
+      "expected_intent": "OTHER",
+      "split": "validation",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-011-A",
+      "family_id": "other-resignation-email",
+      "variant_id": "A",
+      "message": "Help me write a professional resignation email.",
+      "expected_intent": "OTHER",
+      "split": "validation",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-011-B",
+      "family_id": "other-resignation-email",
+      "variant_id": "B",
+      "message": "Can you draft a short letter telling my employer I am leaving?",
+      "expected_intent": "OTHER",
+      "split": "validation",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-011-C",
+      "family_id": "other-resignation-email",
+      "variant_id": "C",
+      "message": "I need a polite email giving two weeks' notice.",
+      "expected_intent": "OTHER",
+      "split": "validation",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-011-D",
+      "family_id": "other-resignation-email",
+      "variant_id": "D",
+      "message": "write me a simple resignation message for my boss",
+      "expected_intent": "OTHER",
+      "split": "validation",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-012-A",
+      "family_id": "other-recipe-request",
+      "variant_id": "A",
+      "message": "Give me a simple recipe for banana bread.",
+      "expected_intent": "OTHER",
+      "split": "validation",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-012-B",
+      "family_id": "other-recipe-request",
+      "variant_id": "B",
+      "message": "How do I make creamy mushroom pasta?",
+      "expected_intent": "OTHER",
+      "split": "validation",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-012-C",
+      "family_id": "other-recipe-request",
+      "variant_id": "C",
+      "message": "What ingredients do I need for homemade pancakes?",
+      "expected_intent": "OTHER",
+      "split": "validation",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-012-D",
+      "family_id": "other-recipe-request",
+      "variant_id": "D",
+      "message": "need an easy chicken curry recipe",
+      "expected_intent": "OTHER",
+      "split": "validation",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-013-A",
+      "family_id": "other-stock-market-question",
+      "variant_id": "A",
+      "message": "How has Microsoft's stock performed this year?",
+      "expected_intent": "OTHER",
+      "split": "test",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-013-B",
+      "family_id": "other-stock-market-question",
+      "variant_id": "B",
+      "message": "What is happening with Tesla shares lately?",
+      "expected_intent": "OTHER",
+      "split": "test",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-013-C",
+      "family_id": "other-stock-market-question",
+      "variant_id": "C",
+      "message": "Can you explain why Nvidia's stock price moved today?",
+      "expected_intent": "OTHER",
+      "split": "test",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-013-D",
+      "family_id": "other-stock-market-question",
+      "variant_id": "D",
+      "message": "is apple stock doing well right now",
+      "expected_intent": "OTHER",
+      "split": "test",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-014-A",
+      "family_id": "other-food-order-request",
+      "variant_id": "A",
+      "message": "Order me a pepperoni pizza from a restaurant near my house.",
+      "expected_intent": "OTHER",
+      "split": "test",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-014-B",
+      "family_id": "other-food-order-request",
+      "variant_id": "B",
+      "message": "Can you arrange a takeaway burger for me?",
+      "expected_intent": "OTHER",
+      "split": "test",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-014-C",
+      "family_id": "other-food-order-request",
+      "variant_id": "C",
+      "message": "Please buy me lunch from the cafe down the road.",
+      "expected_intent": "OTHER",
+      "split": "test",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-014-D",
+      "family_id": "other-food-order-request",
+      "variant_id": "D",
+      "message": "i want to order sushi from a local place, can you do it",
+      "expected_intent": "OTHER",
+      "split": "test",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-015-A",
+      "family_id": "other-chess-advice",
+      "variant_id": "A",
+      "message": "What is the best move in this chess position?",
+      "expected_intent": "OTHER",
+      "split": "test",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-015-B",
+      "family_id": "other-chess-advice",
+      "variant_id": "B",
+      "message": "Should I castle now or develop another piece first?",
+      "expected_intent": "OTHER",
+      "split": "test",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-015-C",
+      "family_id": "other-chess-advice",
+      "variant_id": "C",
+      "message": "Can you help me understand how to respond to the Sicilian Defence?",
+      "expected_intent": "OTHER",
+      "split": "test",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    },
+    {
+      "case_id": "ROUTE-OTHER-015-D",
+      "family_id": "other-chess-advice",
+      "variant_id": "D",
+      "message": "im playing chess, what should i move after e4 c5",
+      "expected_intent": "OTHER",
+      "split": "test",
+      "provenance": "SYNTHETIC_ASSUMPTION"
+    }
+  ]
+}

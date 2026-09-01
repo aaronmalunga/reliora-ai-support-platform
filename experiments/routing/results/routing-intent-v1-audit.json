@@ -1,0 +1,917 @@
+{
+  "report_id": "routing-intent-v1-audit",
+  "dataset_id": "routing-intent-v1",
+  "dataset_version": "1.0.0",
+  "input_provenance": "SYNTHETIC_ASSUMPTION",
+  "evidence_class": "EXPERIMENTAL",
+  "audit_scope": {
+    "cross_split_near_duplicate_detection": {
+      "jaccard_threshold": 0.55,
+      "sequence_threshold": 0.78
+    },
+    "class_associated_token_detection": {
+      "minimum_document_frequency": 4,
+      "document_label_purity_threshold": 0.8,
+      "family_frequency_analysis": true,
+      "interpretation": "Message-level frequency is reported together with distinct semantic-family frequency so repeated variants from one family can be distinguished from broader class-level lexical associations."
+    },
+    "semantic_label_correctness": "REQUIRES_HUMAN_REVIEW"
+  },
+  "summary": {
+    "total_records": 180,
+    "cross_split_near_duplicate_findings": 0,
+    "class_associated_token_findings": 31,
+    "cross_family_class_associated_token_findings": 23
+  },
+  "message_length_summary": {
+    "overall": {
+      "minimum": 4,
+      "maximum": 19,
+      "mean": 9.97
+    },
+    "by_intent": {
+      "BUG": {
+        "minimum": 6,
+        "maximum": 19,
+        "mean": 12.02
+      },
+      "OTHER": {
+        "minimum": 4,
+        "maximum": 14,
+        "mean": 8.87
+      },
+      "PLATFORM": {
+        "minimum": 5,
+        "maximum": 15,
+        "mean": 9.03
+      }
+    }
+  },
+  "boundary_term_distribution": {
+    "account": {
+      "BUG": 2,
+      "PLATFORM": 3,
+      "OTHER": 0
+    },
+    "address": {
+      "BUG": 4,
+      "PLATFORM": 3,
+      "OTHER": 0
+    },
+    "app": {
+      "BUG": 7,
+      "PLATFORM": 0,
+      "OTHER": 0
+    },
+    "checkout": {
+      "BUG": 4,
+      "PLATFORM": 2,
+      "OTHER": 0
+    },
+    "discount": {
+      "BUG": 1,
+      "PLATFORM": 3,
+      "OTHER": 0
+    },
+    "error": {
+      "BUG": 8,
+      "PLATFORM": 0,
+      "OTHER": 1
+    },
+    "order": {
+      "BUG": 6,
+      "PLATFORM": 14,
+      "OTHER": 4
+    },
+    "payment": {
+      "BUG": 4,
+      "PLATFORM": 3,
+      "OTHER": 0
+    },
+    "product": {
+      "BUG": 3,
+      "PLATFORM": 1,
+      "OTHER": 0
+    },
+    "refund": {
+      "BUG": 0,
+      "PLATFORM": 5,
+      "OTHER": 0
+    },
+    "return": {
+      "BUG": 1,
+      "PLATFORM": 3,
+      "OTHER": 1
+    },
+    "shipping": {
+      "BUG": 1,
+      "PLATFORM": 4,
+      "OTHER": 0
+    },
+    "tracking": {
+      "BUG": 3,
+      "PLATFORM": 3,
+      "OTHER": 0
+    }
+  },
+  "cross_split_near_duplicates": [],
+  "class_associated_tokens": [
+    {
+      "token": "keeps",
+      "document_frequency": 11,
+      "dominant_intent": "BUG",
+      "dominant_intent_count": 9,
+      "document_label_purity": 0.8182,
+      "document_intent_counts": {
+        "BUG": 9,
+        "OTHER": 2
+      },
+      "distinct_family_count": 10,
+      "dominant_family_intent": "BUG",
+      "dominant_family_count": 8,
+      "family_label_purity": 0.8,
+      "family_intent_counts": {
+        "BUG": 8,
+        "OTHER": 2
+      },
+      "families_by_intent": {
+        "BUG": [
+          "bug-address-save-failure",
+          "bug-cart-quantity-update",
+          "bug-checkout-crash",
+          "bug-login-loop",
+          "bug-mobile-app-crash",
+          "bug-order-history-error",
+          "bug-profile-update-not-persisting",
+          "bug-wishlist-sync-failure"
+        ],
+        "OTHER": [
+          "other-home-technology-help",
+          "other-programming-help"
+        ]
+      }
+    },
+    {
+      "token": "page",
+      "document_frequency": 15,
+      "dominant_intent": "BUG",
+      "dominant_intent_count": 13,
+      "document_label_purity": 0.8667,
+      "document_intent_counts": {
+        "BUG": 13,
+        "PLATFORM": 2
+      },
+      "distinct_family_count": 9,
+      "dominant_family_intent": "BUG",
+      "dominant_family_count": 7,
+      "family_label_purity": 0.7778,
+      "family_intent_counts": {
+        "BUG": 7,
+        "PLATFORM": 2
+      },
+      "families_by_intent": {
+        "BUG": [
+          "bug-checkout-crash",
+          "bug-mobile-app-crash",
+          "bug-notification-link-broken",
+          "bug-order-history-error",
+          "bug-password-reset-link-failure",
+          "bug-search-malfunction",
+          "bug-tracking-page-blank"
+        ],
+        "PLATFORM": [
+          "platform-order-tracking-process",
+          "platform-payment-methods"
+        ]
+      }
+    },
+    {
+      "token": "help",
+      "document_frequency": 10,
+      "dominant_intent": "OTHER",
+      "dominant_intent_count": 8,
+      "document_label_purity": 0.8,
+      "document_intent_counts": {
+        "BUG": 1,
+        "OTHER": 8,
+        "PLATFORM": 1
+      },
+      "distinct_family_count": 9,
+      "dominant_family_intent": "OTHER",
+      "dominant_family_count": 7,
+      "family_label_purity": 0.7778,
+      "family_intent_counts": {
+        "BUG": 1,
+        "OTHER": 7,
+        "PLATFORM": 1
+      },
+      "families_by_intent": {
+        "BUG": [
+          "bug-payment-button-unresponsive"
+        ],
+        "OTHER": [
+          "other-chess-advice",
+          "other-external-company-support",
+          "other-home-technology-help",
+          "other-programming-help",
+          "other-resignation-email",
+          "other-translation-request",
+          "other-travel-planning"
+        ],
+        "PLATFORM": [
+          "platform-loyalty-program"
+        ]
+      }
+    },
+    {
+      "token": "broken",
+      "document_frequency": 7,
+      "dominant_intent": "BUG",
+      "dominant_intent_count": 7,
+      "document_label_purity": 1.0,
+      "document_intent_counts": {
+        "BUG": 7
+      },
+      "distinct_family_count": 7,
+      "dominant_family_intent": "BUG",
+      "dominant_family_count": 7,
+      "family_label_purity": 1.0,
+      "family_intent_counts": {
+        "BUG": 7
+      },
+      "families_by_intent": {
+        "BUG": [
+          "bug-address-save-failure",
+          "bug-cart-quantity-update",
+          "bug-notification-link-broken",
+          "bug-order-history-error",
+          "bug-password-reset-link-failure",
+          "bug-profile-update-not-persisting",
+          "bug-search-malfunction"
+        ]
+      }
+    },
+    {
+      "token": "nothing",
+      "document_frequency": 7,
+      "dominant_intent": "BUG",
+      "dominant_intent_count": 7,
+      "document_label_purity": 1.0,
+      "document_intent_counts": {
+        "BUG": 7
+      },
+      "distinct_family_count": 6,
+      "dominant_family_intent": "BUG",
+      "dominant_family_count": 6,
+      "family_label_purity": 1.0,
+      "family_intent_counts": {
+        "BUG": 6
+      },
+      "families_by_intent": {
+        "BUG": [
+          "bug-address-save-failure",
+          "bug-cart-quantity-update",
+          "bug-coupon-apply-failure",
+          "bug-payment-button-unresponsive",
+          "bug-product-filter-stuck",
+          "bug-tracking-page-blank"
+        ]
+      }
+    },
+    {
+      "token": "error",
+      "document_frequency": 9,
+      "dominant_intent": "BUG",
+      "dominant_intent_count": 8,
+      "document_label_purity": 0.8889,
+      "document_intent_counts": {
+        "BUG": 8,
+        "OTHER": 1
+      },
+      "distinct_family_count": 6,
+      "dominant_family_intent": "BUG",
+      "dominant_family_count": 5,
+      "family_label_purity": 0.8333,
+      "family_intent_counts": {
+        "BUG": 5,
+        "OTHER": 1
+      },
+      "families_by_intent": {
+        "BUG": [
+          "bug-coupon-apply-failure",
+          "bug-notification-link-broken",
+          "bug-order-history-error",
+          "bug-password-reset-link-failure",
+          "bug-search-malfunction"
+        ],
+        "OTHER": [
+          "other-programming-help"
+        ]
+      }
+    },
+    {
+      "token": "need",
+      "document_frequency": 7,
+      "dominant_intent": "OTHER",
+      "dominant_intent_count": 6,
+      "document_label_purity": 0.8571,
+      "document_intent_counts": {
+        "OTHER": 6,
+        "PLATFORM": 1
+      },
+      "distinct_family_count": 6,
+      "dominant_family_intent": "OTHER",
+      "dominant_family_count": 5,
+      "family_label_purity": 0.8333,
+      "family_intent_counts": {
+        "OTHER": 5,
+        "PLATFORM": 1
+      },
+      "families_by_intent": {
+        "OTHER": [
+          "other-external-company-support",
+          "other-movie-recommendation",
+          "other-recipe-request",
+          "other-resignation-email",
+          "other-travel-planning"
+        ],
+        "PLATFORM": [
+          "platform-change-shipping-address"
+        ]
+      }
+    },
+    {
+      "token": "item",
+      "document_frequency": 6,
+      "dominant_intent": "PLATFORM",
+      "dominant_intent_count": 5,
+      "document_label_purity": 0.8333,
+      "document_intent_counts": {
+        "BUG": 1,
+        "PLATFORM": 5
+      },
+      "distinct_family_count": 5,
+      "dominant_family_intent": "PLATFORM",
+      "dominant_family_count": 4,
+      "family_label_purity": 0.8,
+      "family_intent_counts": {
+        "BUG": 1,
+        "PLATFORM": 4
+      },
+      "families_by_intent": {
+        "BUG": [
+          "bug-cart-quantity-update"
+        ],
+        "PLATFORM": [
+          "platform-exchange-policy",
+          "platform-product-availability",
+          "platform-return-policy",
+          "platform-warranty-information"
+        ]
+      }
+    },
+    {
+      "token": "there",
+      "document_frequency": 5,
+      "dominant_intent": "PLATFORM",
+      "dominant_intent_count": 4,
+      "document_label_purity": 0.8,
+      "document_intent_counts": {
+        "BUG": 1,
+        "PLATFORM": 4
+      },
+      "distinct_family_count": 5,
+      "dominant_family_intent": "PLATFORM",
+      "dominant_family_count": 4,
+      "family_label_purity": 0.8,
+      "family_intent_counts": {
+        "BUG": 1,
+        "PLATFORM": 4
+      },
+      "families_by_intent": {
+        "BUG": [
+          "bug-address-save-failure"
+        ],
+        "PLATFORM": [
+          "platform-account-deletion",
+          "platform-change-shipping-address",
+          "platform-product-availability",
+          "platform-student-discount"
+        ]
+      }
+    },
+    {
+      "token": "wont",
+      "document_frequency": 4,
+      "dominant_intent": "BUG",
+      "dominant_intent_count": 4,
+      "document_label_purity": 1.0,
+      "document_intent_counts": {
+        "BUG": 4
+      },
+      "distinct_family_count": 4,
+      "dominant_family_intent": "BUG",
+      "dominant_family_count": 4,
+      "family_label_purity": 1.0,
+      "family_intent_counts": {
+        "BUG": 4
+      },
+      "families_by_intent": {
+        "BUG": [
+          "bug-cart-quantity-update",
+          "bug-coupon-apply-failure",
+          "bug-payment-button-unresponsive",
+          "bug-wishlist-sync-failure"
+        ]
+      }
+    },
+    {
+      "token": "try",
+      "document_frequency": 4,
+      "dominant_intent": "BUG",
+      "dominant_intent_count": 4,
+      "document_label_purity": 1.0,
+      "document_intent_counts": {
+        "BUG": 4
+      },
+      "distinct_family_count": 4,
+      "dominant_family_intent": "BUG",
+      "dominant_family_count": 4,
+      "family_label_purity": 1.0,
+      "family_intent_counts": {
+        "BUG": 4
+      },
+      "families_by_intent": {
+        "BUG": [
+          "bug-checkout-crash",
+          "bug-coupon-apply-failure",
+          "bug-order-history-error",
+          "bug-search-malfunction"
+        ]
+      }
+    },
+    {
+      "token": "every",
+      "document_frequency": 4,
+      "dominant_intent": "BUG",
+      "dominant_intent_count": 4,
+      "document_label_purity": 1.0,
+      "document_intent_counts": {
+        "BUG": 4
+      },
+      "distinct_family_count": 4,
+      "dominant_family_intent": "BUG",
+      "dominant_family_count": 4,
+      "family_label_purity": 1.0,
+      "family_intent_counts": {
+        "BUG": 4
+      },
+      "families_by_intent": {
+        "BUG": [
+          "bug-checkout-crash",
+          "bug-mobile-app-crash",
+          "bug-order-history-error",
+          "bug-search-malfunction"
+        ]
+      }
+    },
+    {
+      "token": "app",
+      "document_frequency": 7,
+      "dominant_intent": "BUG",
+      "dominant_intent_count": 7,
+      "document_label_purity": 1.0,
+      "document_intent_counts": {
+        "BUG": 7
+      },
+      "distinct_family_count": 3,
+      "dominant_family_intent": "BUG",
+      "dominant_family_count": 3,
+      "family_label_purity": 1.0,
+      "family_intent_counts": {
+        "BUG": 3
+      },
+      "families_by_intent": {
+        "BUG": [
+          "bug-checkout-crash",
+          "bug-mobile-app-crash",
+          "bug-wishlist-sync-failure"
+        ]
+      }
+    },
+    {
+      "token": "changes",
+      "document_frequency": 6,
+      "dominant_intent": "BUG",
+      "dominant_intent_count": 6,
+      "document_label_purity": 1.0,
+      "document_intent_counts": {
+        "BUG": 6
+      },
+      "distinct_family_count": 3,
+      "dominant_family_intent": "BUG",
+      "dominant_family_count": 3,
+      "family_label_purity": 1.0,
+      "family_intent_counts": {
+        "BUG": 3
+      },
+      "families_by_intent": {
+        "BUG": [
+          "bug-address-save-failure",
+          "bug-profile-update-not-persisting",
+          "bug-wishlist-sync-failure"
+        ]
+      }
+    },
+    {
+      "token": "says",
+      "document_frequency": 4,
+      "dominant_intent": "BUG",
+      "dominant_intent_count": 4,
+      "document_label_purity": 1.0,
+      "document_intent_counts": {
+        "BUG": 4
+      },
+      "distinct_family_count": 3,
+      "dominant_family_intent": "BUG",
+      "dominant_family_count": 3,
+      "family_label_purity": 1.0,
+      "family_intent_counts": {
+        "BUG": 3
+      },
+      "families_by_intent": {
+        "BUG": [
+          "bug-address-save-failure",
+          "bug-login-loop",
+          "bug-profile-update-not-persisting"
+        ]
+      }
+    },
+    {
+      "token": "opens",
+      "document_frequency": 4,
+      "dominant_intent": "BUG",
+      "dominant_intent_count": 4,
+      "document_label_purity": 1.0,
+      "document_intent_counts": {
+        "BUG": 4
+      },
+      "distinct_family_count": 3,
+      "dominant_family_intent": "BUG",
+      "dominant_family_count": 3,
+      "family_label_purity": 1.0,
+      "family_intent_counts": {
+        "BUG": 3
+      },
+      "families_by_intent": {
+        "BUG": [
+          "bug-notification-link-broken",
+          "bug-password-reset-link-failure",
+          "bug-tracking-page-blank"
+        ]
+      }
+    },
+    {
+      "token": "shipping",
+      "document_frequency": 5,
+      "dominant_intent": "PLATFORM",
+      "dominant_intent_count": 4,
+      "document_label_purity": 0.8,
+      "document_intent_counts": {
+        "BUG": 1,
+        "PLATFORM": 4
+      },
+      "distinct_family_count": 3,
+      "dominant_family_intent": "PLATFORM",
+      "dominant_family_count": 2,
+      "family_label_purity": 0.6667,
+      "family_intent_counts": {
+        "BUG": 1,
+        "PLATFORM": 2
+      },
+      "families_by_intent": {
+        "BUG": [
+          "bug-address-save-failure"
+        ],
+        "PLATFORM": [
+          "platform-change-shipping-address",
+          "platform-shipping-times"
+        ]
+      }
+    },
+    {
+      "token": "link",
+      "document_frequency": 6,
+      "dominant_intent": "BUG",
+      "dominant_intent_count": 6,
+      "document_label_purity": 1.0,
+      "document_intent_counts": {
+        "BUG": 6
+      },
+      "distinct_family_count": 2,
+      "dominant_family_intent": "BUG",
+      "dominant_family_count": 2,
+      "family_label_purity": 1.0,
+      "family_intent_counts": {
+        "BUG": 2
+      },
+      "families_by_intent": {
+        "BUG": [
+          "bug-notification-link-broken",
+          "bug-password-reset-link-failure"
+        ]
+      }
+    },
+    {
+      "token": "refund",
+      "document_frequency": 5,
+      "dominant_intent": "PLATFORM",
+      "dominant_intent_count": 5,
+      "document_label_purity": 1.0,
+      "document_intent_counts": {
+        "PLATFORM": 5
+      },
+      "distinct_family_count": 2,
+      "dominant_family_intent": "PLATFORM",
+      "dominant_family_count": 2,
+      "family_label_purity": 1.0,
+      "family_intent_counts": {
+        "PLATFORM": 2
+      },
+      "families_by_intent": {
+        "PLATFORM": [
+          "platform-exchange-policy",
+          "platform-refund-timing"
+        ]
+      }
+    },
+    {
+      "token": "write",
+      "document_frequency": 4,
+      "dominant_intent": "OTHER",
+      "dominant_intent_count": 4,
+      "document_label_purity": 1.0,
+      "document_intent_counts": {
+        "OTHER": 4
+      },
+      "distinct_family_count": 2,
+      "dominant_family_intent": "OTHER",
+      "dominant_family_count": 2,
+      "family_label_purity": 1.0,
+      "family_intent_counts": {
+        "OTHER": 2
+      },
+      "families_by_intent": {
+        "OTHER": [
+          "other-creative-writing",
+          "other-resignation-email"
+        ]
+      }
+    },
+    {
+      "token": "sign",
+      "document_frequency": 4,
+      "dominant_intent": "BUG",
+      "dominant_intent_count": 4,
+      "document_label_purity": 1.0,
+      "document_intent_counts": {
+        "BUG": 4
+      },
+      "distinct_family_count": 2,
+      "dominant_family_intent": "BUG",
+      "dominant_family_count": 2,
+      "family_label_purity": 1.0,
+      "family_intent_counts": {
+        "BUG": 2
+      },
+      "families_by_intent": {
+        "BUG": [
+          "bug-login-loop",
+          "bug-profile-update-not-persisting"
+        ]
+      }
+    },
+    {
+      "token": "password",
+      "document_frequency": 4,
+      "dominant_intent": "BUG",
+      "dominant_intent_count": 4,
+      "document_label_purity": 1.0,
+      "document_intent_counts": {
+        "BUG": 4
+      },
+      "distinct_family_count": 2,
+      "dominant_family_intent": "BUG",
+      "dominant_family_count": 2,
+      "family_label_purity": 1.0,
+      "family_intent_counts": {
+        "BUG": 2
+      },
+      "families_by_intent": {
+        "BUG": [
+          "bug-login-loop",
+          "bug-password-reset-link-failure"
+        ]
+      }
+    },
+    {
+      "token": "button",
+      "document_frequency": 4,
+      "dominant_intent": "BUG",
+      "dominant_intent_count": 4,
+      "document_label_purity": 1.0,
+      "document_intent_counts": {
+        "BUG": 4
+      },
+      "distinct_family_count": 2,
+      "dominant_family_intent": "BUG",
+      "dominant_family_count": 2,
+      "family_label_purity": 1.0,
+      "family_intent_counts": {
+        "BUG": 2
+      },
+      "families_by_intent": {
+        "BUG": [
+          "bug-coupon-apply-failure",
+          "bug-payment-button-unresponsive"
+        ]
+      }
+    },
+    {
+      "token": "wishlist",
+      "document_frequency": 4,
+      "dominant_intent": "BUG",
+      "dominant_intent_count": 4,
+      "document_label_purity": 1.0,
+      "document_intent_counts": {
+        "BUG": 4
+      },
+      "distinct_family_count": 1,
+      "dominant_family_intent": "BUG",
+      "dominant_family_count": 1,
+      "family_label_purity": 1.0,
+      "family_intent_counts": {
+        "BUG": 1
+      },
+      "families_by_intent": {
+        "BUG": [
+          "bug-wishlist-sync-failure"
+        ]
+      }
+    },
+    {
+      "token": "warranty",
+      "document_frequency": 4,
+      "dominant_intent": "PLATFORM",
+      "dominant_intent_count": 4,
+      "document_label_purity": 1.0,
+      "document_intent_counts": {
+        "PLATFORM": 4
+      },
+      "distinct_family_count": 1,
+      "dominant_family_intent": "PLATFORM",
+      "dominant_family_count": 1,
+      "family_label_purity": 1.0,
+      "family_intent_counts": {
+        "PLATFORM": 1
+      },
+      "families_by_intent": {
+        "PLATFORM": [
+          "platform-warranty-information"
+        ]
+      }
+    },
+    {
+      "token": "search",
+      "document_frequency": 4,
+      "dominant_intent": "BUG",
+      "dominant_intent_count": 4,
+      "document_label_purity": 1.0,
+      "document_intent_counts": {
+        "BUG": 4
+      },
+      "distinct_family_count": 1,
+      "dominant_family_intent": "BUG",
+      "dominant_family_count": 1,
+      "family_label_purity": 1.0,
+      "family_intent_counts": {
+        "BUG": 1
+      },
+      "families_by_intent": {
+        "BUG": [
+          "bug-search-malfunction"
+        ]
+      }
+    },
+    {
+      "token": "reset",
+      "document_frequency": 4,
+      "dominant_intent": "BUG",
+      "dominant_intent_count": 4,
+      "document_label_purity": 1.0,
+      "document_intent_counts": {
+        "BUG": 4
+      },
+      "distinct_family_count": 1,
+      "dominant_family_intent": "BUG",
+      "dominant_family_count": 1,
+      "family_label_purity": 1.0,
+      "family_intent_counts": {
+        "BUG": 1
+      },
+      "families_by_intent": {
+        "BUG": [
+          "bug-password-reset-link-failure"
+        ]
+      }
+    },
+    {
+      "token": "gift",
+      "document_frequency": 4,
+      "dominant_intent": "PLATFORM",
+      "dominant_intent_count": 4,
+      "document_label_purity": 1.0,
+      "document_intent_counts": {
+        "PLATFORM": 4
+      },
+      "distinct_family_count": 1,
+      "dominant_family_intent": "PLATFORM",
+      "dominant_family_count": 1,
+      "family_label_purity": 1.0,
+      "family_intent_counts": {
+        "PLATFORM": 1
+      },
+      "families_by_intent": {
+        "PLATFORM": [
+          "platform-gift-cards"
+        ]
+      }
+    },
+    {
+      "token": "code",
+      "document_frequency": 4,
+      "dominant_intent": "BUG",
+      "dominant_intent_count": 4,
+      "document_label_purity": 1.0,
+      "document_intent_counts": {
+        "BUG": 4
+      },
+      "distinct_family_count": 1,
+      "dominant_family_intent": "BUG",
+      "dominant_family_count": 1,
+      "family_label_purity": 1.0,
+      "family_intent_counts": {
+        "BUG": 1
+      },
+      "families_by_intent": {
+        "BUG": [
+          "bug-coupon-apply-failure"
+        ]
+      }
+    },
+    {
+      "token": "cart",
+      "document_frequency": 4,
+      "dominant_intent": "BUG",
+      "dominant_intent_count": 4,
+      "document_label_purity": 1.0,
+      "document_intent_counts": {
+        "BUG": 4
+      },
+      "distinct_family_count": 1,
+      "dominant_family_intent": "BUG",
+      "dominant_family_count": 1,
+      "family_label_purity": 1.0,
+      "family_intent_counts": {
+        "BUG": 1
+      },
+      "families_by_intent": {
+        "BUG": [
+          "bug-cart-quantity-update"
+        ]
+      }
+    },
+    {
+      "token": "apply",
+      "document_frequency": 4,
+      "dominant_intent": "BUG",
+      "dominant_intent_count": 4,
+      "document_label_purity": 1.0,
+      "document_intent_counts": {
+        "BUG": 4
+      },
+      "distinct_family_count": 1,
+      "dominant_family_intent": "BUG",
+      "dominant_family_count": 1,
+      "family_label_purity": 1.0,
+      "family_intent_counts": {
+        "BUG": 1
+      },
+      "families_by_intent": {
+        "BUG": [
+          "bug-coupon-apply-failure"
+        ]
+      }
+    }
+  ]
+}

@@ -15,7 +15,7 @@ routing-intent-v1
 ## Status
 
 ```text
-DESIGN IN PROGRESS
+FROZEN
 ```
 
 ---
@@ -648,27 +648,71 @@ If test cases materially influence model development, a new held-out version may
 
 # 23. Dataset Review
 
-Before benchmark execution, the dataset should be reviewed for:
+Dataset review was completed before routing-model training and before
+the version 1 freeze.
+
+Review included:
 
 ```text
 label consistency
 ambiguous intent
 duplicate wording
 family leakage
+cross-split near-duplicates
 unrealistic examples
-class artifacts
+class-specific lexical artifacts
+message-length artifacts
 incorrect split assignment
+held-out test-set semantic correctness
 ```
 
-Automated validation is necessary but cannot establish that every semantic label is correct.
+Automated validation and diagnostic auditing were supplemented by human
+semantic review.
 
-Human review remains part of dataset governance.
+The review process is documented in:
+
+- `routing-intent-v1-methodology.md`
+- `routing-intent-v1-review-log.md`
+
+The final pre-freeze review established:
+
+```text
+records: 180
+semantic families: 45
+
+BUG records: 60
+PLATFORM records: 60
+OTHER records: 60
+
+train records: 108
+validation records: 36
+test records: 36
+
+duplicate case IDs: 0
+exact duplicate messages: 0
+cross-split near-duplicate findings: 0
+
+strongly class-associated token findings: 31
+cross-family class-associated token findings: 23
+
+held-out test families reviewed: 9 / 9
+held-out test records accepted: 36 / 36
+additional test records revised during final semantic review: 0
+
+structural validation: PASS
+```
+
+The lexical findings are diagnostic rather than automatic defects.
+
+Human review distinguished legitimate predictive language from
+synthetic-generation shortcuts before deciding whether a record should
+be revised.
 
 ---
 
-# 24. Planned File Format
+# 24. File Format
 
-Version 1 will use a machine-readable format suitable for:
+Version 1 is stored as machine-readable JSON suitable for:
 
 ```text
 validation
@@ -676,28 +720,80 @@ training
 evaluation
 hashing
 version control
+reproducibility
 ```
 
-The exact physical file will be created after this dataset design is reviewed.
+Primary dataset file:
 
-JSON is currently preferred because it supports explicit metadata cleanly.
+```text
+routing-intent-v1.json
+```
+
+Semantic-family manifest:
+
+```text
+routing-intent-v1-families.json
+```
+
+The physical dataset contains 180 records.
+
+Each record is linked to one of 45 semantic families and carries its
+expected intent, split assignment, variant identifier, and provenance.
+
+JSON is used because it preserves explicit metadata while remaining
+straightforward to validate and consume from Python tooling.
 
 ---
 
 # 25. Dataset Identity
 
-Once version 1 is finalized, its canonical content should receive a SHA-256 digest.
+The frozen version 1 dataset will be bound to canonical SHA-256
+digests after the final freeze quality gates are executed.
 
-The benchmark report should record:
+The recorded identity will include:
 
 ```text
 dataset ID
 dataset version
 dataset SHA-256
+family-manifest SHA-256
 hash basis
+associated Git revision
 ```
 
-This connects experimental results to the exact evaluated dataset.
+The hash basis will be documented explicitly so that later benchmark
+results can be tied to the exact frozen content.
+
+Frozen artifact identity:
+
+```text
+dataset ID: routing-intent-v1
+dataset version: 1.0.0
+
+dataset SHA-256:
+369600abb8711dcadc0acb96bd19edc33a9c06a83cf7c09208bccb6dbde85450
+
+family-manifest SHA-256:
+93d07598b846c2df3490f39b68971b2ae2a5dba872fb149e513f592c0d5724a1
+
+hash algorithm: SHA-256
+hash basis: file bytes with line endings normalized to LF
+
+dataset lifecycle state: FROZEN
+manifest lifecycle state: FROZEN
+
+associated frozen Git revision: PENDING
+benchmark execution: NOT YET STARTED
+```
+
+The LF-normalized hash basis matches the repository's enforced
+`eol=lf` Git attribute for both frozen JSON artifacts.
+
+The associated Git revision remains pending until the complete dataset
+freeze milestone is committed.
+
+Benchmark results must identify these frozen hashes and the associated
+Git revision used for execution.
 
 ---
 
@@ -721,42 +817,119 @@ The model generalizes to all customer requests.
 
 ---
 
-# 27. Planned Version 1 Lifecycle
+# 27. Version 1 Lifecycle
+
+The version 1 dataset followed this lifecycle:
 
 ```text
-dataset design
+dataset design                         COMPLETE
       ↓
-author semantic families
+author semantic families               COMPLETE
       ↓
-author message variants
+author message variants                COMPLETE
       ↓
-assign family-level splits
+assign family-level splits             COMPLETE
       ↓
-validate mechanically
+validate mechanically                  COMPLETE
       ↓
-review labels manually
+audit benchmark-quality risks          COMPLETE
       ↓
-freeze dataset version
+review lexical shortcuts               COMPLETE
       ↓
-calculate canonical hash
+perform targeted pre-freeze curation   COMPLETE
       ↓
-benchmark candidates
+re-validate and re-audit               COMPLETE
       ↓
-generate EXPERIMENTAL evidence
+review held-out labels manually        COMPLETE
+      ↓
+freeze family manifest                 COMPLETE
+      ↓
+freeze dataset version                 COMPLETE
+      ↓
+synchronize freeze documentation       COMPLETE
+      ↓
+execute final quality gates             COMPLETE
+      ↓
+calculate canonical hashes             COMPLETE
+      ↓
+record Git revision                    PENDING
+      ↓
+benchmark candidates                   NOT STARTED
+      ↓
+generate EXPERIMENTAL evidence         NOT STARTED
 ```
+
+The ordering is intentional.
+
+In particular, held-out test review and dataset freeze occurred before
+any routing classifier was trained.
+
+After freeze, model errors must not automatically cause test examples
+to be rewritten.
 
 ---
 
 # 28. Current Status
 
 ```text
-dataset card: CREATED
-semantic families: NOT YET AUTHORED
-message fixtures: NOT YET AUTHORED
-split assignments: DESIGN DEFINED
-validation: NOT YET EXECUTED
-dataset frozen: NO
-benchmark use: NOT YET
+dataset card: UPDATED FOR FROZEN STATE
+
+semantic families:
+45 AUTHORED
+15 BUG
+15 PLATFORM
+15 OTHER
+
+message fixtures:
+180 AUTHORED
+60 BUG
+60 PLATFORM
+60 OTHER
+
+family split assignments:
+27 TRAIN
+9 VALIDATION
+9 TEST
+FROZEN
+
+record split assignments:
+108 TRAIN
+36 VALIDATION
+36 TEST
+FROZEN
+
+family manifest:
+VERSION 1.0.0
+FROZEN
+
+routing dataset:
+VERSION 1.0.0
+FROZEN
+
+structural validation:
+PASS
+
+cross-split near-duplicate findings:
+0 AT CONFIGURED AUDIT THRESHOLDS
+
+strongly class-associated token findings:
+31
+
+cross-family class-associated token findings:
+23
+
+held-out semantic review:
+9 / 9 TEST FAMILIES ACCEPTED
+36 / 36 TEST RECORDS ACCEPTED
+
+test set:
+CLOSED TO MODEL-DRIVEN EDITING
+
+final canonical hashes:
+RECORDED
+
+routing-model benchmarking:
+NOT YET STARTED
 ```
 
 ---

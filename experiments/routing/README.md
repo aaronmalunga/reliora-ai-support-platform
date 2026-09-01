@@ -583,19 +583,62 @@ Family-aware splitting helps prevent closely related paraphrases from appearing 
 
 # 17. Split Strategy
 
-The benchmark should use clearly separated data for:
+The version 1 routing dataset uses **semantic-family-aware splitting**.
+
+Individual message variants are not independently randomized across
+splits. Instead, the semantic family is the split unit.
+
+This prevents paraphrases describing the same underlying scenario from
+appearing on opposite sides of an evaluation boundary.
+
+The frozen version 1 split contains:
 
 ```text
-development / training
-validation where applicable
-final held-out testing
+semantic families: 45
+
+train families: 27
+validation families: 9
+test families: 9
+
+train records: 108
+validation records: 36
+test records: 36
 ```
 
-The exact split strategy will be specified once the dataset design is finalized.
+Each intent contributes:
 
-The final test set should not be repeatedly inspected and modified in response to model errors.
+```text
+9 train families
+3 validation families
+3 test families
+```
 
-Otherwise it gradually becomes part of the development process and stops functioning as genuinely held-out evidence.
+Because each semantic family contains four message variants, each intent
+therefore contributes:
+
+```text
+36 train records
+12 validation records
+12 test records
+```
+
+The held-out test families were assigned before routing-model
+benchmarking and were manually reviewed before dataset freeze.
+
+The test set is now:
+
+```text
+CLOSED TO MODEL-DRIVEN EDITING
+```
+
+It must not be repeatedly inspected or rewritten in response to model
+errors.
+
+A genuine ground-truth defect may still be corrected through explicit
+dataset change control and versioning.
+
+This split discipline is intended to reduce paraphrase leakage and
+preserve the test set as independent evidence.
 
 ---
 
@@ -879,7 +922,9 @@ which extend beyond this benchmark.
 
 ---
 
-# 31. Expected Directory Structure
+# 31. Current Directory Structure
+
+The routing experiment currently contains:
 
 ```text
 experiments/
@@ -887,63 +932,224 @@ experiments/
     ├── README.md
     │
     ├── data/
-    │   └── versioned routing datasets
+    │   ├── routing-intent-v1-card.md
+    │   ├── routing-intent-v1-families.json
+    │   ├── routing-intent-v1-methodology.md
+    │   ├── routing-intent-v1-review-log.md
+    │   └── routing-intent-v1.json
     │
     ├── scripts/
-    │   └── benchmark and analysis code
+    │   ├── audit_routing_dataset.py
+    │   └── validate_routing_data.py
     │
     └── results/
-        └── generated experimental evidence
+        └── routing-intent-v1-audit.json
 ```
+
+This structure separates:
+
+```text
+experiment documentation
+dataset artifacts
+executable validation and audit tooling
+generated experimental evidence
+```
+
+Routing-model training and benchmark-execution artifacts have not yet
+been added because model benchmarking has not started.
 
 ---
 
-# 32. Directory Responsibilities
+# 32. Directory and Artifact Responsibilities
+
+## `README.md`
+
+Defines the routing experiment itself, including:
+
+- requirements and ADR traceability;
+- routing-label semantics;
+- experiment scope;
+- candidate-selection philosophy;
+- evaluation metrics;
+- evidence and reproducibility rules;
+- dataset governance;
+- experiment lifecycle and current status.
+
+It explains **why the routing benchmark exists and how it is governed**.
+
+---
 
 ## `data/`
 
-Contains versioned inputs used by routing experiments.
+Contains versioned benchmark inputs and the documentation required to
+interpret them.
 
-This directory should hold data artifacts, not implementation code.
+### `routing-intent-v1.json`
+
+The executable routing benchmark dataset.
+
+It contains:
+
+```text
+180 message records
+45 semantic families
+3 routing intents
+train / validation / test assignments
+4 variants per semantic family
+```
+
+The dataset content is currently `FROZEN`.
+
+### `routing-intent-v1-families.json`
+
+The semantic-family manifest.
+
+It defines the 45 semantic families, their expected routing labels, and
+their fixed split assignments.
+
+The manifest is currently `FROZEN`.
+
+### `routing-intent-v1-card.md`
+
+Documents the dataset's purpose, scope, taxonomy, composition,
+provenance, split design, claim boundaries, lifecycle, and current
+identity state.
+
+### `routing-intent-v1-methodology.md`
+
+Documents how the dataset was designed, generated, partitioned,
+validated, audited, reviewed, curated, frozen, and governed.
+
+It also records the limitations of the synthetic benchmark and the
+rules for post-freeze change control.
+
+### `routing-intent-v1-review-log.md`
+
+Preserves the human-review history and curation decisions made before
+model benchmarking.
+
+It records:
+
+```text
+pre-freeze review findings
+targeted message revisions
+post-curation audit findings
+held-out test-set semantic review
+freeze decision
+remaining evidence-finalization work
+```
+
+The review log preserves historical states rather than rewriting them
+to make the entire development process appear frozen from the start.
 
 ---
 
 ## `scripts/`
 
-Contains executable experiment orchestration such as:
+Contains executable experiment-support tooling.
+
+### `validate_routing_data.py`
+
+Enforces hard structural and lifecycle contracts for the routing
+dataset and semantic-family manifest.
+
+Examples include:
 
 ```text
-dataset validation
-training
-benchmark execution
-metric calculation
-result generation
+required metadata
+allowed labels
+allowed splits
+allowed variants
+record counts
+family counts
+unique case IDs
+family membership
+label consistency
+split consistency
+four variants per family
+expected class and split distributions
 ```
 
-Reusable application runtime code should eventually live under:
+A validator failure indicates that a documented dataset contract has
+been violated.
+
+### `audit_routing_dataset.py`
+
+Performs diagnostic dataset-quality analysis that requires engineering
+interpretation rather than automatic rejection.
+
+The audit currently examines:
+
+```text
+cross-split lexical similarity
+Jaccard token-set similarity
+character-sequence similarity
+class-associated tokens
+semantic-family token frequency
+boundary-term distribution
+message-length distribution
+```
+
+An audit finding is not automatically a defect.
+
+The validator and audit are deliberately separate because:
+
+```text
+validator
+→ enforces hard contracts
+
+audit
+→ surfaces quality risks for review
+```
+
+Future model-training and benchmark-execution scripts will be added
+only when the frozen dataset evidence package is complete.
+
+Reusable application runtime code belongs under:
 
 ```text
 src/reliora/
 ```
 
-rather than being hidden permanently inside an experiment script.
+rather than being permanently embedded in experiment scripts.
 
 ---
 
 ## `results/`
 
-Contains generated experimental outputs.
+Contains generated experimental evidence rather than hand-authored
+dataset documentation.
 
-Examples may include:
+### `routing-intent-v1-audit.json`
+
+Contains the machine-readable output produced by
+`audit_routing_dataset.py`.
+
+Its current evidence class is:
 
 ```text
-metrics JSON
-confusion matrices
-timing summaries
-model-comparison summaries
+EXPERIMENTAL
 ```
 
-Generated evidence must be distinguishable from hand-authored documentation.
+The audit result describes properties observed in the controlled
+synthetic benchmark.
+
+It does not constitute production-traffic or production-performance
+evidence.
+
+Additional benchmark outputs may later include:
+
+```text
+candidate metrics
+per-class metrics
+confusion matrices
+latency measurements
+model-comparison summaries
+error-analysis artifacts
+```
+
+Those artifacts do not exist yet and must not be implied as completed
+work.
 
 ---
 
@@ -993,40 +1199,104 @@ Both forms of evidence are needed.
 
 ---
 
-# 35. Planned Experiment Lifecycle
+# 35. Experiment Lifecycle
+
+The routing experiment follows a staged lifecycle so that dataset
+design, model development, held-out evaluation, and architecture
+selection remain distinguishable.
+
+Current lifecycle:
 
 ```text
-1. define routing contract
-2. design dataset
-3. validate labels and provenance
-4. establish simple baseline
-5. train candidate classifiers
-6. evaluate held-out data
-7. analyze confusion patterns
-8. measure repeatable local latency
-9. generate versioned results
-10. review evidence
-11. update ADR-012
-12. select or reject routing strategy
-13. promote chosen implementation into runtime architecture
+1. define routing contract                         COMPLETE
+2. design semantic-family benchmark                COMPLETE
+3. validate labels and provenance                  COMPLETE
+4. perform diagnostic dataset audit                COMPLETE
+5. complete human semantic review                  COMPLETE
+6. freeze dataset and family manifest              COMPLETE
+7. close held-out test set to model-driven editing COMPLETE
+8. record frozen Git provenance                    IN PROGRESS
+9. establish simple routing baseline               NOT STARTED
+10. train candidate classifiers                    NOT STARTED
+11. select candidate using train/validation data   NOT STARTED
+12. evaluate selected configuration on held-out test data
+                                                   NOT STARTED
+13. analyze confusion and failure patterns         NOT STARTED
+14. measure repeatable local latency               NOT STARTED
+15. generate versioned benchmark evidence          NOT STARTED
+16. review experimental evidence                   NOT STARTED
+17. update ADR-012                                  NOT STARTED
+18. select or reject routing strategy              NOT STARTED
+19. promote chosen strategy into runtime design    NOT STARTED
 ```
+
+The lifecycle deliberately freezes benchmark content before model
+training begins.
+
+This prevents routing-model results from influencing the held-out test
+data used to evaluate those models.
+
+The next lifecycle gate is completion of the frozen dataset evidence
+package by committing the freeze milestone and recording its Git
+provenance.
+
+The canonical SHA-256 hashes have already been calculated and recorded.
 
 ---
 
 # 36. Current Status
 
-Current status:
+Current routing-experiment state:
 
 ```text
-experiment specification: IN PROGRESS
-dataset: not yet created
-baseline: not yet measured
-candidate models: not yet benchmarked
-preferred router: not selected
-production router: not established
+experiment specification: COMPLETE
+
+dataset ID: routing-intent-v1
+dataset version: 1.0.0
+
+semantic families: 45
+dataset records: 180
+
+family manifest: FROZEN
+dataset content: FROZEN
+human semantic review: COMPLETE
+held-out test families reviewed: 9 / 9
+held-out test records accepted: 36 / 36
+test set: CLOSED TO MODEL-DRIVEN EDITING
+
+structural validation: PASS
+cross-split near-duplicate findings: 0
+strongly class-associated token findings: 31
+cross-family class-associated token findings: 23
+
+dataset SHA-256:
+369600abb8711dcadc0acb96bd19edc33a9c06a83cf7c09208bccb6dbde85450
+
+family-manifest SHA-256:
+93d07598b846c2df3490f39b68971b2ae2a5dba872fb149e513f592c0d5724a1
+
+canonical hashes: RECORDED
+hash basis: file bytes with line endings normalized to LF
+associated frozen Git revision: PENDING
+
+routing baseline: NOT STARTED
+candidate-model benchmarking: NOT STARTED
+held-out model evaluation: NOT STARTED
+preferred router: NOT SELECTED
+runtime routing strategy: NOT ESTABLISHED
 ```
 
-No routing-performance claim should be made until experimental evidence exists.
+The benchmark dataset is therefore **content-frozen but not yet
+benchmark-executed**.
+
+The next step is to perform the final Git diff and status review, commit
+the complete routing-dataset freeze milestone, record the resulting Git
+revision, and verify that the committed frozen artifacts correspond to
+the recorded canonical hashes.
+
+No routing-performance claim should be made until routing candidates
+have been executed against the documented benchmark protocol and the
+resulting evidence has been reviewed.
 
 ---
 

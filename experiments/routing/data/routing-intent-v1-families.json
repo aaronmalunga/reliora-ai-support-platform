@@ -2,7 +2,7 @@
   "manifest_id": "routing-intent-v1-families",
   "dataset_id": "routing-intent-v1",
   "version": "1.0.0",
-  "status": "DESIGN_IN_PROGRESS",
+  "status": "FROZEN",
   "provenance": "SYNTHETIC_ASSUMPTION",
   "split_policy": {
     "unit": "semantic_family",
