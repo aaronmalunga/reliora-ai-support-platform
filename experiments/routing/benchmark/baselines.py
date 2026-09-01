@@ -73,3 +73,195 @@ def fit_majority_baseline(
         predicted_intent=selected_intent,
         class_counts=ordered_counts,
     )
+B1_RULESET_VERSION = "1.0.0"
+
+B1_EXTERNAL_RETAILER_SIGNALS = (
+    "amazon",
+    "ebay",
+    "nike",
+    "another store",
+)
+
+B1_BUG_COMPONENT_SIGNALS = (
+    "checkout",
+    "payment",
+    "pay now",
+    "purchase button",
+    "sign in",
+    "login",
+    "log in",
+    "cart",
+    "quantity",
+    "search",
+    "coupon",
+    "promo",
+    "order",
+    "address",
+    "product page",
+    "app",
+)
+
+B1_BUG_FAILURE_SIGNALS = (
+    "crash",
+    "closes",
+    "close by itself",
+    "freeze",
+    "error",
+    "broken",
+    "does not update",
+    "doesn't update",
+    "wont change",
+    "won't change",
+    "nothing sticks",
+    "not working",
+    "isnt working",
+    "isn't working",
+    "does nothing",
+    "unresponsive",
+    "wont respond",
+    "won't respond",
+    "wont work",
+    "won't work",
+    "spins forever",
+    "loop",
+    "sending me back",
+    "dumped straight back",
+    "keep asking",
+    "keeps asking",
+    "reverting",
+    "disappear",
+    "unchanged",
+    "nothing changes",
+    "stays there",
+    "fails to load",
+    "fail to load",
+    "force closing",
+    "stopped working",
+    "exit",
+)
+
+B1_PLATFORM_SIGNALS = (
+    "return policy",
+    "return window",
+    "sending a purchase back",
+    "shipping",
+    "delivery",
+    "payment method",
+    "payment option",
+    "debit card",
+    "digital wallet",
+    "use to pay",
+    "warranty",
+    "loyalty",
+    "reward",
+    "membership point",
+    "student discount",
+    "student pricing",
+    "discount for students",
+    "countries",
+    "cancel",
+    "cancelling",
+    "change where my order is going",
+)
+
+B1_PLATFORM_COMPOUND_SIGNALS = (
+    ("return", "item"),
+    ("return", "purchase"),
+    ("return", "order"),
+    ("return", "product"),
+    ("order", "arrive"),
+    ("order", "deliver"),
+    ("student", "discount"),
+    ("stop", "order"),
+)
+
+B1_PRECEDENCE = (
+    "EXTERNAL_RETAILER",
+    "BUG",
+    "PLATFORM",
+    "OTHER_FALLBACK",
+)
+
+
+def _contains_any(
+    message: str,
+    signals: Sequence[str],
+) -> bool:
+    """Return whether normalized message text contains any signal."""
+
+    return any(
+        signal in message
+        for signal in signals
+    )
+
+
+def _contains_all(
+    message: str,
+    signals: Sequence[str],
+) -> bool:
+    """Return whether normalized message text contains every signal."""
+
+    return all(
+        signal in message
+        for signal in signals
+    )
+
+
+@dataclass(frozen=True, slots=True)
+class RuleBaseline:
+    """B1 deterministic routing-rule baseline."""
+
+    ruleset_version: str = B1_RULESET_VERSION
+
+    def predict_one(
+        self,
+        message: str,
+    ) -> Intent:
+        """Classify one customer message using deterministic precedence."""
+
+        normalized = " ".join(
+            message.lower().split()
+        )
+
+        if _contains_any(
+            normalized,
+            B1_EXTERNAL_RETAILER_SIGNALS,
+        ):
+            return "OTHER"
+
+        has_bug_component = _contains_any(
+            normalized,
+            B1_BUG_COMPONENT_SIGNALS,
+        )
+        has_bug_failure = _contains_any(
+            normalized,
+            B1_BUG_FAILURE_SIGNALS,
+        )
+
+        if has_bug_component and has_bug_failure:
+            return "BUG"
+
+        if _contains_any(
+            normalized,
+            B1_PLATFORM_SIGNALS,
+        ):
+            return "PLATFORM"
+
+        if any(
+            _contains_all(normalized, signals)
+            for signals in B1_PLATFORM_COMPOUND_SIGNALS
+        ):
+            return "PLATFORM"
+
+        return "OTHER"
+
+    def predict(
+        self,
+        messages: Sequence[str],
+    ) -> tuple[Intent, ...]:
+        """Classify customer messages with the frozen B1 ruleset."""
+
+        return tuple(
+            self.predict_one(message)
+            for message in messages
+        )
