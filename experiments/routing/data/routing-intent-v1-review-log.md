@@ -770,8 +770,13 @@ The dataset content is frozen.
 
 Canonical SHA-256 recording is complete.
 
-The associated frozen Git revision remains pending before model
-benchmarking begins.
+The frozen routing-dataset milestone is recorded in Git commit:
+
+`4c86dae270046e3d4372f41941b56de3101fcdc9`
+
+Commit message:
+
+`test: freeze routing intent benchmark dataset`
 
 ---
 
@@ -999,11 +1004,11 @@ A genuine post-freeze ground-truth defect must instead be:
 
 ---
 
-## 18. Remaining Finalization Actions Before Benchmarking
+## 18. Freeze Finalization Status Before Benchmarking
 
-The semantic-review and data-content-freeze requirements are complete.
+The semantic review and routing-dataset content freeze are complete.
 
-The following finalization work is also complete:
+The following validation and freeze gates have completed successfully:
 
 ```text
 structural validator: PASS
@@ -1015,6 +1020,7 @@ git diff --check: PASS
 canonical dataset SHA-256: RECORDED
 canonical family-manifest SHA-256: RECORDED
 hash basis: RECORDED
+committed artifact hash verification: PASS
 ```
 
 Frozen identities:
@@ -1027,18 +1033,43 @@ routing-intent-v1-families.json
 93d07598b846c2df3490f39b68971b2ae2a5dba872fb149e513f592c0d5724a1
 ```
 
-The remaining work before routing-model benchmarking is:
+The routing-dataset freeze milestone is recorded in Git commit:
+
+```text
+freeze commit:
+4c86dae270046e3d4372f41941b56de3101fcdc9
+
+commit message:
+test: freeze routing intent benchmark dataset
+```
+
+The frozen artifacts were subsequently extracted directly from that Git
+commit and hashed independently.
+
+The verification result was:
+
+```text
+DATASET MATCH: True
+MANIFEST MATCH: True
+ALL COMMITTED HASHES MATCH: True
+```
+
+This verifies that the dataset and family manifest stored in the frozen
+Git commit correspond exactly to the canonical SHA-256 identities
+recorded in the benchmark documentation.
+
+The remaining work before routing-model benchmarking is limited to
+provenance-documentation finalization:
 
 1. synchronize the remaining routing-experiment documentation with the
-   recorded canonical hashes;
-2. perform a final Git diff/status review;
-3. commit the complete routing-dataset freeze milestone;
-4. record the resulting frozen Git revision for provenance;
-5. verify that the committed artifacts still correspond to the recorded
-   dataset and family-manifest identities.
+   recorded freeze commit and verification result;
+2. perform a final Git diff/status review of the provenance-only
+   documentation changes;
+3. commit the provenance-only documentation update.
 
 No routing candidate should be trained, selected, or evaluated on the
-held-out test set until these finalization steps are complete.
+held-out test set until these documentation-finalization steps are
+complete.
 
 Any subsequent change to frozen benchmark content must follow the
 versioning and change-control policy rather than being made in response

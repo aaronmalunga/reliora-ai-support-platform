@@ -1215,7 +1215,7 @@ Current lifecycle:
 5. complete human semantic review                  COMPLETE
 6. freeze dataset and family manifest              COMPLETE
 7. close held-out test set to model-driven editing COMPLETE
-8. record frozen Git provenance                    IN PROGRESS
+8. record frozen Git provenance                    COMPLETE
 9. establish simple routing baseline               NOT STARTED
 10. train candidate classifiers                    NOT STARTED
 11. select candidate using train/validation data   NOT STARTED
@@ -1277,7 +1277,8 @@ family-manifest SHA-256:
 
 canonical hashes: RECORDED
 hash basis: file bytes with line endings normalized to LF
-associated frozen Git revision: PENDING
+associated frozen Git revision:
+4c86dae270046e3d4372f41941b56de3101fcdc9
 
 routing baseline: NOT STARTED
 candidate-model benchmarking: NOT STARTED

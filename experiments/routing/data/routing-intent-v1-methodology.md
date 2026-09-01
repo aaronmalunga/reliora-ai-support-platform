@@ -722,7 +722,9 @@ final evidence package containing:
 - explicit hash basis;
 - associated Git revision.
 
-This evidence-finalization stage is still in progress.
+The freeze evidence package is complete. Provenance-only documentation
+synchronization is handled as a separate finalization step and does not
+modify the frozen benchmark content.
 
 ### 16.3 Benchmark Execution Preconditions
 
@@ -790,8 +792,13 @@ file bytes with line endings normalized to LF
 The LF-normalized hash basis matches the repository's enforced
 `eol=lf` Git attribute for both frozen JSON artifacts.
 
-The associated frozen Git revision remains pending until the complete
-dataset-freeze milestone is committed.
+The frozen dataset milestone is recorded in Git commit:
+
+`4c86dae270046e3d4372f41941b56de3101fcdc9`
+
+Commit message:
+
+`test: freeze routing intent benchmark dataset`
 
 After freeze:
 
@@ -837,15 +844,16 @@ At the current frozen-content checkpoint:
 | Dataset content frozen | YES |
 | Test set closed to model-driven editing | YES |
 | Final canonical frozen hashes | RECORDED |
-| Associated frozen Git revision | PENDING |
+| Associated frozen Git revision | `4c86dae270046e3d4372f41941b56de3101fcdc9` |
 | Routing-model benchmarking | NOT STARTED |
 
 These results describe the controlled synthetic benchmark only.
 
 They do not constitute production-performance evidence.
 
-The dataset is content-frozen, while final evidence packaging and
-canonical identity recording remain in progress.
+The dataset is content-frozen, the canonical identities are recorded,
+and the associated frozen Git revision is documented. Routing-model
+benchmarking has not yet started.
 
 ---
 

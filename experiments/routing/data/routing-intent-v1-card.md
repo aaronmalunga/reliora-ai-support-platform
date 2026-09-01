@@ -782,15 +782,16 @@ hash basis: file bytes with line endings normalized to LF
 dataset lifecycle state: FROZEN
 manifest lifecycle state: FROZEN
 
-associated frozen Git revision: PENDING
+associated frozen Git revision:
+4c86dae270046e3d4372f41941b56de3101fcdc9
 benchmark execution: NOT YET STARTED
 ```
 
 The LF-normalized hash basis matches the repository's enforced
 `eol=lf` Git attribute for both frozen JSON artifacts.
 
-The associated Git revision remains pending until the complete dataset
-freeze milestone is committed.
+The associated frozen Git revision has been recorded above and is part
+of the frozen benchmark provenance.
 
 Benchmark results must identify these frozen hashes and the associated
 Git revision used for execution.
@@ -852,7 +853,7 @@ execute final quality gates             COMPLETE
       ↓
 calculate canonical hashes             COMPLETE
       ↓
-record Git revision                    PENDING
+record Git revision                    COMPLETE
       ↓
 benchmark candidates                   NOT STARTED
       ↓
