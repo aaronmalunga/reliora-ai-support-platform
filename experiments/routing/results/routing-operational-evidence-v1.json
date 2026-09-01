@@ -1,0 +1,98 @@
+{
+  "experiment_id": "routing-operational-evidence-v1",
+  "evidence_classification": "EXPERIMENTAL",
+  "experiment_timestamp_utc": "2026-09-01T20:57:23.746892+00:00",
+  "environment": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python_version": "3.12.10",
+    "scikit_learn_version": "1.9.0",
+    "timer": "time.perf_counter_ns"
+  },
+  "measurement_protocol": {
+    "training_split_used_for_fitting": true,
+    "validation_split_used": false,
+    "held_out_test_used": false,
+    "probe_provenance": "SYNTHETIC_OPERATIONAL_PROBE",
+    "probe_message_count": 12,
+    "warmup_runs": 25,
+    "measurement_runs": 500,
+    "training_runs": 10,
+    "determinism_repetitions": 100,
+    "latency_scope": "local in-process routing inference only",
+    "excluded_from_latency": "network, AWS, API, serialization, queueing, cold-start, and downstream tool latency"
+  },
+  "shortlist": [
+    "B1",
+    "C1-N1-C2.0",
+    "C2-N1-C2.0"
+  ],
+  "candidates": [
+    {
+      "candidate_id": "B1",
+      "family": "DETERMINISTIC_RULE_BASELINE",
+      "training_required": false,
+      "training_latency": null,
+      "prediction_deterministic": true,
+      "inference_latency": {
+        "warmup_runs": 25,
+        "measurement_runs": 500,
+        "messages_per_run": 12,
+        "total_predictions": 6000,
+        "mean_ms_per_run": 0.2384216,
+        "p50_ms_per_run": 0.2001,
+        "p95_ms_per_run": 0.368415,
+        "mean_ms_per_message": 0.019868466666666668,
+        "p50_ms_per_message": 0.016675,
+        "p95_ms_per_message": 0.03070125
+      }
+    },
+    {
+      "candidate_id": "C1-N1-C2.0",
+      "family": "C1",
+      "training_required": true,
+      "training_latency": {
+        "runs": 10,
+        "mean_ms": 23.74693,
+        "p50_ms": 21.03835,
+        "p95_ms": 37.63143999999997
+      },
+      "prediction_deterministic": true,
+      "inference_latency": {
+        "warmup_runs": 25,
+        "measurement_runs": 500,
+        "messages_per_run": 12,
+        "total_predictions": 6000,
+        "mean_ms_per_run": 1.3389128000000001,
+        "p50_ms_per_run": 1.2946499999999999,
+        "p95_ms_per_run": 1.8754999999999997,
+        "mean_ms_per_message": 0.11157606666666667,
+        "p50_ms_per_message": 0.1078875,
+        "p95_ms_per_message": 0.15629166666666666
+      }
+    },
+    {
+      "candidate_id": "C2-N1-C2.0",
+      "family": "C2",
+      "training_required": true,
+      "training_latency": {
+        "runs": 10,
+        "mean_ms": 6.840439999999999,
+        "p50_ms": 6.793749999999999,
+        "p95_ms": 8.378614999999998
+      },
+      "prediction_deterministic": true,
+      "inference_latency": {
+        "warmup_runs": 25,
+        "measurement_runs": 500,
+        "messages_per_run": 12,
+        "total_predictions": 6000,
+        "mean_ms_per_run": 1.3638592,
+        "p50_ms_per_run": 1.28545,
+        "p95_ms_per_run": 1.9527549999999994,
+        "mean_ms_per_message": 0.11365493333333333,
+        "p50_ms_per_message": 0.10712083333333335,
+        "p95_ms_per_message": 0.16272958333333326
+      }
+    }
+  ]
+}
