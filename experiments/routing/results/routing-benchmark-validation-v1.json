@@ -1,0 +1,2008 @@
+{
+  "experiment_id": "routing-benchmark-validation-v1",
+  "evidence_classification": "EXPERIMENTAL",
+  "experiment_timestamp_utc": "2026-09-01T20:08:04.301975+00:00",
+  "benchmark_git_revision": "5d055b40a3d8f75def5dab0870c73f1331c355fe",
+  "dataset": {
+    "dataset_id": "routing-intent-v1",
+    "version": "1.0.0",
+    "status": "FROZEN",
+    "canonical_lf_sha256": "369600abb8711dcadc0acb96bd19edc33a9c06a83cf7c09208bccb6dbde85450"
+  },
+  "split_usage": {
+    "training": {
+      "split": "train",
+      "record_count": 108,
+      "purpose": "candidate fitting or construction"
+    },
+    "evaluation": {
+      "split": "validation",
+      "record_count": 36,
+      "purpose": "candidate and configuration comparison"
+    },
+    "held_out_test": {
+      "split": "test",
+      "used": false,
+      "purpose": "reserved for final independent evaluation after preferred configuration is fixed"
+    }
+  },
+  "environment": {
+    "python": "3.12.10",
+    "scikit_learn": "1.9.0"
+  },
+  "candidate_count": 14,
+  "candidates": [
+    {
+      "candidate_id": "B0",
+      "family": "MAJORITY_BASELINE",
+      "configuration": {
+        "predicted_intent": "BUG",
+        "class_counts": [
+          {
+            "intent": "BUG",
+            "count": 36
+          },
+          {
+            "intent": "PLATFORM",
+            "count": 36
+          },
+          {
+            "intent": "OTHER",
+            "count": 36
+          }
+        ],
+        "tie_break_order": [
+          "BUG",
+          "PLATFORM",
+          "OTHER"
+        ]
+      },
+      "metrics": {
+        "sample_count": 36,
+        "accuracy": 0.3333333333333333,
+        "macro_precision": 0.1111111111111111,
+        "macro_recall": 0.3333333333333333,
+        "macro_f1": 0.16666666666666666,
+        "label_order": [
+          "BUG",
+          "PLATFORM",
+          "OTHER"
+        ],
+        "per_class": [
+          {
+            "intent": "BUG",
+            "precision": 0.3333333333333333,
+            "recall": 1.0,
+            "f1": 0.5,
+            "support": 12
+          },
+          {
+            "intent": "PLATFORM",
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 12
+          },
+          {
+            "intent": "OTHER",
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 12
+          }
+        ],
+        "confusion_matrix": [
+          [
+            12,
+            0,
+            0
+          ],
+          [
+            12,
+            0,
+            0
+          ],
+          [
+            12,
+            0,
+            0
+          ]
+        ]
+      },
+      "failure_count": 24,
+      "failures": [
+        {
+          "case_id": "ROUTE-PLATFORM-010-A",
+          "family_id": "platform-gift-cards",
+          "variant_id": "A",
+          "message": "Do you sell or accept gift cards?",
+          "expected_intent": "PLATFORM",
+          "predicted_intent": "BUG",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-PLATFORM-010-B",
+          "family_id": "platform-gift-cards",
+          "variant_id": "B",
+          "message": "Can a gift card be used together with another payment method?",
+          "expected_intent": "PLATFORM",
+          "predicted_intent": "BUG",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-PLATFORM-010-C",
+          "family_id": "platform-gift-cards",
+          "variant_id": "C",
+          "message": "What are the rules for using gift cards on an order?",
+          "expected_intent": "PLATFORM",
+          "predicted_intent": "BUG",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-PLATFORM-010-D",
+          "family_id": "platform-gift-cards",
+          "variant_id": "D",
+          "message": "can i pay with a gift card here",
+          "expected_intent": "PLATFORM",
+          "predicted_intent": "BUG",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-PLATFORM-011-A",
+          "family_id": "platform-product-availability",
+          "variant_id": "A",
+          "message": "How can I tell when an out-of-stock item will be available again?",
+          "expected_intent": "PLATFORM",
+          "predicted_intent": "BUG",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-PLATFORM-011-B",
+          "family_id": "platform-product-availability",
+          "variant_id": "B",
+          "message": "Do you restock products that are currently unavailable?",
+          "expected_intent": "PLATFORM",
+          "predicted_intent": "BUG",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-PLATFORM-011-C",
+          "family_id": "platform-product-availability",
+          "variant_id": "C",
+          "message": "Is there a way to check whether this item will come back in stock?",
+          "expected_intent": "PLATFORM",
+          "predicted_intent": "BUG",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-PLATFORM-011-D",
+          "family_id": "platform-product-availability",
+          "variant_id": "D",
+          "message": "when do sold out items usually come back",
+          "expected_intent": "PLATFORM",
+          "predicted_intent": "BUG",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-PLATFORM-012-A",
+          "family_id": "platform-refund-timing",
+          "variant_id": "A",
+          "message": "How long does an approved refund usually take to arrive?",
+          "expected_intent": "PLATFORM",
+          "predicted_intent": "BUG",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-PLATFORM-012-B",
+          "family_id": "platform-refund-timing",
+          "variant_id": "B",
+          "message": "When should I expect the money back after a refund is processed?",
+          "expected_intent": "PLATFORM",
+          "predicted_intent": "BUG",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-PLATFORM-012-C",
+          "family_id": "platform-refund-timing",
+          "variant_id": "C",
+          "message": "What is the normal refund processing time?",
+          "expected_intent": "PLATFORM",
+          "predicted_intent": "BUG",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-PLATFORM-012-D",
+          "family_id": "platform-refund-timing",
+          "variant_id": "D",
+          "message": "how many days till a refund shows up",
+          "expected_intent": "PLATFORM",
+          "predicted_intent": "BUG",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-OTHER-010-A",
+          "family_id": "other-translation-request",
+          "variant_id": "A",
+          "message": "Translate 'good morning' into French.",
+          "expected_intent": "OTHER",
+          "predicted_intent": "BUG",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-OTHER-010-B",
+          "family_id": "other-translation-request",
+          "variant_id": "B",
+          "message": "Can you translate this sentence from Spanish to English?",
+          "expected_intent": "OTHER",
+          "predicted_intent": "BUG",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-OTHER-010-C",
+          "family_id": "other-translation-request",
+          "variant_id": "C",
+          "message": "How would I say 'see you tomorrow' in German?",
+          "expected_intent": "OTHER",
+          "predicted_intent": "BUG",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-OTHER-010-D",
+          "family_id": "other-translation-request",
+          "variant_id": "D",
+          "message": "translate this for me: thank you for your help",
+          "expected_intent": "OTHER",
+          "predicted_intent": "BUG",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-OTHER-011-A",
+          "family_id": "other-resignation-email",
+          "variant_id": "A",
+          "message": "Help me write a professional resignation email.",
+          "expected_intent": "OTHER",
+          "predicted_intent": "BUG",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-OTHER-011-B",
+          "family_id": "other-resignation-email",
+          "variant_id": "B",
+          "message": "Can you draft a short letter telling my employer I am leaving?",
+          "expected_intent": "OTHER",
+          "predicted_intent": "BUG",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-OTHER-011-C",
+          "family_id": "other-resignation-email",
+          "variant_id": "C",
+          "message": "I need a polite email giving two weeks' notice.",
+          "expected_intent": "OTHER",
+          "predicted_intent": "BUG",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-OTHER-011-D",
+          "family_id": "other-resignation-email",
+          "variant_id": "D",
+          "message": "write me a simple resignation message for my boss",
+          "expected_intent": "OTHER",
+          "predicted_intent": "BUG",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-OTHER-012-A",
+          "family_id": "other-recipe-request",
+          "variant_id": "A",
+          "message": "Give me a simple recipe for banana bread.",
+          "expected_intent": "OTHER",
+          "predicted_intent": "BUG",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-OTHER-012-B",
+          "family_id": "other-recipe-request",
+          "variant_id": "B",
+          "message": "How do I make creamy mushroom pasta?",
+          "expected_intent": "OTHER",
+          "predicted_intent": "BUG",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-OTHER-012-C",
+          "family_id": "other-recipe-request",
+          "variant_id": "C",
+          "message": "What ingredients do I need for homemade pancakes?",
+          "expected_intent": "OTHER",
+          "predicted_intent": "BUG",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-OTHER-012-D",
+          "family_id": "other-recipe-request",
+          "variant_id": "D",
+          "message": "need an easy chicken curry recipe",
+          "expected_intent": "OTHER",
+          "predicted_intent": "BUG",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        }
+      ]
+    },
+    {
+      "candidate_id": "B1",
+      "family": "DETERMINISTIC_RULE_BASELINE",
+      "configuration": {
+        "ruleset_version": "1.0.0",
+        "precedence": [
+          "EXTERNAL_RETAILER",
+          "BUG",
+          "PLATFORM",
+          "OTHER_FALLBACK"
+        ],
+        "fallback": "OTHER"
+      },
+      "metrics": {
+        "sample_count": 36,
+        "accuracy": 0.3888888888888889,
+        "macro_precision": 0.6212121212121212,
+        "macro_recall": 0.3888888888888889,
+        "macro_f1": 0.27667887667887664,
+        "label_order": [
+          "BUG",
+          "PLATFORM",
+          "OTHER"
+        ],
+        "per_class": [
+          {
+            "intent": "BUG",
+            "precision": 1.0,
+            "recall": 0.08333333333333333,
+            "f1": 0.15384615384615385,
+            "support": 12
+          },
+          {
+            "intent": "PLATFORM",
+            "precision": 0.5,
+            "recall": 0.08333333333333333,
+            "f1": 0.14285714285714285,
+            "support": 12
+          },
+          {
+            "intent": "OTHER",
+            "precision": 0.36363636363636365,
+            "recall": 1.0,
+            "f1": 0.5333333333333333,
+            "support": 12
+          }
+        ],
+        "confusion_matrix": [
+          [
+            1,
+            1,
+            10
+          ],
+          [
+            0,
+            1,
+            11
+          ],
+          [
+            0,
+            0,
+            12
+          ]
+        ]
+      },
+      "failure_count": 22,
+      "failures": [
+        {
+          "case_id": "ROUTE-BUG-010-A",
+          "family_id": "bug-password-reset-link-failure",
+          "variant_id": "A",
+          "message": "The password reset link in the email opens an error page.",
+          "expected_intent": "BUG",
+          "predicted_intent": "OTHER",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-BUG-010-B",
+          "family_id": "bug-password-reset-link-failure",
+          "variant_id": "B",
+          "message": "I requested a reset email twice, but both links say they are invalid immediately.",
+          "expected_intent": "BUG",
+          "predicted_intent": "OTHER",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-BUG-010-C",
+          "family_id": "bug-password-reset-link-failure",
+          "variant_id": "C",
+          "message": "Is the reset-password link broken? It never opens the page where I can choose a new password.",
+          "expected_intent": "BUG",
+          "predicted_intent": "OTHER",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-BUG-010-D",
+          "family_id": "bug-password-reset-link-failure",
+          "variant_id": "D",
+          "message": "password reset email comes through but the link doesnt work",
+          "expected_intent": "BUG",
+          "predicted_intent": "OTHER",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-BUG-011-B",
+          "family_id": "bug-wishlist-sync-failure",
+          "variant_id": "B",
+          "message": "My wishlist changes are not syncing between the website and mobile app.",
+          "expected_intent": "BUG",
+          "predicted_intent": "OTHER",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-BUG-011-C",
+          "family_id": "bug-wishlist-sync-failure",
+          "variant_id": "C",
+          "message": "Why does removing something from my wishlist come back after I refresh?",
+          "expected_intent": "BUG",
+          "predicted_intent": "OTHER",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-BUG-011-D",
+          "family_id": "bug-wishlist-sync-failure",
+          "variant_id": "D",
+          "message": "wishlist wont save my changes, stuff keeps reappearing",
+          "expected_intent": "BUG",
+          "predicted_intent": "OTHER",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-BUG-012-A",
+          "family_id": "bug-notification-link-broken",
+          "variant_id": "A",
+          "message": "The link in my order notification takes me to a 404 page.",
+          "expected_intent": "BUG",
+          "predicted_intent": "OTHER",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-BUG-012-B",
+          "family_id": "bug-notification-link-broken",
+          "variant_id": "B",
+          "message": "I tap the delivery notification, but it opens the wrong page.",
+          "expected_intent": "BUG",
+          "predicted_intent": "PLATFORM",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-BUG-012-C",
+          "family_id": "bug-notification-link-broken",
+          "variant_id": "C",
+          "message": "Is the link in your email alert broken? It sends me to an error screen.",
+          "expected_intent": "BUG",
+          "predicted_intent": "OTHER",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-BUG-012-D",
+          "family_id": "bug-notification-link-broken",
+          "variant_id": "D",
+          "message": "notification link goes nowhere, just get an error page",
+          "expected_intent": "BUG",
+          "predicted_intent": "OTHER",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-PLATFORM-010-A",
+          "family_id": "platform-gift-cards",
+          "variant_id": "A",
+          "message": "Do you sell or accept gift cards?",
+          "expected_intent": "PLATFORM",
+          "predicted_intent": "OTHER",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-PLATFORM-010-C",
+          "family_id": "platform-gift-cards",
+          "variant_id": "C",
+          "message": "What are the rules for using gift cards on an order?",
+          "expected_intent": "PLATFORM",
+          "predicted_intent": "OTHER",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-PLATFORM-010-D",
+          "family_id": "platform-gift-cards",
+          "variant_id": "D",
+          "message": "can i pay with a gift card here",
+          "expected_intent": "PLATFORM",
+          "predicted_intent": "OTHER",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-PLATFORM-011-A",
+          "family_id": "platform-product-availability",
+          "variant_id": "A",
+          "message": "How can I tell when an out-of-stock item will be available again?",
+          "expected_intent": "PLATFORM",
+          "predicted_intent": "OTHER",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-PLATFORM-011-B",
+          "family_id": "platform-product-availability",
+          "variant_id": "B",
+          "message": "Do you restock products that are currently unavailable?",
+          "expected_intent": "PLATFORM",
+          "predicted_intent": "OTHER",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-PLATFORM-011-C",
+          "family_id": "platform-product-availability",
+          "variant_id": "C",
+          "message": "Is there a way to check whether this item will come back in stock?",
+          "expected_intent": "PLATFORM",
+          "predicted_intent": "OTHER",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-PLATFORM-011-D",
+          "family_id": "platform-product-availability",
+          "variant_id": "D",
+          "message": "when do sold out items usually come back",
+          "expected_intent": "PLATFORM",
+          "predicted_intent": "OTHER",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-PLATFORM-012-A",
+          "family_id": "platform-refund-timing",
+          "variant_id": "A",
+          "message": "How long does an approved refund usually take to arrive?",
+          "expected_intent": "PLATFORM",
+          "predicted_intent": "OTHER",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-PLATFORM-012-B",
+          "family_id": "platform-refund-timing",
+          "variant_id": "B",
+          "message": "When should I expect the money back after a refund is processed?",
+          "expected_intent": "PLATFORM",
+          "predicted_intent": "OTHER",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-PLATFORM-012-C",
+          "family_id": "platform-refund-timing",
+          "variant_id": "C",
+          "message": "What is the normal refund processing time?",
+          "expected_intent": "PLATFORM",
+          "predicted_intent": "OTHER",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-PLATFORM-012-D",
+          "family_id": "platform-refund-timing",
+          "variant_id": "D",
+          "message": "how many days till a refund shows up",
+          "expected_intent": "PLATFORM",
+          "predicted_intent": "OTHER",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        }
+      ]
+    },
+    {
+      "candidate_id": "C1-N1-C0.5",
+      "family": "C1",
+      "configuration": {
+        "search_space_version": "1.0.0",
+        "ngram_range": [
+          1,
+          1
+        ],
+        "C": 0.5,
+        "tfidf": {
+          "analyzer": "word",
+          "lowercase": true,
+          "strip_accents": null,
+          "min_df": 1,
+          "max_df": 1.0,
+          "norm": "l2",
+          "use_idf": true,
+          "smooth_idf": true,
+          "sublinear_tf": false,
+          "stop_words": null
+        },
+        "classifier": {
+          "name": "LogisticRegression",
+          "solver": "lbfgs",
+          "max_iter": 1000,
+          "class_weight": null,
+          "fit_intercept": true,
+          "tol": 0.0001
+        }
+      },
+      "metrics": {
+        "sample_count": 36,
+        "accuracy": 0.8888888888888888,
+        "macro_precision": 0.888888888888889,
+        "macro_recall": 0.888888888888889,
+        "macro_f1": 0.888888888888889,
+        "label_order": [
+          "BUG",
+          "PLATFORM",
+          "OTHER"
+        ],
+        "per_class": [
+          {
+            "intent": "BUG",
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 12
+          },
+          {
+            "intent": "PLATFORM",
+            "precision": 0.8333333333333334,
+            "recall": 0.8333333333333334,
+            "f1": 0.8333333333333334,
+            "support": 12
+          },
+          {
+            "intent": "OTHER",
+            "precision": 0.8333333333333334,
+            "recall": 0.8333333333333334,
+            "f1": 0.8333333333333334,
+            "support": 12
+          }
+        ],
+        "confusion_matrix": [
+          [
+            12,
+            0,
+            0
+          ],
+          [
+            0,
+            10,
+            2
+          ],
+          [
+            0,
+            2,
+            10
+          ]
+        ]
+      },
+      "failure_count": 4,
+      "failures": [
+        {
+          "case_id": "ROUTE-PLATFORM-011-C",
+          "family_id": "platform-product-availability",
+          "variant_id": "C",
+          "message": "Is there a way to check whether this item will come back in stock?",
+          "expected_intent": "PLATFORM",
+          "predicted_intent": "OTHER",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-PLATFORM-012-C",
+          "family_id": "platform-refund-timing",
+          "variant_id": "C",
+          "message": "What is the normal refund processing time?",
+          "expected_intent": "PLATFORM",
+          "predicted_intent": "OTHER",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-OTHER-012-B",
+          "family_id": "other-recipe-request",
+          "variant_id": "B",
+          "message": "How do I make creamy mushroom pasta?",
+          "expected_intent": "OTHER",
+          "predicted_intent": "PLATFORM",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-OTHER-012-C",
+          "family_id": "other-recipe-request",
+          "variant_id": "C",
+          "message": "What ingredients do I need for homemade pancakes?",
+          "expected_intent": "OTHER",
+          "predicted_intent": "PLATFORM",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        }
+      ]
+    },
+    {
+      "candidate_id": "C1-N1-C1.0",
+      "family": "C1",
+      "configuration": {
+        "search_space_version": "1.0.0",
+        "ngram_range": [
+          1,
+          1
+        ],
+        "C": 1.0,
+        "tfidf": {
+          "analyzer": "word",
+          "lowercase": true,
+          "strip_accents": null,
+          "min_df": 1,
+          "max_df": 1.0,
+          "norm": "l2",
+          "use_idf": true,
+          "smooth_idf": true,
+          "sublinear_tf": false,
+          "stop_words": null
+        },
+        "classifier": {
+          "name": "LogisticRegression",
+          "solver": "lbfgs",
+          "max_iter": 1000,
+          "class_weight": null,
+          "fit_intercept": true,
+          "tol": 0.0001
+        }
+      },
+      "metrics": {
+        "sample_count": 36,
+        "accuracy": 0.8888888888888888,
+        "macro_precision": 0.888888888888889,
+        "macro_recall": 0.888888888888889,
+        "macro_f1": 0.888888888888889,
+        "label_order": [
+          "BUG",
+          "PLATFORM",
+          "OTHER"
+        ],
+        "per_class": [
+          {
+            "intent": "BUG",
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 12
+          },
+          {
+            "intent": "PLATFORM",
+            "precision": 0.8333333333333334,
+            "recall": 0.8333333333333334,
+            "f1": 0.8333333333333334,
+            "support": 12
+          },
+          {
+            "intent": "OTHER",
+            "precision": 0.8333333333333334,
+            "recall": 0.8333333333333334,
+            "f1": 0.8333333333333334,
+            "support": 12
+          }
+        ],
+        "confusion_matrix": [
+          [
+            12,
+            0,
+            0
+          ],
+          [
+            0,
+            10,
+            2
+          ],
+          [
+            0,
+            2,
+            10
+          ]
+        ]
+      },
+      "failure_count": 4,
+      "failures": [
+        {
+          "case_id": "ROUTE-PLATFORM-011-C",
+          "family_id": "platform-product-availability",
+          "variant_id": "C",
+          "message": "Is there a way to check whether this item will come back in stock?",
+          "expected_intent": "PLATFORM",
+          "predicted_intent": "OTHER",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-PLATFORM-012-C",
+          "family_id": "platform-refund-timing",
+          "variant_id": "C",
+          "message": "What is the normal refund processing time?",
+          "expected_intent": "PLATFORM",
+          "predicted_intent": "OTHER",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-OTHER-012-B",
+          "family_id": "other-recipe-request",
+          "variant_id": "B",
+          "message": "How do I make creamy mushroom pasta?",
+          "expected_intent": "OTHER",
+          "predicted_intent": "PLATFORM",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-OTHER-012-C",
+          "family_id": "other-recipe-request",
+          "variant_id": "C",
+          "message": "What ingredients do I need for homemade pancakes?",
+          "expected_intent": "OTHER",
+          "predicted_intent": "PLATFORM",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        }
+      ]
+    },
+    {
+      "candidate_id": "C1-N1-C2.0",
+      "family": "C1",
+      "configuration": {
+        "search_space_version": "1.0.0",
+        "ngram_range": [
+          1,
+          1
+        ],
+        "C": 2.0,
+        "tfidf": {
+          "analyzer": "word",
+          "lowercase": true,
+          "strip_accents": null,
+          "min_df": 1,
+          "max_df": 1.0,
+          "norm": "l2",
+          "use_idf": true,
+          "smooth_idf": true,
+          "sublinear_tf": false,
+          "stop_words": null
+        },
+        "classifier": {
+          "name": "LogisticRegression",
+          "solver": "lbfgs",
+          "max_iter": 1000,
+          "class_weight": null,
+          "fit_intercept": true,
+          "tol": 0.0001
+        }
+      },
+      "metrics": {
+        "sample_count": 36,
+        "accuracy": 0.9444444444444444,
+        "macro_precision": 0.9444444444444443,
+        "macro_recall": 0.9444444444444443,
+        "macro_f1": 0.9444444444444443,
+        "label_order": [
+          "BUG",
+          "PLATFORM",
+          "OTHER"
+        ],
+        "per_class": [
+          {
+            "intent": "BUG",
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 12
+          },
+          {
+            "intent": "PLATFORM",
+            "precision": 0.9166666666666666,
+            "recall": 0.9166666666666666,
+            "f1": 0.9166666666666666,
+            "support": 12
+          },
+          {
+            "intent": "OTHER",
+            "precision": 0.9166666666666666,
+            "recall": 0.9166666666666666,
+            "f1": 0.9166666666666666,
+            "support": 12
+          }
+        ],
+        "confusion_matrix": [
+          [
+            12,
+            0,
+            0
+          ],
+          [
+            0,
+            11,
+            1
+          ],
+          [
+            0,
+            1,
+            11
+          ]
+        ]
+      },
+      "failure_count": 2,
+      "failures": [
+        {
+          "case_id": "ROUTE-PLATFORM-012-C",
+          "family_id": "platform-refund-timing",
+          "variant_id": "C",
+          "message": "What is the normal refund processing time?",
+          "expected_intent": "PLATFORM",
+          "predicted_intent": "OTHER",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-OTHER-012-B",
+          "family_id": "other-recipe-request",
+          "variant_id": "B",
+          "message": "How do I make creamy mushroom pasta?",
+          "expected_intent": "OTHER",
+          "predicted_intent": "PLATFORM",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        }
+      ]
+    },
+    {
+      "candidate_id": "C1-N2-C0.5",
+      "family": "C1",
+      "configuration": {
+        "search_space_version": "1.0.0",
+        "ngram_range": [
+          1,
+          2
+        ],
+        "C": 0.5,
+        "tfidf": {
+          "analyzer": "word",
+          "lowercase": true,
+          "strip_accents": null,
+          "min_df": 1,
+          "max_df": 1.0,
+          "norm": "l2",
+          "use_idf": true,
+          "smooth_idf": true,
+          "sublinear_tf": false,
+          "stop_words": null
+        },
+        "classifier": {
+          "name": "LogisticRegression",
+          "solver": "lbfgs",
+          "max_iter": 1000,
+          "class_weight": null,
+          "fit_intercept": true,
+          "tol": 0.0001
+        }
+      },
+      "metrics": {
+        "sample_count": 36,
+        "accuracy": 0.9166666666666666,
+        "macro_precision": 0.9184149184149185,
+        "macro_recall": 0.9166666666666666,
+        "macro_f1": 0.9165217391304347,
+        "label_order": [
+          "BUG",
+          "PLATFORM",
+          "OTHER"
+        ],
+        "per_class": [
+          {
+            "intent": "BUG",
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 12
+          },
+          {
+            "intent": "PLATFORM",
+            "precision": 0.8461538461538461,
+            "recall": 0.9166666666666666,
+            "f1": 0.88,
+            "support": 12
+          },
+          {
+            "intent": "OTHER",
+            "precision": 0.9090909090909091,
+            "recall": 0.8333333333333334,
+            "f1": 0.8695652173913043,
+            "support": 12
+          }
+        ],
+        "confusion_matrix": [
+          [
+            12,
+            0,
+            0
+          ],
+          [
+            0,
+            11,
+            1
+          ],
+          [
+            0,
+            2,
+            10
+          ]
+        ]
+      },
+      "failure_count": 3,
+      "failures": [
+        {
+          "case_id": "ROUTE-PLATFORM-012-C",
+          "family_id": "platform-refund-timing",
+          "variant_id": "C",
+          "message": "What is the normal refund processing time?",
+          "expected_intent": "PLATFORM",
+          "predicted_intent": "OTHER",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-OTHER-012-B",
+          "family_id": "other-recipe-request",
+          "variant_id": "B",
+          "message": "How do I make creamy mushroom pasta?",
+          "expected_intent": "OTHER",
+          "predicted_intent": "PLATFORM",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-OTHER-012-C",
+          "family_id": "other-recipe-request",
+          "variant_id": "C",
+          "message": "What ingredients do I need for homemade pancakes?",
+          "expected_intent": "OTHER",
+          "predicted_intent": "PLATFORM",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        }
+      ]
+    },
+    {
+      "candidate_id": "C1-N2-C1.0",
+      "family": "C1",
+      "configuration": {
+        "search_space_version": "1.0.0",
+        "ngram_range": [
+          1,
+          2
+        ],
+        "C": 1.0,
+        "tfidf": {
+          "analyzer": "word",
+          "lowercase": true,
+          "strip_accents": null,
+          "min_df": 1,
+          "max_df": 1.0,
+          "norm": "l2",
+          "use_idf": true,
+          "smooth_idf": true,
+          "sublinear_tf": false,
+          "stop_words": null
+        },
+        "classifier": {
+          "name": "LogisticRegression",
+          "solver": "lbfgs",
+          "max_iter": 1000,
+          "class_weight": null,
+          "fit_intercept": true,
+          "tol": 0.0001
+        }
+      },
+      "metrics": {
+        "sample_count": 36,
+        "accuracy": 0.9166666666666666,
+        "macro_precision": 0.9184149184149185,
+        "macro_recall": 0.9166666666666666,
+        "macro_f1": 0.9165217391304347,
+        "label_order": [
+          "BUG",
+          "PLATFORM",
+          "OTHER"
+        ],
+        "per_class": [
+          {
+            "intent": "BUG",
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 12
+          },
+          {
+            "intent": "PLATFORM",
+            "precision": 0.8461538461538461,
+            "recall": 0.9166666666666666,
+            "f1": 0.88,
+            "support": 12
+          },
+          {
+            "intent": "OTHER",
+            "precision": 0.9090909090909091,
+            "recall": 0.8333333333333334,
+            "f1": 0.8695652173913043,
+            "support": 12
+          }
+        ],
+        "confusion_matrix": [
+          [
+            12,
+            0,
+            0
+          ],
+          [
+            0,
+            11,
+            1
+          ],
+          [
+            0,
+            2,
+            10
+          ]
+        ]
+      },
+      "failure_count": 3,
+      "failures": [
+        {
+          "case_id": "ROUTE-PLATFORM-012-C",
+          "family_id": "platform-refund-timing",
+          "variant_id": "C",
+          "message": "What is the normal refund processing time?",
+          "expected_intent": "PLATFORM",
+          "predicted_intent": "OTHER",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-OTHER-012-B",
+          "family_id": "other-recipe-request",
+          "variant_id": "B",
+          "message": "How do I make creamy mushroom pasta?",
+          "expected_intent": "OTHER",
+          "predicted_intent": "PLATFORM",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-OTHER-012-C",
+          "family_id": "other-recipe-request",
+          "variant_id": "C",
+          "message": "What ingredients do I need for homemade pancakes?",
+          "expected_intent": "OTHER",
+          "predicted_intent": "PLATFORM",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        }
+      ]
+    },
+    {
+      "candidate_id": "C1-N2-C2.0",
+      "family": "C1",
+      "configuration": {
+        "search_space_version": "1.0.0",
+        "ngram_range": [
+          1,
+          2
+        ],
+        "C": 2.0,
+        "tfidf": {
+          "analyzer": "word",
+          "lowercase": true,
+          "strip_accents": null,
+          "min_df": 1,
+          "max_df": 1.0,
+          "norm": "l2",
+          "use_idf": true,
+          "smooth_idf": true,
+          "sublinear_tf": false,
+          "stop_words": null
+        },
+        "classifier": {
+          "name": "LogisticRegression",
+          "solver": "lbfgs",
+          "max_iter": 1000,
+          "class_weight": null,
+          "fit_intercept": true,
+          "tol": 0.0001
+        }
+      },
+      "metrics": {
+        "sample_count": 36,
+        "accuracy": 0.9166666666666666,
+        "macro_precision": 0.9184149184149185,
+        "macro_recall": 0.9166666666666666,
+        "macro_f1": 0.9165217391304347,
+        "label_order": [
+          "BUG",
+          "PLATFORM",
+          "OTHER"
+        ],
+        "per_class": [
+          {
+            "intent": "BUG",
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 12
+          },
+          {
+            "intent": "PLATFORM",
+            "precision": 0.8461538461538461,
+            "recall": 0.9166666666666666,
+            "f1": 0.88,
+            "support": 12
+          },
+          {
+            "intent": "OTHER",
+            "precision": 0.9090909090909091,
+            "recall": 0.8333333333333334,
+            "f1": 0.8695652173913043,
+            "support": 12
+          }
+        ],
+        "confusion_matrix": [
+          [
+            12,
+            0,
+            0
+          ],
+          [
+            0,
+            11,
+            1
+          ],
+          [
+            0,
+            2,
+            10
+          ]
+        ]
+      },
+      "failure_count": 3,
+      "failures": [
+        {
+          "case_id": "ROUTE-PLATFORM-012-C",
+          "family_id": "platform-refund-timing",
+          "variant_id": "C",
+          "message": "What is the normal refund processing time?",
+          "expected_intent": "PLATFORM",
+          "predicted_intent": "OTHER",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-OTHER-012-B",
+          "family_id": "other-recipe-request",
+          "variant_id": "B",
+          "message": "How do I make creamy mushroom pasta?",
+          "expected_intent": "OTHER",
+          "predicted_intent": "PLATFORM",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-OTHER-012-C",
+          "family_id": "other-recipe-request",
+          "variant_id": "C",
+          "message": "What ingredients do I need for homemade pancakes?",
+          "expected_intent": "OTHER",
+          "predicted_intent": "PLATFORM",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        }
+      ]
+    },
+    {
+      "candidate_id": "C2-N1-C0.5",
+      "family": "C2",
+      "configuration": {
+        "search_space_version": "1.0.0",
+        "ngram_range": [
+          1,
+          1
+        ],
+        "C": 0.5,
+        "tfidf": {
+          "analyzer": "word",
+          "lowercase": true,
+          "strip_accents": null,
+          "min_df": 1,
+          "max_df": 1.0,
+          "norm": "l2",
+          "use_idf": true,
+          "smooth_idf": true,
+          "sublinear_tf": false,
+          "stop_words": null
+        },
+        "classifier": {
+          "name": "LinearSVC",
+          "max_iter": 5000,
+          "class_weight": null,
+          "tol": 0.0001
+        }
+      },
+      "metrics": {
+        "sample_count": 36,
+        "accuracy": 0.9444444444444444,
+        "macro_precision": 0.9444444444444443,
+        "macro_recall": 0.9444444444444443,
+        "macro_f1": 0.9444444444444443,
+        "label_order": [
+          "BUG",
+          "PLATFORM",
+          "OTHER"
+        ],
+        "per_class": [
+          {
+            "intent": "BUG",
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 12
+          },
+          {
+            "intent": "PLATFORM",
+            "precision": 0.9166666666666666,
+            "recall": 0.9166666666666666,
+            "f1": 0.9166666666666666,
+            "support": 12
+          },
+          {
+            "intent": "OTHER",
+            "precision": 0.9166666666666666,
+            "recall": 0.9166666666666666,
+            "f1": 0.9166666666666666,
+            "support": 12
+          }
+        ],
+        "confusion_matrix": [
+          [
+            12,
+            0,
+            0
+          ],
+          [
+            0,
+            11,
+            1
+          ],
+          [
+            0,
+            1,
+            11
+          ]
+        ]
+      },
+      "failure_count": 2,
+      "failures": [
+        {
+          "case_id": "ROUTE-PLATFORM-012-C",
+          "family_id": "platform-refund-timing",
+          "variant_id": "C",
+          "message": "What is the normal refund processing time?",
+          "expected_intent": "PLATFORM",
+          "predicted_intent": "OTHER",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-OTHER-012-B",
+          "family_id": "other-recipe-request",
+          "variant_id": "B",
+          "message": "How do I make creamy mushroom pasta?",
+          "expected_intent": "OTHER",
+          "predicted_intent": "PLATFORM",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        }
+      ]
+    },
+    {
+      "candidate_id": "C2-N1-C1.0",
+      "family": "C2",
+      "configuration": {
+        "search_space_version": "1.0.0",
+        "ngram_range": [
+          1,
+          1
+        ],
+        "C": 1.0,
+        "tfidf": {
+          "analyzer": "word",
+          "lowercase": true,
+          "strip_accents": null,
+          "min_df": 1,
+          "max_df": 1.0,
+          "norm": "l2",
+          "use_idf": true,
+          "smooth_idf": true,
+          "sublinear_tf": false,
+          "stop_words": null
+        },
+        "classifier": {
+          "name": "LinearSVC",
+          "max_iter": 5000,
+          "class_weight": null,
+          "tol": 0.0001
+        }
+      },
+      "metrics": {
+        "sample_count": 36,
+        "accuracy": 0.9444444444444444,
+        "macro_precision": 0.9444444444444443,
+        "macro_recall": 0.9444444444444443,
+        "macro_f1": 0.9444444444444443,
+        "label_order": [
+          "BUG",
+          "PLATFORM",
+          "OTHER"
+        ],
+        "per_class": [
+          {
+            "intent": "BUG",
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 12
+          },
+          {
+            "intent": "PLATFORM",
+            "precision": 0.9166666666666666,
+            "recall": 0.9166666666666666,
+            "f1": 0.9166666666666666,
+            "support": 12
+          },
+          {
+            "intent": "OTHER",
+            "precision": 0.9166666666666666,
+            "recall": 0.9166666666666666,
+            "f1": 0.9166666666666666,
+            "support": 12
+          }
+        ],
+        "confusion_matrix": [
+          [
+            12,
+            0,
+            0
+          ],
+          [
+            0,
+            11,
+            1
+          ],
+          [
+            0,
+            1,
+            11
+          ]
+        ]
+      },
+      "failure_count": 2,
+      "failures": [
+        {
+          "case_id": "ROUTE-PLATFORM-012-C",
+          "family_id": "platform-refund-timing",
+          "variant_id": "C",
+          "message": "What is the normal refund processing time?",
+          "expected_intent": "PLATFORM",
+          "predicted_intent": "OTHER",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-OTHER-012-B",
+          "family_id": "other-recipe-request",
+          "variant_id": "B",
+          "message": "How do I make creamy mushroom pasta?",
+          "expected_intent": "OTHER",
+          "predicted_intent": "PLATFORM",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        }
+      ]
+    },
+    {
+      "candidate_id": "C2-N1-C2.0",
+      "family": "C2",
+      "configuration": {
+        "search_space_version": "1.0.0",
+        "ngram_range": [
+          1,
+          1
+        ],
+        "C": 2.0,
+        "tfidf": {
+          "analyzer": "word",
+          "lowercase": true,
+          "strip_accents": null,
+          "min_df": 1,
+          "max_df": 1.0,
+          "norm": "l2",
+          "use_idf": true,
+          "smooth_idf": true,
+          "sublinear_tf": false,
+          "stop_words": null
+        },
+        "classifier": {
+          "name": "LinearSVC",
+          "max_iter": 5000,
+          "class_weight": null,
+          "tol": 0.0001
+        }
+      },
+      "metrics": {
+        "sample_count": 36,
+        "accuracy": 0.9722222222222222,
+        "macro_precision": 0.9743589743589745,
+        "macro_recall": 0.9722222222222222,
+        "macro_f1": 0.9721739130434782,
+        "label_order": [
+          "BUG",
+          "PLATFORM",
+          "OTHER"
+        ],
+        "per_class": [
+          {
+            "intent": "BUG",
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 12
+          },
+          {
+            "intent": "PLATFORM",
+            "precision": 1.0,
+            "recall": 0.9166666666666666,
+            "f1": 0.9565217391304348,
+            "support": 12
+          },
+          {
+            "intent": "OTHER",
+            "precision": 0.9230769230769231,
+            "recall": 1.0,
+            "f1": 0.96,
+            "support": 12
+          }
+        ],
+        "confusion_matrix": [
+          [
+            12,
+            0,
+            0
+          ],
+          [
+            0,
+            11,
+            1
+          ],
+          [
+            0,
+            0,
+            12
+          ]
+        ]
+      },
+      "failure_count": 1,
+      "failures": [
+        {
+          "case_id": "ROUTE-PLATFORM-012-C",
+          "family_id": "platform-refund-timing",
+          "variant_id": "C",
+          "message": "What is the normal refund processing time?",
+          "expected_intent": "PLATFORM",
+          "predicted_intent": "OTHER",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        }
+      ]
+    },
+    {
+      "candidate_id": "C2-N2-C0.5",
+      "family": "C2",
+      "configuration": {
+        "search_space_version": "1.0.0",
+        "ngram_range": [
+          1,
+          2
+        ],
+        "C": 0.5,
+        "tfidf": {
+          "analyzer": "word",
+          "lowercase": true,
+          "strip_accents": null,
+          "min_df": 1,
+          "max_df": 1.0,
+          "norm": "l2",
+          "use_idf": true,
+          "smooth_idf": true,
+          "sublinear_tf": false,
+          "stop_words": null
+        },
+        "classifier": {
+          "name": "LinearSVC",
+          "max_iter": 5000,
+          "class_weight": null,
+          "tol": 0.0001
+        }
+      },
+      "metrics": {
+        "sample_count": 36,
+        "accuracy": 0.9166666666666666,
+        "macro_precision": 0.9184149184149185,
+        "macro_recall": 0.9166666666666666,
+        "macro_f1": 0.9165217391304347,
+        "label_order": [
+          "BUG",
+          "PLATFORM",
+          "OTHER"
+        ],
+        "per_class": [
+          {
+            "intent": "BUG",
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 12
+          },
+          {
+            "intent": "PLATFORM",
+            "precision": 0.8461538461538461,
+            "recall": 0.9166666666666666,
+            "f1": 0.88,
+            "support": 12
+          },
+          {
+            "intent": "OTHER",
+            "precision": 0.9090909090909091,
+            "recall": 0.8333333333333334,
+            "f1": 0.8695652173913043,
+            "support": 12
+          }
+        ],
+        "confusion_matrix": [
+          [
+            12,
+            0,
+            0
+          ],
+          [
+            0,
+            11,
+            1
+          ],
+          [
+            0,
+            2,
+            10
+          ]
+        ]
+      },
+      "failure_count": 3,
+      "failures": [
+        {
+          "case_id": "ROUTE-PLATFORM-012-C",
+          "family_id": "platform-refund-timing",
+          "variant_id": "C",
+          "message": "What is the normal refund processing time?",
+          "expected_intent": "PLATFORM",
+          "predicted_intent": "OTHER",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-OTHER-012-B",
+          "family_id": "other-recipe-request",
+          "variant_id": "B",
+          "message": "How do I make creamy mushroom pasta?",
+          "expected_intent": "OTHER",
+          "predicted_intent": "PLATFORM",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-OTHER-012-C",
+          "family_id": "other-recipe-request",
+          "variant_id": "C",
+          "message": "What ingredients do I need for homemade pancakes?",
+          "expected_intent": "OTHER",
+          "predicted_intent": "PLATFORM",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        }
+      ]
+    },
+    {
+      "candidate_id": "C2-N2-C1.0",
+      "family": "C2",
+      "configuration": {
+        "search_space_version": "1.0.0",
+        "ngram_range": [
+          1,
+          2
+        ],
+        "C": 1.0,
+        "tfidf": {
+          "analyzer": "word",
+          "lowercase": true,
+          "strip_accents": null,
+          "min_df": 1,
+          "max_df": 1.0,
+          "norm": "l2",
+          "use_idf": true,
+          "smooth_idf": true,
+          "sublinear_tf": false,
+          "stop_words": null
+        },
+        "classifier": {
+          "name": "LinearSVC",
+          "max_iter": 5000,
+          "class_weight": null,
+          "tol": 0.0001
+        }
+      },
+      "metrics": {
+        "sample_count": 36,
+        "accuracy": 0.9166666666666666,
+        "macro_precision": 0.9184149184149185,
+        "macro_recall": 0.9166666666666666,
+        "macro_f1": 0.9165217391304347,
+        "label_order": [
+          "BUG",
+          "PLATFORM",
+          "OTHER"
+        ],
+        "per_class": [
+          {
+            "intent": "BUG",
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 12
+          },
+          {
+            "intent": "PLATFORM",
+            "precision": 0.8461538461538461,
+            "recall": 0.9166666666666666,
+            "f1": 0.88,
+            "support": 12
+          },
+          {
+            "intent": "OTHER",
+            "precision": 0.9090909090909091,
+            "recall": 0.8333333333333334,
+            "f1": 0.8695652173913043,
+            "support": 12
+          }
+        ],
+        "confusion_matrix": [
+          [
+            12,
+            0,
+            0
+          ],
+          [
+            0,
+            11,
+            1
+          ],
+          [
+            0,
+            2,
+            10
+          ]
+        ]
+      },
+      "failure_count": 3,
+      "failures": [
+        {
+          "case_id": "ROUTE-PLATFORM-012-C",
+          "family_id": "platform-refund-timing",
+          "variant_id": "C",
+          "message": "What is the normal refund processing time?",
+          "expected_intent": "PLATFORM",
+          "predicted_intent": "OTHER",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-OTHER-012-B",
+          "family_id": "other-recipe-request",
+          "variant_id": "B",
+          "message": "How do I make creamy mushroom pasta?",
+          "expected_intent": "OTHER",
+          "predicted_intent": "PLATFORM",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-OTHER-012-C",
+          "family_id": "other-recipe-request",
+          "variant_id": "C",
+          "message": "What ingredients do I need for homemade pancakes?",
+          "expected_intent": "OTHER",
+          "predicted_intent": "PLATFORM",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        }
+      ]
+    },
+    {
+      "candidate_id": "C2-N2-C2.0",
+      "family": "C2",
+      "configuration": {
+        "search_space_version": "1.0.0",
+        "ngram_range": [
+          1,
+          2
+        ],
+        "C": 2.0,
+        "tfidf": {
+          "analyzer": "word",
+          "lowercase": true,
+          "strip_accents": null,
+          "min_df": 1,
+          "max_df": 1.0,
+          "norm": "l2",
+          "use_idf": true,
+          "smooth_idf": true,
+          "sublinear_tf": false,
+          "stop_words": null
+        },
+        "classifier": {
+          "name": "LinearSVC",
+          "max_iter": 5000,
+          "class_weight": null,
+          "tol": 0.0001
+        }
+      },
+      "metrics": {
+        "sample_count": 36,
+        "accuracy": 0.9166666666666666,
+        "macro_precision": 0.9184149184149185,
+        "macro_recall": 0.9166666666666666,
+        "macro_f1": 0.9165217391304347,
+        "label_order": [
+          "BUG",
+          "PLATFORM",
+          "OTHER"
+        ],
+        "per_class": [
+          {
+            "intent": "BUG",
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 12
+          },
+          {
+            "intent": "PLATFORM",
+            "precision": 0.8461538461538461,
+            "recall": 0.9166666666666666,
+            "f1": 0.88,
+            "support": 12
+          },
+          {
+            "intent": "OTHER",
+            "precision": 0.9090909090909091,
+            "recall": 0.8333333333333334,
+            "f1": 0.8695652173913043,
+            "support": 12
+          }
+        ],
+        "confusion_matrix": [
+          [
+            12,
+            0,
+            0
+          ],
+          [
+            0,
+            11,
+            1
+          ],
+          [
+            0,
+            2,
+            10
+          ]
+        ]
+      },
+      "failure_count": 3,
+      "failures": [
+        {
+          "case_id": "ROUTE-PLATFORM-012-C",
+          "family_id": "platform-refund-timing",
+          "variant_id": "C",
+          "message": "What is the normal refund processing time?",
+          "expected_intent": "PLATFORM",
+          "predicted_intent": "OTHER",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-OTHER-012-B",
+          "family_id": "other-recipe-request",
+          "variant_id": "B",
+          "message": "How do I make creamy mushroom pasta?",
+          "expected_intent": "OTHER",
+          "predicted_intent": "PLATFORM",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "case_id": "ROUTE-OTHER-012-C",
+          "family_id": "other-recipe-request",
+          "variant_id": "C",
+          "message": "What ingredients do I need for homemade pancakes?",
+          "expected_intent": "OTHER",
+          "predicted_intent": "PLATFORM",
+          "split": "validation",
+          "provenance": "SYNTHETIC_ASSUMPTION"
+        }
+      ]
+    }
+  ]
+}
