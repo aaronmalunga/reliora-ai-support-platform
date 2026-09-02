@@ -1,0 +1,216 @@
+{
+  "experiment_id": "routing-held-out-test-v1",
+  "evidence_classification": "EXPERIMENTAL",
+  "experiment_timestamp_utc": "2026-09-01T21:53:36.139518+00:00",
+  "benchmark_git_revision": "3edaa1c99fdca68c59e3d8432d3a93a5a072f040",
+  "selection": {
+    "decision_id": "ROUTING-SELECTION-V1",
+    "selection_decision_commit": "fd47277",
+    "selected_candidate_id": "C2-N1-C2.0",
+    "configuration_search_performed": false,
+    "selection_changed_after_test_exposure": false
+  },
+  "dataset": {
+    "dataset_id": "routing-intent-v1",
+    "version": "1.0.0",
+    "status": "FROZEN",
+    "canonical_lf_sha256": "369600abb8711dcadc0acb96bd19edc33a9c06a83cf7c09208bccb6dbde85450"
+  },
+  "split_usage": {
+    "training": {
+      "split": "train",
+      "record_count": 108,
+      "purpose": "fit already-selected candidate"
+    },
+    "validation": {
+      "split": "validation",
+      "used": false
+    },
+    "held_out_test": {
+      "split": "test",
+      "record_count": 36,
+      "used": true,
+      "purpose": "single final generalization evaluation"
+    }
+  },
+  "environment": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python_version": "3.12.10",
+    "scikit_learn_version": "1.9.0"
+  },
+  "candidate": {
+    "candidate_id": "C2-N1-C2.0",
+    "family": "C2",
+    "configuration": {
+      "search_space_version": "1.0.0",
+      "ngram_range": [
+        1,
+        1
+      ],
+      "C": 2.0,
+      "tfidf": {
+        "analyzer": "word",
+        "lowercase": true,
+        "strip_accents": null,
+        "min_df": 1,
+        "max_df": 1.0,
+        "norm": "l2",
+        "use_idf": true,
+        "smooth_idf": true,
+        "sublinear_tf": false,
+        "stop_words": null
+      },
+      "classifier": {
+        "name": "LinearSVC",
+        "max_iter": 5000,
+        "class_weight": null,
+        "tol": 0.0001
+      }
+    },
+    "metrics": {
+      "sample_count": 36,
+      "accuracy": 0.75,
+      "macro_precision": 0.75,
+      "macro_recall": 0.75,
+      "macro_f1": 0.7402597402597402,
+      "label_order": [
+        "BUG",
+        "PLATFORM",
+        "OTHER"
+      ],
+      "per_class": [
+        {
+          "intent": "BUG",
+          "precision": 0.75,
+          "recall": 1.0,
+          "f1": 0.8571428571428571,
+          "support": 12
+        },
+        {
+          "intent": "PLATFORM",
+          "precision": 0.8,
+          "recall": 0.6666666666666666,
+          "f1": 0.7272727272727273,
+          "support": 12
+        },
+        {
+          "intent": "OTHER",
+          "precision": 0.7,
+          "recall": 0.5833333333333334,
+          "f1": 0.6363636363636364,
+          "support": 12
+        }
+      ],
+      "confusion_matrix": [
+        [
+          12,
+          0,
+          0
+        ],
+        [
+          1,
+          8,
+          3
+        ],
+        [
+          3,
+          2,
+          7
+        ]
+      ]
+    },
+    "failure_count": 9,
+    "failures": [
+      {
+        "case_id": "ROUTE-PLATFORM-014-A",
+        "family_id": "platform-account-deletion",
+        "variant_id": "A",
+        "message": "How can I delete my account?",
+        "expected_intent": "PLATFORM",
+        "predicted_intent": "OTHER",
+        "split": "test",
+        "provenance": "SYNTHETIC_ASSUMPTION"
+      },
+      {
+        "case_id": "ROUTE-PLATFORM-014-D",
+        "family_id": "platform-account-deletion",
+        "variant_id": "D",
+        "message": "can i completely get rid of my account",
+        "expected_intent": "PLATFORM",
+        "predicted_intent": "OTHER",
+        "split": "test",
+        "provenance": "SYNTHETIC_ASSUMPTION"
+      },
+      {
+        "case_id": "ROUTE-PLATFORM-015-A",
+        "family_id": "platform-exchange-policy",
+        "variant_id": "A",
+        "message": "Can I exchange an item instead of returning it for a refund?",
+        "expected_intent": "PLATFORM",
+        "predicted_intent": "OTHER",
+        "split": "test",
+        "provenance": "SYNTHETIC_ASSUMPTION"
+      },
+      {
+        "case_id": "ROUTE-PLATFORM-015-C",
+        "family_id": "platform-exchange-policy",
+        "variant_id": "C",
+        "message": "If I ordered the wrong size, am I allowed to swap it for another one?",
+        "expected_intent": "PLATFORM",
+        "predicted_intent": "BUG",
+        "split": "test",
+        "provenance": "SYNTHETIC_ASSUMPTION"
+      },
+      {
+        "case_id": "ROUTE-OTHER-013-D",
+        "family_id": "other-stock-market-question",
+        "variant_id": "D",
+        "message": "is apple stock doing well right now",
+        "expected_intent": "OTHER",
+        "predicted_intent": "BUG",
+        "split": "test",
+        "provenance": "SYNTHETIC_ASSUMPTION"
+      },
+      {
+        "case_id": "ROUTE-OTHER-014-A",
+        "family_id": "other-food-order-request",
+        "variant_id": "A",
+        "message": "Order me a pepperoni pizza from a restaurant near my house.",
+        "expected_intent": "OTHER",
+        "predicted_intent": "BUG",
+        "split": "test",
+        "provenance": "SYNTHETIC_ASSUMPTION"
+      },
+      {
+        "case_id": "ROUTE-OTHER-014-C",
+        "family_id": "other-food-order-request",
+        "variant_id": "C",
+        "message": "Please buy me lunch from the cafe down the road.",
+        "expected_intent": "OTHER",
+        "predicted_intent": "BUG",
+        "split": "test",
+        "provenance": "SYNTHETIC_ASSUMPTION"
+      },
+      {
+        "case_id": "ROUTE-OTHER-014-D",
+        "family_id": "other-food-order-request",
+        "variant_id": "D",
+        "message": "i want to order sushi from a local place, can you do it",
+        "expected_intent": "OTHER",
+        "predicted_intent": "PLATFORM",
+        "split": "test",
+        "provenance": "SYNTHETIC_ASSUMPTION"
+      },
+      {
+        "case_id": "ROUTE-OTHER-015-C",
+        "family_id": "other-chess-advice",
+        "variant_id": "C",
+        "message": "Can you help me understand how to respond to the Sicilian Defence?",
+        "expected_intent": "OTHER",
+        "predicted_intent": "PLATFORM",
+        "split": "test",
+        "provenance": "SYNTHETIC_ASSUMPTION"
+      }
+    ]
+  }
+}
