@@ -1,17 +1,9 @@
 """Deterministic evaluation of bug-report workflow behaviour."""
 
 from collections.abc import Iterable
-from enum import StrEnum
 
+from reliora.domain.bug import BugField
 from reliora.evaluation.models import EvaluationFinding
-
-
-class BugField(StrEnum):
-    """Required fields in the Reliora bug-report workflow."""
-
-    DESCRIPTION = "description"
-    STEPS_TO_REPRODUCE = "steps_to_reproduce"
-    ENVIRONMENT = "environment"
 
 
 def evaluate_incremental_bug_collection(
