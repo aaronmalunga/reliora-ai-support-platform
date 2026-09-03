@@ -52,7 +52,7 @@ A new AWS feature alone is not sufficient reason to change an accepted decision.
 | ADR-013 | Use versioned deployment provenance and rollback capability | PROPOSED | Release safety |
 | ADR-014 | Measure application-level unit economics before making cost-efficiency claims | PROPOSED | Evidence-based FinOps |
 | ADR-015 | Prevent preview AWS services from becoming critical runtime dependencies by default | PROPOSED | Platform risk management |
-
+| ADR-016 | Separate durable operation-control state from authoritative ticket state | PROPOSED | Distributed idempotency, concurrency safety, and backend truth |
 ---
 
 # Decision Principles

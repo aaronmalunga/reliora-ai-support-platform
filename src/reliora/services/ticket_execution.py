@@ -1,6 +1,7 @@
 """Safe execution coordinator for bug-ticket side effects."""
 
 from enum import StrEnum
+from typing import Protocol
 from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict
@@ -33,6 +34,17 @@ class TicketExecutionResult(BaseModel):
     request_id: UUID
     status: TicketExecutionStatus
     confirmation: TicketCreationConfirmation | None = None
+
+
+class TicketExecutionPort(Protocol):
+    """Port for executing one authorized logical ticket operation."""
+
+    def execute(
+        self,
+        operation: BugReportOperation,
+    ) -> TicketExecutionResult:
+        """Execute, replay, or reject one logical ticket operation."""
+        ...
 
 
 class TicketExecutionCoordinator:

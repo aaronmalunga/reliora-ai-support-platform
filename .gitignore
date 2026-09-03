@@ -32,6 +32,8 @@ Thumbs.db
 crash.log
 crash.*.log
 *.tfplan
+*.tfvars
+*.tfvars.json
 .terraform.tfstate.lock.info
 
 # Local-only evidence and media
