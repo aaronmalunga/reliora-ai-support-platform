@@ -107,6 +107,7 @@ Implementation status should be updated as the project progresses.
 | RJ-021 | Support local, AWS integration and ephemeral cloud demonstration modes | HIGH | ACCEPTED | PARTIAL / PLANNED | PENDING |
 | RJ-022 | Public claims must be bounded by evidence | CRITICAL | ACCEPTED | ACTIVE | PARTIAL |
 | RJ-023 | Use a formal Solutions Architect decision journal linked to Learning and Interview ledgers | HIGH | ACCEPTED | IMPLEMENTED BY THIS DOCUMENT | VERIFIED |
+| RJ-024 | Use a dedicated least-privilege Lambda execution role derived from Reliora's actual runtime access pattern | CRITICAL | ACCEPTED | PENDING IMPLEMENTATION | LOCAL/SOURCE VERIFIED; AWS PENDING |
 | RJ-039 | Require an evidence gate before adopting candidate architecture or technology | HIGH | ACCEPTED | ACTIVE PROCESS GUARDRAIL | DOCUMENTED |
 
 ---
@@ -1074,6 +1075,8 @@ Maintain a claim-evidence ledger before final portfolio release.
 
 # 26. RJ-023 — Decision Journal + Learning Ledger + Interview Ledger
 
+
+
 ### Category
 Career / Engineering Process
 
@@ -1144,8 +1147,7 @@ For every `CRITICAL` Reliora decision, confirm all three records exist before fi
 These decisions should receive full journal entries when their implementation phase begins.
 
 | ID | Future decision question | Target phase | Status |
-|---|---|---|---|
-| RJ-024 | Exact Reliora AWS IAM trust/permission boundaries | AWS core | OPEN |
+    |---|---|---|---|
 | RJ-025 | DynamoDB physical schema for ticket + idempotency records | AWS core | OPEN |
 | RJ-026 | Exact retry responsibility and retry budget by layer | Reliability | OPEN |
 | RJ-027 | AgentCore memory/session configuration for Reliora runtime | Agent integration | OPEN |
@@ -1363,8 +1365,311 @@ ACCEPTED
 unless explicitly marked as a future/non-goal decision.
 
 ---
+# 32. RJ-024 — Least-privilege Lambda execution identity and permissions
 
-# 32. RJ-039 — Candidate architecture requires an evidence gate before implementation
+### Metadata
+
+| Field | Value |
+|---|---|
+| Date opened | 2026-09-04 |
+| Last updated | 2026-09-04 |
+| Phase | AWS product core |
+| Category | Security / IAM / Cloud Architecture |
+| Importance | CRITICAL |
+| Decision status | ACCEPTED |
+| Implementation status | PENDING IMPLEMENTATION |
+| Evidence status | LOCAL/SOURCE VERIFIED; AWS PENDING |
+| Requirement basis | Least privilege, deterministic side-effect execution, backend truth |
+| Related decision | RJ-039 |
+| Related ADR | None currently required |
+| Delivery branch | `feat/aws-infrastructure` |
+
+### 1. Decision question
+
+What AWS IAM trust and permission boundary should Reliora's bug-ticket Lambda
+use?
+
+### 2. Why this decision exists
+
+Reliora's ticket execution path performs a persistent business side effect.
+
+The Lambda execution role must therefore provide enough authority for the
+approved execution path while avoiding unrelated DynamoDB and CloudWatch
+permissions.
+
+The permissions must be derived from the actual runtime access pattern rather
+than from a broad managed policy or guessed future requirements.
+
+### 3. Source-supported runtime behaviour
+
+The current DynamoDB execution adapter uses:
+
+```text
+operations table
+→ GetItem with ConsistentRead=True
+
+operations table + tickets table
+→ TransactWriteItems containing conditional Put actions
+```
+
+### 4. Trust decision
+
+The Lambda execution role trusts:
+
+```text
+lambda.amazonaws.com
+```
+
+for:
+
+```text
+sts:AssumeRole
+```
+
+No customer, model-generated input, application user, or Gateway payload may
+assume this execution role directly.
+
+### 5. DynamoDB permission decision
+
+The demonstrated runtime requires:
+
+```text
+operations table
+→ dynamodb:GetItem
+
+operations table
+→ dynamodb:PutItem
+  only as part of TransactWriteItems
+
+tickets table
+→ dynamodb:PutItem
+  only as part of TransactWriteItems
+```
+
+Use `dynamodb:EnclosingOperation` to constrain the transactional PutItem
+permissions to the approved `TransactWriteItems` path.
+
+Do not grant permissions for DynamoDB operations that the selected runtime does
+not use.
+
+Current exclusions include:
+
+```text
+Scan
+Query
+UpdateItem
+DeleteItem
+BatchWriteItem
+dynamodb:*
+```
+
+### 6. CloudWatch Logs decision
+
+Terraform will create the Lambda log group explicitly.
+
+The Lambda execution role therefore requires only:
+
+```text
+logs:CreateLogStream
+logs:PutLogEvents
+```
+
+scoped to the Reliora Lambda log-group streams.
+
+The execution role will not require `logs:CreateLogGroup`.
+
+Terraform owns log-group creation, retention, tags, lifecycle and teardown.
+
+### 7. Managed-policy decision
+
+Do not attach broad DynamoDB managed policies.
+
+Do not attach `AWSLambdaBasicExecutionRole` when Reliora can define the
+required logging permissions more narrowly.
+
+Use a Reliora-owned least-privilege execution policy.
+
+### 8. Decision
+
+Use a dedicated Terraform-managed Lambda execution role derived from the
+runtime's demonstrated AWS access pattern.
+
+```text
+Trust
+→ lambda.amazonaws.com
+→ sts:AssumeRole
+
+Operations table
+→ GetItem
+
+Operations + tickets tables
+→ transactional PutItem
+
+Reliora Lambda log streams
+→ CreateLogStream
+→ PutLogEvents
+```
+
+### 9. Rationale
+
+The permission model follows:
+
+```text
+actual runtime requirement
+→ required AWS operation
+→ required resource
+→ IAM permission
+```
+
+rather than:
+
+```text
+AWS service
+→ broad managed policy
+→ application
+```
+
+This keeps IAM authority aligned with implemented behaviour.
+
+### 10. Trade-offs accepted
+
+A custom least-privilege policy requires more maintenance than attaching broad
+AWS-managed policies.
+
+If the application later introduces a legitimate new AWS API operation, the
+policy must be deliberately updated.
+
+That maintenance cost is accepted because IAM should evolve with verified
+application requirements rather than anticipate hypothetical future features.
+
+### 11. Risks
+
+The proposed policy could fail because of:
+
+- incorrect DynamoDB resource scoping;
+- incorrect `dynamodb:EnclosingOperation` use;
+- incorrect CloudWatch log-stream ARN scoping;
+- an undocumented runtime dependency;
+- future code changes introducing additional AWS operations.
+
+These risks must be resolved through Terraform validation and real AWS
+integration testing.
+
+### 12. Verification plan
+
+RJ-024 becomes AWS-verified only when the deployed runtime proves:
+
+```text
+1. Lambda assumes the execution role.
+2. Lambda writes its expected CloudWatch logs.
+3. GetItem succeeds against the operations table.
+4. transactional creation writes one operation and one ticket.
+5. matching retry reads and replays the existing result.
+6. conflicting operation reuse performs no new write.
+7. the demonstrated workflow requires no broader DynamoDB permissions.
+```
+
+The existence of the IAM role in AWS is not sufficient evidence.
+
+The application workflow must execute successfully while using that role.
+
+### 13. Evidence state
+
+```text
+Lambda trust semantics
+→ VERIFIED FROM AWS DOCUMENTATION
+
+Reliora DynamoDB access pattern
+→ VERIFIED FROM SOURCE
+
+DynamoDB transaction permission mechanism
+→ VERIFIED FROM AWS DOCUMENTATION
+
+CloudWatch log-stream permission model
+→ VERIFIED FROM AWS DOCUMENTATION
+
+Terraform implementation
+→ PENDING
+
+AWS role assumption
+→ PENDING
+
+AWS create/replay/conflict behaviour
+→ PENDING
+
+CloudWatch log delivery
+→ PENDING
+```
+
+### 14. Reconsideration triggers
+
+Revisit RJ-024 if:
+
+- Reliora introduces another AWS API operation;
+- the persistence architecture changes;
+- the Lambda execution boundary changes;
+- KMS introduces additional authorization requirements;
+- tracing introduces additional runtime permissions;
+- AWS integration proves the proposed policy insufficient;
+- a simpler policy achieves the same least-privilege properties.
+
+### 15. Claim-safe wording
+
+Before cloud verification:
+
+> Reliora's Lambda IAM boundary is designed from the runtime's demonstrated
+> DynamoDB access pattern and documented AWS authorization semantics. Cloud
+> execution remains pending verification.
+
+After successful verification:
+
+> Reliora's demonstrated Lambda ticket workflow executes under a
+> resource-scoped role limited to the DynamoDB and CloudWatch operations
+> required by the tested path.
+
+### 16. Interview narrative
+
+#### 15 seconds
+
+> I derived the Lambda execution role from the SDK operations the application
+> actually performs instead of attaching a broad DynamoDB policy.
+
+#### 60 seconds
+
+> I inspected the runtime first. Reliora needs a strongly consistent GetItem
+> against its operation record and transactional writes to its operations and
+> tickets tables. The transaction writes are constrained to the transactional
+> path, and Terraform owns the Lambda log group so the runtime only needs
+> stream-level logging permissions. I still treat the design as cloud-pending
+> until create, replay and conflict behavior succeeds under that exact role.
+
+### 17. Learning Ledger extraction
+
+After AWS verification, extract reusable lessons covering:
+
+- Lambda execution-role trust;
+- invocation permission versus execution permission;
+- deriving IAM from SDK access patterns;
+- DynamoDB resource scoping;
+- transaction-scoped permissions;
+- Terraform-managed CloudWatch logging;
+- least-privilege verification.
+
+### 18. Final state
+
+```text
+Decision Status: ACCEPTED
+Implementation Status: PENDING
+Verification Status: SOURCE/DOCUMENTATION VERIFIED; AWS PENDING
+Evidence Complete: NO
+Learning Ledger Complete: DEFER UNTIL AWS VERIFICATION
+Interview Ledger Complete: PARTIAL
+ADR Required/Created: NO
+Next Review: after Lambda/DynamoDB cloud integration
+```
+
+
+# 33. RJ-039 — Candidate architecture requires an evidence gate before implementation
 
 ### Category
 Engineering Process / Architecture Governance
@@ -1504,7 +1809,7 @@ Standard under the Tool Admission Rule and Pre-Implementation Architecture Gate.
 
 ---
 
-# 33. Final Reliora Rule
+# 34. Final Reliora Rule
 
 > **Reliora should not merely show that the architecture works. It should preserve why the architecture exists, what alternatives were rejected, what trade-offs were accepted, what evidence supports the decision, what would cause the design to change, and how the principle transfers beyond Reliora.**
 
