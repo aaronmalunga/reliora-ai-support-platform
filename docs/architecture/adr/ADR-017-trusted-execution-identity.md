@@ -156,6 +156,7 @@ Therefore:
 candidate mechanism
 != architecture decision
 != implemented architecture
-!= verified architecture```
+!= verified architecture
+```
 
 Strands remains only a possible future implementation mechanism if later evidence independently justifies its introduction.
