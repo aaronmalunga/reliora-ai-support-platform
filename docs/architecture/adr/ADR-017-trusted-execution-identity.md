@@ -124,3 +124,38 @@ Revisit this decision if:
 Reliora separates request, session, and logical-operation identities and
 verifies their local idempotency semantics deterministically. End-to-end
 AgentCore identity propagation remains under integration verification.
+
+
+## Implementation Hypothesis History
+
+During investigation of the trusted-identity requirement, Strands `toolUseId`
+and tool-retry behaviour were considered as a possible mechanism for deriving
+stable logical operation identity.
+
+This was a candidate implementation mechanism, not an accepted architecture
+decision.
+
+The candidate was initially treated too strongly as the likely next
+implementation. A subsequent source-precedence review confirmed that Reliora's
+accepted baseline still uses the managed AgentCore Harness / Gateway / Lambda /
+DynamoDB architecture and that this baseline had not yet been demonstrated
+incapable of satisfying the identity requirement.
+
+No Strands dependency, runtime replacement, or cloud resource was introduced.
+
+The implementation sequence was corrected before execution.
+
+The governing lesson is:
+
+> UNKNOWN is an experiment state, not permission to introduce a plausible
+> technology.
+
+Therefore:
+
+```text
+candidate mechanism
+!= architecture decision
+!= implemented architecture
+!= verified architecture```
+
+Strands remains only a possible future implementation mechanism if later evidence independently justifies its introduction.
