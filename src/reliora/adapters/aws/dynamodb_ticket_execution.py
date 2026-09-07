@@ -1,12 +1,22 @@
 """DynamoDB-backed execution for durable bug-ticket side effects."""
 
+from __future__ import annotations
+
 from collections.abc import Callable, Mapping
 from datetime import UTC, datetime
-from typing import Any, Protocol
+from typing import TYPE_CHECKING, Any, Protocol, Unpack
 from uuid import UUID, uuid4
 
 from botocore.exceptions import ClientError
 from pydantic import ValidationError
+
+if TYPE_CHECKING:
+    from mypy_boto3_dynamodb.type_defs import (
+        GetItemInputTypeDef,
+        GetItemOutputTypeDef,
+        TransactWriteItemsInputTypeDef,
+        TransactWriteItemsOutputTypeDef,
+    )
 
 from reliora.domain.operations import BugReportOperation
 from reliora.domain.tickets import TicketCreationConfirmation
@@ -20,14 +30,19 @@ from reliora.services.ticket_execution import (
 class DynamoDBClient(Protocol):
     """Minimal DynamoDB API required by the durable execution adapter."""
 
-    def get_item(self, **kwargs: Any) -> dict[str, Any]:
+    def get_item(
+        self,
+        **kwargs: Unpack[GetItemInputTypeDef],
+    ) -> GetItemOutputTypeDef:
         """Return one DynamoDB item."""
         ...
 
-    def transact_write_items(self, **kwargs: Any) -> dict[str, Any]:
+    def transact_write_items(
+        self,
+        **kwargs: Unpack[TransactWriteItemsInputTypeDef],
+    ) -> TransactWriteItemsOutputTypeDef:
         """Atomically write multiple DynamoDB items."""
         ...
-
 
 def _utc_now() -> datetime:
     """Return the current timezone-aware UTC timestamp."""
