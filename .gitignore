@@ -44,3 +44,6 @@ evidence/raw/
 tmp/
 temp/
 *.tmp
+
+# Generated deployment artifacts
+build/
