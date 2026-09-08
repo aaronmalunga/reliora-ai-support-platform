@@ -1,4 +1,4 @@
-﻿# Reliora Threat Model
+# Reliora Threat Model
 
 ## Purpose
 
@@ -144,7 +144,7 @@ T-011 Evaluation Ground-Truth Poisoning
 → TARGET
 
 T-012 Secret Exposure Through Source Control
-→ PARTIAL
+→ LOCAL VERIFIED / CI ENFORCEMENT PENDING
 
 ### Scenario
 
@@ -502,9 +502,16 @@ An attacker could gain access to cloud resources or external services.
 
 ### Verification
 
-Secret scanning runs locally or in CI before release.
+Repository and Git-history secret scanning was executed locally with Gitleaks.
 
-**Status: PARTIAL**
+Observed result:
+
+```text
+Gitleaks repository/history scan
+→ 0 findings
+```
+
+**Status: LOCAL VERIFIED / CI ENFORCEMENT PENDING**
 
 ---
 

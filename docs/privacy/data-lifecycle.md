@@ -333,6 +333,14 @@ Local verification does not prove cloud enforcement. Provider retention,
 transport, access, and deletion behaviour must be labelled as pending until
 demonstrated in the relevant environment.
 
+### Current State
+
+| Control | Status |
+|---|---|
+| repository history scan | LOCAL VERIFIED — GITLEAKS, 0 FINDINGS |
+| CI secret scan | PENDING |
+| Secret History Scan | LOCAL VERIFIED — 0 FINDINGS |
+
 Evidence should identify the control, test or inspection performed, result,
 environment, and remaining limitation. Claims must not be stronger than the
 evidence supporting them.
