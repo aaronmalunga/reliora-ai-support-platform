@@ -224,8 +224,10 @@ Identifiers describe different layers of the same system; they are complementary
 | `ADR-013` | Use versioned deployment provenance and rollback capability | `PROPOSED` |
 | `ADR-014` | Measure application-level unit economics before making cost-efficiency claims | `PROPOSED` |
 | `ADR-015` | Prevent preview AWS services from becoming critical runtime dependencies by default | `PROPOSED` |
+| `ADR-016` | Separate durable operation-control state from authoritative ticket state | `PROPOSED` |
+| `ADR-017` | Source side-effect execution identity from deterministic trusted boundaries | `PROPOSED` |
 
-The ADR index currently marks all fifteen entries `PROPOSED`. Some engineering work has progressed beyond that state, especially `ADR-012`; ADR lifecycle reconciliation should be handled explicitly in a separate change.
+The ADR index currently marks all sixteen entries `PROPOSED`. Some engineering work has progressed beyond that state, especially `ADR-012`; ADR lifecycle reconciliation should be handled explicitly in a separate change.
 
 ## 8. Behavioural Invariants — INV
 

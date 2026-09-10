@@ -9,7 +9,7 @@ from reliora.policy.authorization import (
     evaluate_bug_report_preconditions,
 )
 from reliora.services.ticket_execution import (
-    TicketExecutionCoordinator,
+    TicketExecutionPort,
     TicketExecutionResult,
 )
 
@@ -29,7 +29,7 @@ class BugTicketApplicationService:
     def __init__(
         self,
         *,
-        ticket_execution: TicketExecutionCoordinator,
+        ticket_execution: TicketExecutionPort,
     ) -> None:
         self._ticket_execution = ticket_execution
 

@@ -1,0 +1,88 @@
+name: Reliora Quality Gate
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  python-quality:
+    name: Python quality and regression
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.7"
+          enable-cache: true
+
+      - name: Install locked dependencies
+        run: uv sync --frozen
+
+      - name: Ruff
+        run: uv run ruff check .
+
+      - name: Mypy
+        run: uv run mypy src
+
+      - name: Pytest regression suite
+        run: uv run python -m pytest
+
+  deployment-static:
+    name: Lambda artifact and Terraform validation
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.7"
+          enable-cache: true
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_version: "1.15.9"
+          terraform_wrapper: false
+
+      - name: Build Lambda deployment package
+        shell: pwsh
+        run: ./scripts/build_lambda.ps1
+
+      - name: Verify Lambda deployment package
+        shell: pwsh
+        run: |
+          uv run python -c "import zipfile; p=r'build\lambda\reliora-ticket-execution.zip'; z=zipfile.ZipFile(p); names=z.namelist(); assert any(n.endswith('reliora/adapters/aws/lambda_entrypoint.py') for n in names), 'Lambda handler missing'; assert any(n.startswith('boto3/') for n in names), 'boto3 missing'; assert any(n.startswith('pydantic/') for n in names), 'pydantic missing'; native=[n for n in names if 'pydantic_core' in n and n.endswith('.so')]; assert native, 'Linux pydantic-core binary missing'; print('Lambda artifact verification passed'); print(native[:3])"
+
+      - name: Terraform format check
+        working-directory: infra/terraform/envs/dev
+        run: terraform fmt -check
+
+      - name: Terraform initialize
+        working-directory: infra/terraform/envs/dev
+        run: terraform init -backend=false -input=false
+
+      - name: Terraform validate
+        working-directory: infra/terraform/envs/dev
+        run: terraform validate -no-color
