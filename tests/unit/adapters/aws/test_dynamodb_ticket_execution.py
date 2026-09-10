@@ -4,7 +4,8 @@ from datetime import UTC, datetime
 from typing import Any
 from uuid import UUID
 
-from botocore.exceptions import ClientError
+import pytest
+from botocore.exceptions import ClientError, ReadTimeoutError
 
 from reliora.adapters.aws.dynamodb_ticket_execution import (
     DynamoDBTicketExecutionCoordinator,
@@ -33,7 +34,7 @@ class FakeDynamoDBClient:
         self,
         *,
         get_item_responses: list[dict[str, Any]] | None = None,
-        transaction_error: ClientError | None = None,
+        transaction_error: Exception | None = None,
     ) -> None:
         self.get_item_responses = list(get_item_responses or [])
         self.transaction_error = transaction_error
@@ -133,6 +134,27 @@ def transaction_cancelled_error() -> ClientError:
         "TransactWriteItems",
     )
 
+
+def access_denied_error() -> ClientError:
+    """Return a non-ambiguous AWS service error that must propagate."""
+
+    return ClientError(
+        {
+            "Error": {
+                "Code": "AccessDeniedException",
+                "Message": "Access denied.",
+            }
+        },
+        "TransactWriteItems",
+    )
+
+
+def read_timeout_error() -> ReadTimeoutError:
+    """Return an ambiguous transport timeout after a DynamoDB request."""
+
+    return ReadTimeoutError(
+        endpoint_url="https://dynamodb.us-east-1.amazonaws.com"
+    )
 
 def coordinator(
     client: FakeDynamoDBClient,
@@ -278,6 +300,48 @@ def test_concurrent_conflicting_race_reconciles_as_conflict() -> None:
     assert len(client.transaction_calls) == 1
 
 
+def test_read_timeout_with_matching_durable_state_reconciles_as_replay() -> None:
+    """NFR-REL-001/H-007: ambiguous timeout recovers authoritative state."""
+
+    client = FakeDynamoDBClient(
+        get_item_responses=[
+            {},
+            stored_operation_item(),
+        ],
+        transaction_error=read_timeout_error(),
+    )
+    service = coordinator(client)
+
+    result = service.execute(operation())
+
+    assert result.status is TicketExecutionStatus.REPLAYED
+    assert result.confirmation is not None
+    assert result.confirmation.ticket_id == TICKET_ID
+    assert len(client.transaction_calls) == 1
+    assert len(client.get_item_calls) == 2
+
+
+
+def test_read_timeout_without_authoritative_state_is_unconfirmed() -> None:
+    """H-007: ambiguous timeout without durable truth cannot claim success."""
+
+    client = FakeDynamoDBClient(
+        get_item_responses=[
+            {},
+            {},
+        ],
+        transaction_error=read_timeout_error(),
+    )
+    service = coordinator(client)
+
+    result = service.execute(operation())
+
+    assert result.status is TicketExecutionStatus.UNCONFIRMED
+    assert result.confirmation is None
+    assert len(client.transaction_calls) == 1
+    assert len(client.get_item_calls) == 2
+
+
 def test_cancelled_transaction_without_authoritative_state_is_unconfirmed() -> None:
     """H-007: ambiguous transaction outcome must never fabricate success."""
 
@@ -294,6 +358,22 @@ def test_cancelled_transaction_without_authoritative_state_is_unconfirmed() -> N
 
     assert result.status is TicketExecutionStatus.UNCONFIRMED
     assert result.confirmation is None
+
+
+def test_access_denied_error_propagates_without_reconciliation() -> None:
+    """H-007: non-ambiguous AWS service failures must not be rewritten."""
+
+    client = FakeDynamoDBClient(
+        get_item_responses=[{}],
+        transaction_error=access_denied_error(),
+    )
+    service = coordinator(client)
+
+    with pytest.raises(ClientError, match="Access denied."):
+        service.execute(operation())
+
+    assert len(client.transaction_calls) == 1
+    assert len(client.get_item_calls) == 1
 
 
 def test_incomplete_matching_state_is_unconfirmed() -> None:

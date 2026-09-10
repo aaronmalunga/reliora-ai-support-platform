@@ -7,7 +7,7 @@ from datetime import UTC, datetime
 from typing import TYPE_CHECKING, Any, Protocol, Unpack
 from uuid import UUID, uuid4
 
-from botocore.exceptions import ClientError
+from botocore.exceptions import ClientError, ReadTimeoutError
 from pydantic import ValidationError
 
 if TYPE_CHECKING:
@@ -132,19 +132,14 @@ class DynamoDBTicketExecutionCoordinator:
             if error_code != "TransactionCanceledException":
                 raise
 
-            reconciled_item = self._load_operation(operation.operation_id)
-
-            if reconciled_item is None:
-                return TicketExecutionResult(
-                    operation_id=operation.operation_id,
-                    request_id=operation.request_id,
-                    status=TicketExecutionStatus.UNCONFIRMED,
-                )
-
-            return self._result_from_existing(
+            return self._reconcile_ambiguous_write(
                 operation=operation,
                 expected_fingerprint=fingerprint,
-                item=reconciled_item,
+            )
+        except ReadTimeoutError:
+            return self._reconcile_ambiguous_write(
+                operation=operation,
+                expected_fingerprint=fingerprint,
             )
 
         return TicketExecutionResult(
@@ -176,6 +171,25 @@ class DynamoDBTicketExecutionCoordinator:
             return None
 
         return item
+
+    def _reconcile_ambiguous_write(
+        self,
+        *,
+        operation: BugReportOperation,
+        expected_fingerprint: str,
+    ) -> TicketExecutionResult:
+        """Recover authoritative state after an ambiguous write outcome."""
+
+        reconciled_item = self._load_operation(operation.operation_id)
+
+        if reconciled_item is None:
+            return self._unconfirmed(operation)
+
+        return self._result_from_existing(
+            operation=operation,
+            expected_fingerprint=expected_fingerprint,
+            item=reconciled_item,
+        )
 
     def _result_from_existing(
         self,
