@@ -14,6 +14,7 @@ from reliora.domain.bug import BugReportDraft
 from reliora.domain.operations import BugReportOperation
 from reliora.reliability.idempotency import bug_report_fingerprint
 from reliora.services.ticket_execution import TicketExecutionStatus
+from reliora.telemetry.failures import FailureCategory, FailureEvent
 
 OPERATION_ID = UUID("aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa")
 SESSION_ID = UUID("bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb")
@@ -60,6 +61,23 @@ class FakeDynamoDBClient:
             raise self.transaction_error
 
         return {}
+
+
+class RecordingFailureTelemetrySink:
+    """Record failure events emitted by the adapter."""
+
+    def __init__(self) -> None:
+        self.events: list[FailureEvent] = []
+
+    def record(self, event: FailureEvent) -> None:
+        self.events.append(event)
+
+
+class FailingFailureTelemetrySink:
+    """Simulate an unavailable telemetry destination."""
+
+    def record(self, event: FailureEvent) -> None:
+        raise RuntimeError("Telemetry unavailable.")
 
 
 def complete_bug_report(
@@ -119,7 +137,6 @@ def stored_operation_item(
             },
         }
     }
-
 
 def transaction_cancelled_error() -> ClientError:
     """Return the AWS error used when a transaction is cancelled."""
@@ -374,6 +391,60 @@ def test_access_denied_error_propagates_without_reconciliation() -> None:
 
     assert len(client.transaction_calls) == 1
     assert len(client.get_item_calls) == 1
+
+
+def test_access_denied_emits_authorization_failure_telemetry() -> None:
+    """NFR-OBS-002/REL-004: access denial emits classified telemetry."""
+
+    client = FakeDynamoDBClient(
+        get_item_responses=[{}],
+        transaction_error=access_denied_error(),
+    )
+    telemetry = RecordingFailureTelemetrySink()
+
+    service = DynamoDBTicketExecutionCoordinator(
+        dynamodb_client=client,
+        operations_table_name=OPERATIONS_TABLE,
+        tickets_table_name=TICKETS_TABLE,
+        ticket_id_factory=lambda: TICKET_ID,
+        clock=lambda: CONFIRMED_AT,
+        failure_telemetry=telemetry,
+    )
+
+    with pytest.raises(ClientError, match="Access denied."):
+        service.execute(operation())
+
+    assert telemetry.events == [
+        FailureEvent(
+            occurred_at=CONFIRMED_AT,
+            category=FailureCategory.AUTHORIZATION,
+            request_id=FIRST_REQUEST_ID,
+            operation_id=OPERATION_ID,
+            error_code="AccessDeniedException",
+        )
+    ]
+
+
+def test_telemetry_failure_does_not_mask_access_denied_error() -> None:
+    """FM-011: telemetry failure must not replace the business failure."""
+
+    client = FakeDynamoDBClient(
+        get_item_responses=[{}],
+        transaction_error=access_denied_error(),
+    )
+    telemetry = FailingFailureTelemetrySink()
+
+    service = DynamoDBTicketExecutionCoordinator(
+        dynamodb_client=client,
+        operations_table_name=OPERATIONS_TABLE,
+        tickets_table_name=TICKETS_TABLE,
+        ticket_id_factory=lambda: TICKET_ID,
+        clock=lambda: CONFIRMED_AT,
+        failure_telemetry=telemetry,
+    )
+
+    with pytest.raises(ClientError, match="Access denied."):
+        service.execute(operation())
 
 
 def test_incomplete_matching_state_is_unconfirmed() -> None:

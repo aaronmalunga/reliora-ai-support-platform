@@ -25,6 +25,7 @@ from reliora.services.ticket_execution import (
     TicketExecutionResult,
     TicketExecutionStatus,
 )
+from reliora.telemetry.failures import FailureCategory, FailureEvent
 
 
 class DynamoDBClient(Protocol):
@@ -75,6 +76,14 @@ def _string_attribute(
     return value
 
 
+class FailureTelemetrySink(Protocol):
+    """Record structured operational failures."""
+
+    def record(self, event: FailureEvent) -> None:
+        """Persist one failure telemetry event."""
+        ...
+
+
 class DynamoDBTicketExecutionCoordinator:
     """Execute ticket operations with durable DynamoDB idempotency."""
 
@@ -87,6 +96,7 @@ class DynamoDBTicketExecutionCoordinator:
         provider_name: str = "reliora-dynamodb",
         ticket_id_factory: Callable[[], str] = _ticket_id,
         clock: Callable[[], datetime] = _utc_now,
+        failure_telemetry: FailureTelemetrySink | None = None,
     ) -> None:
         self._dynamodb = dynamodb_client
         self._operations_table_name = operations_table_name
@@ -94,6 +104,7 @@ class DynamoDBTicketExecutionCoordinator:
         self._provider_name = provider_name
         self._ticket_id_factory = ticket_id_factory
         self._clock = clock
+        self._failure_telemetry = failure_telemetry
 
     def execute(
         self,
@@ -129,13 +140,18 @@ class DynamoDBTicketExecutionCoordinator:
         except ClientError as error:
             error_code = error.response.get("Error", {}).get("Code")
 
-            if error_code != "TransactionCanceledException":
-                raise
+            if error_code == "TransactionCanceledException":
+                return self._reconcile_ambiguous_write(
+                    operation=operation,
+                    expected_fingerprint=fingerprint,
+                )
 
-            return self._reconcile_ambiguous_write(
+            self._emit_failure_telemetry(
                 operation=operation,
-                expected_fingerprint=fingerprint,
+                occurred_at=confirmation.confirmed_at,
+                error_code=error_code,
             )
+            raise
         except ReadTimeoutError:
             return self._reconcile_ambiguous_write(
                 operation=operation,
@@ -312,6 +328,42 @@ class DynamoDBTicketExecutionCoordinator:
                 },
             ]
         )
+
+    def _emit_failure_telemetry(
+        self,
+        *,
+        operation: BugReportOperation,
+        occurred_at: datetime,
+        error_code: str | None,
+    ) -> None:
+        """Emit best-effort failure telemetry without masking primary failures."""
+
+        if self._failure_telemetry is None:
+            return
+
+        try:
+            self._failure_telemetry.record(
+                FailureEvent(
+                    occurred_at=occurred_at,
+                    category=self._categorize_failure(error_code),
+                    request_id=operation.request_id,
+                    operation_id=operation.operation_id,
+                    error_code=error_code,
+                )
+            )
+        except Exception:  # noqa: BLE001 - telemetry must not mask the primary failure
+            return
+
+    @staticmethod
+    def _categorize_failure(
+        error_code: str | None,
+    ) -> FailureCategory:
+        """Map a known AWS error code to Reliora's failure taxonomy."""
+
+        if error_code == "AccessDeniedException":
+            return FailureCategory.AUTHORIZATION
+
+        return FailureCategory.UNKNOWN
 
     @staticmethod
     def _unconfirmed(
