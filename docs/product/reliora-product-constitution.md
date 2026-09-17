@@ -210,6 +210,111 @@ Secondary users are:
 
 ---
 
+## 3.5 Problem-Buyer Evidence Gate
+
+Reliora must not continue major product expansion merely because engineering work already exists or because an industry problem is plausible.
+
+Before a major product investment, the current evidence must be reviewed across:
+
+- problem credibility;
+- customer workflow evidence;
+- buyer/economic-owner evidence;
+- incumbent alternatives;
+- measurable value potential;
+- security, reliability, privacy, and operational risk;
+- implementation and operating burden;
+- technical feasibility.
+
+The gate must end in exactly one of the following product decisions.
+
+### CONTINUE
+
+Use `CONTINUE` when:
+
+- the problem remains credible for the intended customer;
+- the proposed buyer or economic owner plausibly owns the pain;
+- existing alternatives do not already remove the material problem sufficiently;
+- the intended value can be measured;
+- the required architecture and operating burden are proportionate;
+- current evidence does not reveal a stronger reason to narrow, pivot, stop, or defer.
+
+`CONTINUE` does not convert hypotheses into validated customer evidence.
+
+### NARROW
+
+Use `NARROW` when:
+
+- the problem is credible but evidence supports only part of the proposed scope;
+- buyer or workflow evidence is weaker than the breadth of planned investment;
+- additional automation would increase risk or complexity faster than demonstrated value;
+- a smaller workflow can test the thesis more directly.
+
+A `NARROW` decision authorizes only the bounded scope explicitly identified by the gate.
+
+### PIVOT
+
+Use `PIVOT` when:
+
+- the strongest evidence points to a materially different customer problem;
+- a different buyer or operational owner is more plausible;
+- the strongest value appears to be in reliability/control tooling rather than the current customer-facing workflow;
+- evidence shows that the current framing is not the best expression of the validated need.
+
+A pivot requires a new or amended product decision. Existing engineering must not be used as a reason to preserve a disproven framing.
+
+### STOP
+
+Use `STOP` when:
+
+- the problem is not material;
+- existing alternatives solve it sufficiently;
+- credible customer or buyer evidence contradicts the thesis;
+- operating cost, implementation burden, or risk is disproportionate to plausible value;
+- AI provides no meaningful advantage over a simpler solution for the intended problem.
+
+Stopping a direction is an acceptable product outcome.
+
+### DEFER
+
+Use `DEFER` when:
+
+- available evidence is insufficient for a responsible decision;
+- the missing evidence can be obtained without building substantial new product capability;
+- the next useful action is research, discovery, measurement, or a bounded experiment rather than feature implementation.
+
+`DEFER` is not permission to accumulate speculative architecture.
+
+### Evidence guardrails
+
+The following boundaries always apply:
+
+- industry evidence may establish that a problem class exists, but not that a specific Reliora customer has that problem;
+- synthetic customers, costs, traffic, workflows, and ROI remain synthetic;
+- local engineering evidence does not prove market demand or production outcomes;
+- existing engineering investment does not justify continued scope by itself;
+- missing buyer evidence must not be compensated for by adding technology;
+- customer or production claims must remain narrower than the evidence that supports them.
+
+### Reassessment triggers
+
+Re-run the gate when material new evidence changes any of:
+
+- target customer;
+- economic buyer;
+- supported workflow;
+- autonomy level;
+- side-effect scope;
+- operating model;
+- primary value proposition;
+- incumbent alternative;
+- risk profile;
+- deployment burden;
+- measured unit economics.
+
+The gate is a product-governance control, not a one-time documentation exercise.
+
+---
+
 # 4. Jobs To Be Done
 
 Reliora should help a retailer accomplish the following jobs.

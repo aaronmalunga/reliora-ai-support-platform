@@ -911,3 +911,138 @@ M1.1 is complete when:
 At that point Reliora may proceed to M1.2:
 
 > **Problem–Buyer Evidence Gate**
+
+---
+
+# 25. M1.2 Problem-Buyer Evidence Gate Assessment
+
+**Assessment date:** 2026-09-17
+
+**Assessment mode:** Retrospective
+
+**Current gate outcome:** `NARROW`
+
+## 25.1 Why the current outcome is NARROW
+
+The available evidence supports continued work on a bounded production-oriented reference implementation, but it does not currently support broad product expansion or market-validation claims.
+
+Current evidence supports:
+
+- a credible technical problem class;
+- a credible industry problem class;
+- a defined target-customer hypothesis;
+- a coherent product boundary around safe AI-assisted support;
+- substantial local engineering evidence for deterministic control, authorization, idempotency, replay, conflict handling, reconciliation, evaluation, and failure handling.
+
+Current evidence does not yet establish:
+
+- a validated real retailer workflow;
+- a validated economic buyer;
+- willingness to pay;
+- customer-specific problem frequency or severity;
+- real support economics;
+- real adoption;
+- production ROI.
+
+`STOP` is not justified because the problem class remains credible and the current technical work addresses independently documented reliability and control risks.
+
+`PIVOT` is not justified because current evidence has not demonstrated that another problem, buyer, or workflow is materially stronger.
+
+A broad `CONTINUE` decision is not justified because customer-specific and buyer evidence remain insufficient.
+
+A complete `DEFER` is unnecessary because Reliora can continue generating high-value technical and target-environment evidence inside a deliberately bounded reference-implementation scope.
+
+Therefore, the current evidence supports `NARROW`.
+
+## 25.2 Scope authorized by NARROW
+
+Reliora may continue work that strengthens the existing reliability-and-control thesis, including:
+
+- the existing `BUG / PLATFORM / OTHER` support boundary;
+- deterministic authorization;
+- stable logical-operation identity;
+- idempotent execution and reconciliation;
+- structured human handoff;
+- reconstructable operational evidence;
+- deterministic and generative evaluation;
+- behavioural release controls;
+- bounded target-cloud verification;
+- measured workload and unit-cost evidence where available;
+- reproducible deployment and recovery evidence.
+
+Each item still requires its own architecture and evidence gate where applicable.
+
+## 25.3 Scope not authorized by the current evidence
+
+The current gate does not authorize expansion merely for capability breadth, including:
+
+- additional autonomous business-action workflows without an independently evidenced need;
+- multi-agent architecture;
+- mandatory RAG or vector infrastructure;
+- persistent personalized memory;
+- browser or code-interpreter capability;
+- Kubernetes/EKS;
+- Kafka/MSK;
+- Redis;
+- enterprise multi-tenancy and billing;
+- multi-region architecture;
+- broad commerce, payment, warehouse, inventory, or order-management functionality.
+
+It also does not authorize claims of:
+
+- validated customer demand;
+- willingness to pay;
+- production reliability;
+- real customer ROI;
+- measured labour savings;
+- commercial adoption.
+
+## 25.4 Evidence that could support a later CONTINUE decision
+
+A broader continuation decision would require stronger evidence such as:
+
+- direct evidence from relevant customer-support, CX, engineering, AI/automation, or operations stakeholders;
+- evidence of the actual current-state support workflow and its failure points;
+- evidence that a plausible buyer or economic owner materially owns the problem;
+- evidence that incumbent approaches leave a meaningful unresolved gap;
+- at least one measurable customer or operational baseline relevant to the intended value;
+- evidence that the operating burden and risk are proportionate to the expected benefit.
+
+No arbitrary interview count is treated as sufficient by itself. Evidence quality and relevance matter more than document volume.
+
+## 25.5 Evidence that could trigger PIVOT or STOP
+
+Reassess toward `PIVOT` or `STOP` if credible evidence shows that:
+
+- the target problem is low priority;
+- incumbent products solve the problem sufficiently;
+- the assumed buyer does not own or fund the problem;
+- a materially different workflow has stronger value;
+- the required operating model is disproportionate;
+- the AI component provides no meaningful advantage over simpler deterministic software;
+- the strongest value lies in a materially different product boundary.
+
+## 25.6 Immediate consequence
+
+The next Reliora product-lifecycle work should not be feature expansion.
+
+The next evidence work should compare product-level alternatives and define a measurable value hypothesis for the narrowed scope.
+
+This assessment does not modify the technical evidence maturity of the project.
+
+---
+
+# 26. M1.2 Exit Condition
+
+M1.2 is complete when:
+
+- the permanent problem-buyer governance gate exists in the Product Constitution;
+- the current retrospective gate has been applied;
+- the decision outcome is explicit;
+- the authorized and non-authorized scope are explicit;
+- no customer, buyer, production, or ROI evidence has been invented;
+- the next evidence required for a broader continuation decision is explicit.
+
+Current outcome:
+
+> **NARROW - continue Reliora as a bounded reliability-and-control reference implementation while deferring broad expansion and commercial validation claims until stronger customer/buyer evidence exists.**
