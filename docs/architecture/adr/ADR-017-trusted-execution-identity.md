@@ -1,4 +1,4 @@
-﻿# ADR-017 - Trusted Execution Identity for Side-Effecting Agent Tools
+# ADR-017 - Trusted Execution Identity for Side-Effecting Agent Tools
 
 ## Status
 
@@ -160,3 +160,41 @@ candidate mechanism
 ```
 
 Strands remains only a possible future implementation mechanism if later evidence independently justifies its introduction.
+
+## M2 Target-Environment Entry Gate - 2026-09-18
+
+**Status:** `BLOCKED`
+
+The first M2 target-environment entry gate was attempted before any architecture or deployment change.
+
+Observed environment:
+
+- AWS CLI configuration present;
+- region `us-east-1`;
+- credentials loaded from the shared credentials file;
+- no explicit profile selected.
+
+The command:
+
+```text
+aws sts get-caller-identity
+```
+
+returned:
+
+```text
+InvalidClientTokenId
+The security token included in the request is invalid.
+```
+
+Therefore the authenticated AWS target environment was not reached and the ADR-017 integration experiment was not executed.
+
+This blocker does not change the ADR decision status. ADR-017 remains `PROPOSED`.
+
+No replacement identity mechanism is authorized by this result.
+
+Detailed evidence:
+
+```text
+evidence/adr017-target-environment-entry-gate-2026-09-18.md
+```

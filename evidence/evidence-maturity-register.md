@@ -206,6 +206,38 @@ This currently blocks:
 
 Local evidence already obtained remains valid within its original boundary.
 
+### ADR-017 target-environment entry gate - 2026-09-18
+
+A fresh M2 entry-gate check confirmed that AWS CLI configuration is present but valid AWS authentication is not currently available.
+
+Observed command:
+
+```text
+aws sts get-caller-identity
+```
+
+Observed result:
+
+```text
+InvalidClientTokenId
+```
+
+Classification:
+
+```text
+Target-environment access     BLOCKED
+Evidence maturity promotion   NONE
+ADR-017 cloud experiment      NOT EXECUTED
+```
+
+The blocker is recorded in:
+
+```text
+evidence/adr017-target-environment-entry-gate-2026-09-18.md
+```
+
+This does not invalidate existing local evidence and does not authorize an alternative architecture.
+
 ---
 
 ## 7. Evidence Promotion and Claim Control
