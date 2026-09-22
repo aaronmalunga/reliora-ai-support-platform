@@ -53,12 +53,16 @@ The two generated JSON reports showed only CRLF-to-LF warnings and no content di
 
 The older [2026-09-17 baseline](../../evidence/post-audit-engineering-baseline-2026-09-17.md) remains historical. The [September 8 security record](../security/security-scan-baseline.md) records zero Gitleaks findings, no known runtime dependency vulnerabilities at scan time, and 36 passing / 12 failing Checkov checks with dispositions. It does not certify a new release.
 
-Fresh security scans were reported at `8d95afa`: Gitleaks 8.30.1 scanned 73 commits with zero leaks (exit 0); pip-audit 2.10.1 reported no known runtime vulnerabilities (exit 0); Checkov 3.3.16 reported 36 passed / 12 failed / 0 skipped. All 12 check/resource failures match the existing finding register. Their existing development dispositions remain, including open code-signing, concurrency, and tracing gaps and pending DLQ semantics verification. No production risk acceptance or clean IaC scan is claimed. The successful Checkov run's numeric exit-code output was not included. Its earlier pyenv launcher failure was resolved by explicitly selecting Python and running the module; see [VERIFY.md](VERIFY.md).
+Fresh security scans were reported at `8d95afa`: Gitleaks 8.30.1 scanned 73 commits with zero leaks (exit 0); pip-audit 2.10.1 reported no known runtime vulnerabilities (exit 0); Checkov 3.3.16 reported 36 passed / 12 failed / 0 skipped. All 12 check/resource failures match the existing finding register. Their existing development dispositions remain, including open code-signing, concurrency, and tracing gaps and pending DLQ semantics verification. No production risk acceptance or clean IaC scan is claimed. Aaron subsequently confirmed the completed Checkov scan returned exit code 1. Its earlier pyenv launcher failure was resolved by explicitly selecting Python and running the module; see [VERIFY.md](VERIFY.md).
 
 ## Active blockers
 
 1. **GitHub Actions:** the user supplied a banner stating account billing is locked and workflows cannot execute. Startup-failure runs produced no passing check evidence. Account resolution is outside a code change; recheck before claiming restoration.
 2. **AWS:** the [2026-09-18 entry gate](../../evidence/adr017-target-environment-entry-gate-2026-09-18.md) records STS `InvalidClientTokenId`. No current credential check was performed. This is independent of GitHub billing.
-3. **Final verification:** local scan execution and report cleanup are recorded. Open security findings, hosted CI, reviewed integration, and pinned transfer remain outstanding. Checkov's numeric scan exit code remains unreported.
+3. **Final verification:** local scan execution and report cleanup are recorded. Open security findings, hosted CI, reviewed integration, and pinned transfer remain outstanding. The scan exit code is confirmed as 1.
 
 These blockers do not authorize weakening tests, making the repository public, changing identity semantics, or expanding the architecture. No live cloud retry-safety, production-readiness, or customer-value claim follows from local tests.
+
+## Integration and transfer checkpoint
+
+The [integration review](INTEGRATION_REVIEW.md) records that all seven other remote branch tips are ancestors of the inspected handover HEAD. This is ancestry and scope evidence, not approval of every code change. Aaron confirmed a clean synchronized local checkout at `57557eb`. Later documentation commits must be fetched before local continuation. A pinned transfer may preserve this blocked continuation state without claiming a merge to main or production readiness. The enclosing Git commit identifies this document version; the outer transfer manifest records the exact exported SHA and file hashes.

@@ -14,7 +14,7 @@ This index maps existing sources; it does not replace them. Follow the source pr
 | Architecture | [Logical architecture](../architecture/logical-architecture.md), [decision journal](../architecture/decision-journal.md), [ADR index](../architecture/adr/README.md) | Distinguish proposed, accepted, implemented, and verified. |
 | Identity blocker | [ADR-017](../architecture/adr/ADR-017-trusted-execution-identity.md), [AWS entry gate](../../evidence/adr017-target-environment-entry-gate-2026-09-18.md) | PROPOSED; authentication blocked the experiment. |
 | Policy/security | [Autonomy](../governance/autonomy-policy.md), [threat model](../security/threat-model.md), [privacy](../privacy/data-lifecycle.md) | Requirements and scoped controls; not full cloud verification. |
-| Security evidence | [Security scan baseline](../security/security-scan-baseline.md) | September 8 local results; September 22 clarification; fresh scans pending. |
+| Security evidence | [Security scan baseline](../security/security-scan-baseline.md) | September 8 baseline and September 22 user-reported fresh scans; 12 Checkov findings remain. |
 | Evaluation | [Evaluation guide](../../evals/README.md), [contract](../../evals/behavioural-evaluation-contract.md) | Fixture scope, result interpretation, and limitations. |
 | Evidence maturity | [Register](../../evidence/evidence-maturity-register.md), [September 17 baseline](../../evidence/post-audit-engineering-baseline-2026-09-17.md) | Historical records, not automatically current test results. |
 | Completion sequence | [Mitigation plan](../audit/RELIORA_MITIGATION_PLAN.md), [NEXT_STEPS](NEXT_STEPS.md) | Existing gates with current completion/dependency overlay. |

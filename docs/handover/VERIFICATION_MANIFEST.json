@@ -97,7 +97,6 @@
     }
   ],
   "pending_current_checkpoint_checks": [
-    "Checkov successful-run numeric exit-code capture if still available",
     "IaC open finding remediation or release-scope risk disposition",
     "hosted CI after account restoration"
   ],
@@ -226,8 +225,8 @@
         "failed": 12,
         "skipped": 0,
         "status": "REPORTED_EXECUTED_WITH_FINDINGS",
-        "exit_code": null,
-        "exit_code_note": "Latest transcript ends at $LASTEXITCODE without its numeric output. Earlier exit 1 belongs to launcher failure, not this scan.",
+        "exit_code": 1,
+        "exit_code_note": "Aaron subsequently explicitly confirmed that the completed policy scan returned 1.",
         "findings": [
           {
             "check": "CKV_AWS_28",
@@ -307,5 +306,16 @@
       "Checkov failures remain; existing development dispositions are not production approval",
       "No AWS or hosted CI evidence"
     ]
+  },
+  "latest_user_checkout_observation": {
+    "commit": "57557ebd622c7a3fe06f916283c05b85a8ea6685",
+    "reported_date": "2026-09-22",
+    "worktree": "Clean and synchronized with origin/chore/reliora-handover-readiness"
+  },
+  "integration_review": {
+    "path": "docs/handover/INTEGRATION_REVIEW.md",
+    "observed_head": "57557ebd622c7a3fe06f916283c05b85a8ea6685",
+    "all_other_remote_branch_tips_ancestors": true,
+    "main_merge_completed": false
   }
 }

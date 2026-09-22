@@ -378,7 +378,7 @@ not captured.
 |---|---|---|---|
 | Gitleaks 8.30.1 | History reachable from all local Git refs; 73 commits, approximately 1.31 MB | No leaks found | 0 |
 | pip-audit 2.10.1 | Hashed locked runtime requirements from the successful Lambda build | No known vulnerabilities found | 0 |
-| Checkov 3.3.16 | infra/terraform; Terraform framework; bundled policies | 36 passed / 12 failed / 0 skipped | Not included in the successful-run transcript |
+| Checkov 3.3.16 | infra/terraform; Terraform framework; bundled policies | 36 passed / 12 failed / 0 skipped | 1 (subsequently confirmed by Aaron) |
 
 All 12 Checkov check/resource pairs match the finding register above:
 CKV_AWS_28 and CKV_AWS_119 on each DynamoDB table; CKV_AWS_272,
@@ -395,7 +395,8 @@ Checkov initially failed at its Windows launcher with a pyenv Python-selection
 message and exit 1. That was not a policy-scan result. Selecting the working
 project Python explicitly and invoking `python -m checkov.main` in uv's
 isolated tool environment produced the version and scan output above. Do not
-reuse the launcher's exit code for the completed scan.
+reuse the launcher's exit code for the completed scan. Aaron subsequently
+confirmed that the completed policy scan also returned 1.
 
 See [verification commands](../handover/VERIFY.md) and the
 [verification manifest](../handover/VERIFICATION_MANIFEST.json) for exact
