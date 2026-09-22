@@ -1,0 +1,321 @@
+{
+  "schema_version": 1,
+  "snapshot_date": "2026-09-22",
+  "repository": "aaronmalunga/reliora-ai-support-platform",
+  "continuation_branch": "chore/reliora-handover-readiness",
+  "consolidated_parent_commit": "bb55f983c18b3abe618291be0e8468bd38b96223",
+  "code_baseline_commit": "0b9ab45781612e81759816dd9fe288b1088e0e0d",
+  "final_export_commit": null,
+  "final_export_sha256": null,
+  "final_handover_tag": null,
+  "status": "CONTINUATION_CHECKPOINT_WITH_VERIFICATION_DEBT",
+  "source_relation": {
+    "observed_compare": "0b9ab45781612e81759816dd9fe288b1088e0e0d...bb55f983c18b3abe618291be0e8468bd38b96223",
+    "changed_paths": [
+      "docs/privacy/data-lifecycle.md",
+      "docs/security/security-scan-baseline.md",
+      "docs/security/threat-model.md"
+    ],
+    "scope": "Documentation only; no new runtime or tests in consolidation."
+  },
+  "local_check_observation": {
+    "source": "User-pasted PowerShell transcript in handover conversation",
+    "observer": "Aaron (reported); assistant did not execute these checks",
+    "reported_date": "2026-09-22",
+    "execution_timestamp_utc": null,
+    "branch_at_execution": "chore/reliora-handover-readiness",
+    "commit_at_execution": "0b9ab45781612e81759816dd9fe288b1088e0e0d",
+    "commit_basis": "Branch creation at known HEAD and no intervening commit before reported checks",
+    "worktree_before_checks": "User reported clean",
+    "environment": "Windows PowerShell, active project environment",
+    "python_version": null,
+    "uv_version": null,
+    "ruff_version": null,
+    "mypy_version": null,
+    "pytest_version": null,
+    "checks": [
+      {
+        "command": "uv sync --frozen",
+        "status": "REPORTED_PASS",
+        "result": "Checked 38 packages in 274ms",
+        "exit_code": null
+      },
+      {
+        "command": "ruff check",
+        "status": "REPORTED_PASS",
+        "result": "All checks passed!",
+        "exit_code": null
+      },
+      {
+        "command": "mypy src",
+        "status": "REPORTED_PASS",
+        "result": "Success: no issues found in 31 source files",
+        "exit_code": null
+      },
+      {
+        "command": "python -m pytest -q",
+        "status": "REPORTED_PASS",
+        "tests_passed": 208,
+        "duration_seconds": 16.67,
+        "exit_code": null
+      }
+    ],
+    "invocation_note": "Standalone uv run --frozen prefixes printed usage help; checks then succeeded as bare commands in the active environment. Do not claim the successful checks used uv run."
+  },
+  "documentation_review": {
+    "consolidation": "User reported patch application and git diff --cached --check passing, then committed and pushed bb55f98",
+    "handover_docs": "Link targets, manifest JSON, and changed-file scope validated before commit; no application tests rerun for documentation changes"
+  },
+  "historical_records": [
+    {
+      "path": "evidence/post-audit-engineering-baseline-2026-09-17.md",
+      "code_commit": "88c13baa8ae5d47910acf39ba879cf066815a364",
+      "scope": "Recorded prior local checks including evaluators, Lambda packaging, Terraform validation; not fresh handover execution"
+    },
+    {
+      "path": "docs/security/security-scan-baseline.md",
+      "date": "2026-09-08",
+      "scope": "Recorded local scans; Gitleaks zero findings, pip-audit no known vulnerabilities at scan time, Checkov 36 passed / 12 failed / 0 skipped with dispositions",
+      "fresh_release_scan": false
+    }
+  ],
+  "blockers": [
+    {
+      "id": "CI-BILLING",
+      "status": "BLOCKED",
+      "evidence": "User screenshot of GitHub Actions: account billing locked; workflows cannot execute",
+      "observed_date": "2026-09-22",
+      "successful_hosted_ci_claim": false
+    },
+    {
+      "id": "AWS-AUTH",
+      "status": "LAST_RECORDED_BLOCKED",
+      "evidence_path": "evidence/adr017-target-environment-entry-gate-2026-09-18.md",
+      "observed_date": "2026-09-18",
+      "result": "InvalidClientTokenId",
+      "current_credentials_rechecked": false
+    }
+  ],
+  "pending_current_checkpoint_checks": [
+    "IaC open finding remediation or release-scope risk disposition",
+    "hosted CI after account restoration"
+  ],
+  "imported_sources": [
+    {
+      "path": "RELIORA-PRODUCT-NORTH-STAR.md",
+      "source_filename": "RELIORA-PRODUCT-NORTH-STAR(1).md",
+      "source_sha256": "8255f7025eac3dff93168a0d9d819156c0dc2a4943ae48e1e63ebbd30c028173",
+      "content_preserved": true
+    }
+  ],
+  "claim_limits": [
+    "No new AWS or production verification",
+    "No commercial adoption or ROI validation",
+    "No current security-clean claim",
+    "No final release certification"
+  ],
+  "handover_check_observation": {
+    "source": "User-pasted PowerShell transcripts in handover conversation",
+    "observer": "Aaron (reported); assistant did not execute these checks",
+    "reported_date": "2026-09-22",
+    "execution_timestamp_utc": null,
+    "commit_at_execution": "f5323827a629e8589e3b50fb638c2e8af6133cd9",
+    "branch_at_execution": "chore/reliora-handover-readiness",
+    "environment": {
+      "os": "Windows",
+      "shell": "PowerShell",
+      "python": "3.12.10",
+      "uv": "0.12.7",
+      "terraform": "1.15.8",
+      "terraform_platform": "windows_amd64",
+      "aws_provider": "6.62.0"
+    },
+    "worktree": "Clean before evaluator execution; afterward only the two generated evaluator JSON reports marked modified. git diff -- evidence/generated/ printed CRLF-to-LF warnings and no content diff. Index normalization and final clean status not yet confirmed. Subsequent explicit staging normalized the report index: no staged diff and clean status confirmed before the fast-forward to 8d95afa.",
+    "checks": [
+      {
+        "command": "uv run --frozen python evals/runners/run_deterministic_evaluator_regression.py",
+        "result": "15 total; 15 matched; 0 mismatches; FACT-001, INV-004, INV-012 each 5/5",
+        "status": "REPORTED_PASS",
+        "exit_code": null
+      },
+      {
+        "command": "uv run --frozen python evals/runners/run_stage1_reproduction.py",
+        "result": "4 total; 3 executable; 1 documented non-executable; 3 known defects detected; 0 mismatches; all executable expectations met",
+        "status": "REPORTED_PASS",
+        "exit_code": null
+      },
+      {
+        "command": ".\\scripts\\build_lambda.ps1",
+        "result": "12 production packages installed; build/lambda/reliora-ticket-execution.zip created",
+        "status": "REPORTED_PASS",
+        "exit_code": null
+      },
+      {
+        "command": "uv run --frozen python -c \"import zipfile; p=r'build\\lambda\\reliora-ticket-execution.zip'; z=zipfile.ZipFile(p); names=z.namelist(); assert any(n.endswith('reliora/adapters/aws/lambda_entrypoint.py') for n in names), 'Lambda handler missing'; assert any(n.startswith('boto3/') for n in names), 'boto3 missing'; assert any(n.startswith('pydantic/') for n in names), 'pydantic missing'; native=[n for n in names if 'pydantic_core' in n and n.endswith('.so')]; assert native, 'Linux pydantic-core binary missing'; print('Lambda artifact verification passed'); print(native[:3])\"",
+        "result": "Lambda artifact verification passed; pydantic_core/_pydantic_core.cpython-312-x86_64-linux-gnu.so present",
+        "status": "REPORTED_PASS",
+        "exit_code": null
+      },
+      {
+        "command": "terraform -chdir=infra/terraform/envs/dev fmt -check",
+        "result": "No output or reported error",
+        "status": "REPORTED_PASS",
+        "exit_code": null
+      },
+      {
+        "command": "terraform -chdir=infra/terraform/envs/dev init -backend=false -input=false",
+        "result": "Successfully initialized; reused locked hashicorp/aws 6.62.0",
+        "status": "REPORTED_PASS",
+        "exit_code": null
+      },
+      {
+        "command": "terraform -chdir=infra/terraform/envs/dev validate -no-color",
+        "result": "Success! The configuration is valid.",
+        "status": "REPORTED_PASS",
+        "exit_code": null
+      }
+    ],
+    "limitations": [
+      "Numeric exit codes and exact execution times not captured",
+      "ZIP presence checks do not prove Lambda execution",
+      "No AWS deployment, plan/apply, credential recheck, or hosted CI execution",
+      "Terraform 1.15.8 differs from existing workflow pin 1.15.9; no tool upgrade performed"
+    ],
+    "artifact_sha256": null
+  },
+  "worktree_cleanup_observation": {
+    "source": "Aaron's PowerShell transcript",
+    "reported_date": "2026-09-22",
+    "result": "Explicit git add of the two generated reports produced no staged diff and a clean git status. Fast-forward from f532382 to 8d95afa then confirmed.",
+    "runtime_changes": false
+  },
+  "security_check_observation": {
+    "source": "User-pasted PowerShell transcripts; scanner execution performed by Aaron, not assistant or hosted CI",
+    "reported_date": "2026-09-22",
+    "execution_timestamp_utc": null,
+    "commit_at_execution": "8d95afa829a2686ae50a10d57a3518ba181eb407",
+    "commit_basis": "User confirmed fast-forward and HEAD 8d95afa before scanning; no intervening source changes reported",
+    "checks": [
+      {
+        "tool": "Gitleaks",
+        "version": "8.30.1",
+        "command": "gitleaks git --redact=100 --log-opts=\"--all --full-history\" .",
+        "scope": "Git history reachable from all refs present in the local clone",
+        "commits_scanned": 73,
+        "approximate_bytes_scanned": 1305141,
+        "result": "No leaks found",
+        "status": "REPORTED_PASS",
+        "exit_code": 0
+      },
+      {
+        "tool": "pip-audit",
+        "version": "2.10.1",
+        "command": "uv tool run --from pip-audit==2.10.1 pip-audit -r build/lambda/requirements.txt --require-hashes --disable-pip",
+        "scope": "Locked runtime requirements produced by the Lambda build at f532382; subsequent changes documentation only",
+        "result": "No known vulnerabilities found",
+        "status": "REPORTED_PASS",
+        "exit_code": 0
+      },
+      {
+        "tool": "Checkov",
+        "version": "3.3.16",
+        "command": "uv tool run --python .\\.venv\\Scripts\\python.exe --from checkov==3.3.16 python -m checkov.main -d infra/terraform --framework terraform --skip-download --skip-results-upload --compact --quiet",
+        "scope": "infra/terraform, terraform framework, local bundled policies",
+        "passed": 36,
+        "failed": 12,
+        "skipped": 0,
+        "status": "REPORTED_EXECUTED_WITH_FINDINGS",
+        "exit_code": 1,
+        "exit_code_note": "Aaron subsequently explicitly confirmed that the completed policy scan returned 1.",
+        "findings": [
+          {
+            "check": "CKV_AWS_28",
+            "resource": "aws_dynamodb_table.operations",
+            "existing_disposition": "ACCEPTED DEV DEVIATION"
+          },
+          {
+            "check": "CKV_AWS_119",
+            "resource": "aws_dynamodb_table.operations",
+            "existing_disposition": "ACCEPTED DEV DEVIATION"
+          },
+          {
+            "check": "CKV_AWS_28",
+            "resource": "aws_dynamodb_table.tickets",
+            "existing_disposition": "ACCEPTED DEV DEVIATION"
+          },
+          {
+            "check": "CKV_AWS_119",
+            "resource": "aws_dynamodb_table.tickets",
+            "existing_disposition": "ACCEPTED DEV DEVIATION"
+          },
+          {
+            "check": "CKV_AWS_272",
+            "resource": "aws_lambda_function.ticket_execution",
+            "existing_disposition": "OPEN HARDENING GAP"
+          },
+          {
+            "check": "CKV_AWS_116",
+            "resource": "aws_lambda_function.ticket_execution",
+            "existing_disposition": "CONDITIONAL / CLOUD VERIFICATION PENDING"
+          },
+          {
+            "check": "CKV_AWS_173",
+            "resource": "aws_lambda_function.ticket_execution",
+            "existing_disposition": "ACCEPTED DEV DEVIATION"
+          },
+          {
+            "check": "CKV_AWS_115",
+            "resource": "aws_lambda_function.ticket_execution",
+            "existing_disposition": "OPEN HARDENING GAP"
+          },
+          {
+            "check": "CKV_AWS_117",
+            "resource": "aws_lambda_function.ticket_execution",
+            "existing_disposition": "NOT REQUIRED BY CURRENT ARCHITECTURE"
+          },
+          {
+            "check": "CKV_AWS_50",
+            "resource": "aws_lambda_function.ticket_execution",
+            "existing_disposition": "OPEN OBSERVABILITY GAP"
+          },
+          {
+            "check": "CKV_AWS_158",
+            "resource": "aws_cloudwatch_log_group.ticket_lambda",
+            "existing_disposition": "ACCEPTED DEV DEVIATION"
+          },
+          {
+            "check": "CKV_AWS_338",
+            "resource": "aws_cloudwatch_log_group.ticket_lambda",
+            "existing_disposition": "INTENTIONALLY REJECTED FOR DEV"
+          }
+        ],
+        "comparison": "All 12 check/resource pairs match the existing September 8 finding register; no change to existing dispositions or production acceptance."
+      }
+    ],
+    "launcher_issue": {
+      "attempt": "uv tool run --from checkov==3.3.16 checkov",
+      "result": "pyenv global/local Python selection message; version and scan did not execute; scan attempt returned 1",
+      "recovery": "Select .venv/Scripts/python.exe explicitly and invoke python -m checkov.main inside the isolated tool environment; version and scan output obtained",
+      "project_python_pin_changed": false
+    },
+    "limitations": [
+      "User-reported results; exact execution timestamps and report hashes not captured",
+      "Scanner versions pinned for baseline comparison; no latest-policy-coverage claim",
+      "Gitleaks scope is locally available Git refs, not all workstation files or inaccessible remote refs",
+      "Dependency vulnerabilities reflect data available at scan time",
+      "Checkov failures remain; existing development dispositions are not production approval",
+      "No AWS or hosted CI evidence"
+    ]
+  },
+  "latest_user_checkout_observation": {
+    "commit": "57557ebd622c7a3fe06f916283c05b85a8ea6685",
+    "reported_date": "2026-09-22",
+    "worktree": "Clean and synchronized with origin/chore/reliora-handover-readiness"
+  },
+  "integration_review": {
+    "path": "docs/handover/INTEGRATION_REVIEW.md",
+    "observed_head": "57557ebd622c7a3fe06f916283c05b85a8ea6685",
+    "all_other_remote_branch_tips_ancestors": true,
+    "main_merge_completed": false
+  }
+}
