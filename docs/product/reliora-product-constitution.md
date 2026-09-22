@@ -6,9 +6,9 @@
 **Status:** Living source of truth
 **Version:** 1.1
 **Established:** 2026-09-03
-**Current implementation baseline:** `cc02e58`
-**Current local regression baseline:** 164 passing tests
-**Current delivery branch:** `feat/aws-infrastructure`
+**Current implementation and evidence status:** [Handover current state](../handover/CURRENT_STATE.md)
+**Current delivery branch:** `chore/reliora-handover-readiness` (verify actual Git state)
+**Status metadata refreshed:** 2026-09-22; governing scope and decision rules unchanged
 
 ---
 
@@ -33,7 +33,7 @@ The governing idea is:
 This document complements, rather than replaces:
 
 1. the official Udacity/AWS P1 specification;
-2. `RELIORA-PRODUCT-NORTH-STAR.md`;
+2. [RELIORA-PRODUCT-NORTH-STAR.md](../../RELIORA-PRODUCT-NORTH-STAR.md);
 3. Reliora functional requirements;
 4. Reliora non-functional requirements;
 5. autonomy and human-intervention policy;
@@ -52,7 +52,7 @@ When making a Reliora decision, use the following precedence order:
 
 1. official Udacity/AWS P1 requirements and rubric;
 2. this Reliora Product Constitution;
-3. `RELIORA-PRODUCT-NORTH-STAR.md`;
+3. [RELIORA-PRODUCT-NORTH-STAR.md](../../RELIORA-PRODUCT-NORTH-STAR.md);
 4. Reliora-specific requirements, ADRs, policies, architecture, evaluation contracts, and preserved evidence;
 5. the Portfolio Product Engineering Standard;
 6. general engineering knowledge and external documentation.
@@ -2199,7 +2199,13 @@ Reliora reaches portfolio release when a reviewer can answer "yes" to the follow
 
 ---
 
-# 48. Current Status Snapshot
+# 48. Historical Status Snapshot — 2026-09-03
+
+This section preserves the September 3 checkpoint. Its commit, test count,
+branch, and next-phase statements are historical. Use the
+[current state](../handover/CURRENT_STATE.md) and
+[verification manifest](../handover/VERIFICATION_MANIFEST.json) for the
+handover baseline and remaining blockers.
 
 As of 2026-09-03:
 

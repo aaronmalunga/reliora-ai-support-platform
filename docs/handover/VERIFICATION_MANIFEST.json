@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "snapshot_date": "2026-09-22",
+  "repository": "aaronmalunga/reliora-ai-support-platform",
+  "continuation_branch": "chore/reliora-handover-readiness",
+  "consolidated_parent_commit": "bb55f983c18b3abe618291be0e8468bd38b96223",
+  "code_baseline_commit": "0b9ab45781612e81759816dd9fe288b1088e0e0d",
+  "final_export_commit": null,
+  "final_export_sha256": null,
+  "final_handover_tag": null,
+  "status": "CONTINUATION_CHECKPOINT_WITH_VERIFICATION_DEBT",
+  "source_relation": {
+    "observed_compare": "0b9ab45781612e81759816dd9fe288b1088e0e0d...bb55f983c18b3abe618291be0e8468bd38b96223",
+    "changed_paths": [
+      "docs/privacy/data-lifecycle.md",
+      "docs/security/security-scan-baseline.md",
+      "docs/security/threat-model.md"
+    ],
+    "scope": "Documentation only; no new runtime or tests in consolidation."
+  },
+  "local_check_observation": {
+    "source": "User-pasted PowerShell transcript in handover conversation",
+    "observer": "Aaron (reported); assistant did not execute these checks",
+    "reported_date": "2026-09-22",
+    "execution_timestamp_utc": null,
+    "branch_at_execution": "chore/reliora-handover-readiness",
+    "commit_at_execution": "0b9ab45781612e81759816dd9fe288b1088e0e0d",
+    "commit_basis": "Branch creation at known HEAD and no intervening commit before reported checks",
+    "worktree_before_checks": "User reported clean",
+    "environment": "Windows PowerShell, active project environment",
+    "python_version": null,
+    "uv_version": null,
+    "ruff_version": null,
+    "mypy_version": null,
+    "pytest_version": null,
+    "checks": [
+      {
+        "command": "uv sync --frozen",
+        "status": "REPORTED_PASS",
+        "result": "Checked 38 packages in 274ms",
+        "exit_code": null
+      },
+      {
+        "command": "ruff check",
+        "status": "REPORTED_PASS",
+        "result": "All checks passed!",
+        "exit_code": null
+      },
+      {
+        "command": "mypy src",
+        "status": "REPORTED_PASS",
+        "result": "Success: no issues found in 31 source files",
+        "exit_code": null
+      },
+      {
+        "command": "python -m pytest -q",
+        "status": "REPORTED_PASS",
+        "tests_passed": 208,
+        "duration_seconds": 16.67,
+        "exit_code": null
+      }
+    ],
+    "invocation_note": "Standalone uv run --frozen prefixes printed usage help; checks then succeeded as bare commands in the active environment. Do not claim the successful checks used uv run."
+  },
+  "documentation_review": {
+    "consolidation": "User reported patch application and git diff --cached --check passing, then committed and pushed bb55f98",
+    "handover_docs": "Link targets, manifest JSON, and changed-file scope validated before commit; no application tests rerun for documentation changes"
+  },
+  "historical_records": [
+    {
+      "path": "evidence/post-audit-engineering-baseline-2026-09-17.md",
+      "code_commit": "88c13baa8ae5d47910acf39ba879cf066815a364",
+      "scope": "Recorded prior local checks including evaluators, Lambda packaging, Terraform validation; not fresh handover execution"
+    },
+    {
+      "path": "docs/security/security-scan-baseline.md",
+      "date": "2026-09-08",
+      "scope": "Recorded local scans; Gitleaks zero findings, pip-audit no known vulnerabilities at scan time, Checkov 36 passed / 12 failed / 0 skipped with dispositions",
+      "fresh_release_scan": false
+    }
+  ],
+  "blockers": [
+    {
+      "id": "CI-BILLING",
+      "status": "BLOCKED",
+      "evidence": "User screenshot of GitHub Actions: account billing locked; workflows cannot execute",
+      "observed_date": "2026-09-22",
+      "successful_hosted_ci_claim": false
+    },
+    {
+      "id": "AWS-AUTH",
+      "status": "LAST_RECORDED_BLOCKED",
+      "evidence_path": "evidence/adr017-target-environment-entry-gate-2026-09-18.md",
+      "observed_date": "2026-09-18",
+      "result": "InvalidClientTokenId",
+      "current_credentials_rechecked": false
+    }
+  ],
+  "pending_current_checkpoint_checks": [
+    "deterministic evaluator regression runner",
+    "Stage-1 reproduction runner",
+    "Lambda build and artifact inspection",
+    "Terraform fmt/init/validate",
+    "secret/history scan",
+    "runtime dependency vulnerability scan",
+    "IaC scan with finding disposition",
+    "hosted CI after account restoration"
+  ],
+  "imported_sources": [
+    {
+      "path": "RELIORA-PRODUCT-NORTH-STAR.md",
+      "source_filename": "RELIORA-PRODUCT-NORTH-STAR(1).md",
+      "source_sha256": "8255f7025eac3dff93168a0d9d819156c0dc2a4943ae48e1e63ebbd30c028173",
+      "content_preserved": true
+    }
+  ],
+  "claim_limits": [
+    "No new AWS or production verification",
+    "No commercial adoption or ROI validation",
+    "No current security-clean claim",
+    "No final release certification"
+  ]
+}
