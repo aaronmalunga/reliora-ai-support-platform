@@ -97,9 +97,8 @@
     }
   ],
   "pending_current_checkpoint_checks": [
-    "secret/history scan",
-    "runtime dependency vulnerability scan",
-    "IaC scan with finding disposition",
+    "Checkov successful-run numeric exit-code capture if still available",
+    "IaC open finding remediation or release-scope risk disposition",
     "hosted CI after account restoration"
   ],
   "imported_sources": [
@@ -132,7 +131,7 @@
       "terraform_platform": "windows_amd64",
       "aws_provider": "6.62.0"
     },
-    "worktree": "Clean before evaluator execution; afterward only the two generated evaluator JSON reports marked modified. git diff -- evidence/generated/ printed CRLF-to-LF warnings and no content diff. Index normalization and final clean status not yet confirmed.",
+    "worktree": "Clean before evaluator execution; afterward only the two generated evaluator JSON reports marked modified. git diff -- evidence/generated/ printed CRLF-to-LF warnings and no content diff. Index normalization and final clean status not yet confirmed. Subsequent explicit staging normalized the report index: no staged diff and clean status confirmed before the fast-forward to 8d95afa.",
     "checks": [
       {
         "command": "uv run --frozen python evals/runners/run_deterministic_evaluator_regression.py",
@@ -181,9 +180,132 @@
       "Numeric exit codes and exact execution times not captured",
       "ZIP presence checks do not prove Lambda execution",
       "No AWS deployment, plan/apply, credential recheck, or hosted CI execution",
-      "Fresh security scans remain pending",
       "Terraform 1.15.8 differs from existing workflow pin 1.15.9; no tool upgrade performed"
     ],
     "artifact_sha256": null
+  },
+  "worktree_cleanup_observation": {
+    "source": "Aaron's PowerShell transcript",
+    "reported_date": "2026-09-22",
+    "result": "Explicit git add of the two generated reports produced no staged diff and a clean git status. Fast-forward from f532382 to 8d95afa then confirmed.",
+    "runtime_changes": false
+  },
+  "security_check_observation": {
+    "source": "User-pasted PowerShell transcripts; scanner execution performed by Aaron, not assistant or hosted CI",
+    "reported_date": "2026-09-22",
+    "execution_timestamp_utc": null,
+    "commit_at_execution": "8d95afa829a2686ae50a10d57a3518ba181eb407",
+    "commit_basis": "User confirmed fast-forward and HEAD 8d95afa before scanning; no intervening source changes reported",
+    "checks": [
+      {
+        "tool": "Gitleaks",
+        "version": "8.30.1",
+        "command": "gitleaks git --redact=100 --log-opts=\"--all --full-history\" .",
+        "scope": "Git history reachable from all refs present in the local clone",
+        "commits_scanned": 73,
+        "approximate_bytes_scanned": 1305141,
+        "result": "No leaks found",
+        "status": "REPORTED_PASS",
+        "exit_code": 0
+      },
+      {
+        "tool": "pip-audit",
+        "version": "2.10.1",
+        "command": "uv tool run --from pip-audit==2.10.1 pip-audit -r build/lambda/requirements.txt --require-hashes --disable-pip",
+        "scope": "Locked runtime requirements produced by the Lambda build at f532382; subsequent changes documentation only",
+        "result": "No known vulnerabilities found",
+        "status": "REPORTED_PASS",
+        "exit_code": 0
+      },
+      {
+        "tool": "Checkov",
+        "version": "3.3.16",
+        "command": "uv tool run --python .\\.venv\\Scripts\\python.exe --from checkov==3.3.16 python -m checkov.main -d infra/terraform --framework terraform --skip-download --skip-results-upload --compact --quiet",
+        "scope": "infra/terraform, terraform framework, local bundled policies",
+        "passed": 36,
+        "failed": 12,
+        "skipped": 0,
+        "status": "REPORTED_EXECUTED_WITH_FINDINGS",
+        "exit_code": null,
+        "exit_code_note": "Latest transcript ends at $LASTEXITCODE without its numeric output. Earlier exit 1 belongs to launcher failure, not this scan.",
+        "findings": [
+          {
+            "check": "CKV_AWS_28",
+            "resource": "aws_dynamodb_table.operations",
+            "existing_disposition": "ACCEPTED DEV DEVIATION"
+          },
+          {
+            "check": "CKV_AWS_119",
+            "resource": "aws_dynamodb_table.operations",
+            "existing_disposition": "ACCEPTED DEV DEVIATION"
+          },
+          {
+            "check": "CKV_AWS_28",
+            "resource": "aws_dynamodb_table.tickets",
+            "existing_disposition": "ACCEPTED DEV DEVIATION"
+          },
+          {
+            "check": "CKV_AWS_119",
+            "resource": "aws_dynamodb_table.tickets",
+            "existing_disposition": "ACCEPTED DEV DEVIATION"
+          },
+          {
+            "check": "CKV_AWS_272",
+            "resource": "aws_lambda_function.ticket_execution",
+            "existing_disposition": "OPEN HARDENING GAP"
+          },
+          {
+            "check": "CKV_AWS_116",
+            "resource": "aws_lambda_function.ticket_execution",
+            "existing_disposition": "CONDITIONAL / CLOUD VERIFICATION PENDING"
+          },
+          {
+            "check": "CKV_AWS_173",
+            "resource": "aws_lambda_function.ticket_execution",
+            "existing_disposition": "ACCEPTED DEV DEVIATION"
+          },
+          {
+            "check": "CKV_AWS_115",
+            "resource": "aws_lambda_function.ticket_execution",
+            "existing_disposition": "OPEN HARDENING GAP"
+          },
+          {
+            "check": "CKV_AWS_117",
+            "resource": "aws_lambda_function.ticket_execution",
+            "existing_disposition": "NOT REQUIRED BY CURRENT ARCHITECTURE"
+          },
+          {
+            "check": "CKV_AWS_50",
+            "resource": "aws_lambda_function.ticket_execution",
+            "existing_disposition": "OPEN OBSERVABILITY GAP"
+          },
+          {
+            "check": "CKV_AWS_158",
+            "resource": "aws_cloudwatch_log_group.ticket_lambda",
+            "existing_disposition": "ACCEPTED DEV DEVIATION"
+          },
+          {
+            "check": "CKV_AWS_338",
+            "resource": "aws_cloudwatch_log_group.ticket_lambda",
+            "existing_disposition": "INTENTIONALLY REJECTED FOR DEV"
+          }
+        ],
+        "comparison": "All 12 check/resource pairs match the existing September 8 finding register; no change to existing dispositions or production acceptance."
+      }
+    ],
+    "launcher_issue": {
+      "attempt": "uv tool run --from checkov==3.3.16 checkov",
+      "result": "pyenv global/local Python selection message; version and scan did not execute; scan attempt returned 1",
+      "recovery": "Select .venv/Scripts/python.exe explicitly and invoke python -m checkov.main inside the isolated tool environment; version and scan output obtained",
+      "project_python_pin_changed": false
+    },
+    "limitations": [
+      "User-reported results; exact execution timestamps and report hashes not captured",
+      "Scanner versions pinned for baseline comparison; no latest-policy-coverage claim",
+      "Gitleaks scope is locally available Git refs, not all workstation files or inaccessible remote refs",
+      "Dependency vulnerabilities reflect data available at scan time",
+      "Checkov failures remain; existing development dispositions are not production approval",
+      "No AWS or hosted CI evidence"
+    ]
   }
 }

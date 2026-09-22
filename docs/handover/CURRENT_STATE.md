@@ -49,14 +49,16 @@ Aaron invoked the latter commands directly in the active PowerShell environment 
 
 Aaron subsequently fast-forwarded to `f5323827a629e8589e3b50fb638c2e8af6133cd9` and reported both evaluator runners passing: 15/15 regression expectations and zero Stage-1 mismatches, with three expected historical defects detected. Lambda packaging and the workflow-equivalent ZIP inspection passed, including the Linux x86_64 pydantic-core binary. Terraform fmt/init/validate passed using Terraform 1.15.8 and AWS provider 6.62.0; Python 3.12.10 and uv 0.12.7 were reported. Numeric exit codes and execution timestamps remain unknown. The workflow pins Terraform 1.15.9, so local and CI tool versions differ. See [the manifest](VERIFICATION_MANIFEST.json) for actual commands and limitations.
 
-The two generated JSON reports remain marked modified locally, while `git diff -- evidence/generated/` showed only CRLF-to-LF warnings and no content diff. Final index normalization and a clean worktree are pending. No application source changes were reported.
+The two generated JSON reports showed only CRLF-to-LF warnings and no content diff. Explicit staging subsequently produced no staged diff and a clean worktree. Aaron then fast-forwarded to `8d95afa829a2686ae50a10d57a3518ba181eb407`. No application source changes were reported.
 
 The older [2026-09-17 baseline](../../evidence/post-audit-engineering-baseline-2026-09-17.md) remains historical. The [September 8 security record](../security/security-scan-baseline.md) records zero Gitleaks findings, no known runtime dependency vulnerabilities at scan time, and 36 passing / 12 failing Checkov checks with dispositions. It does not certify a new release.
+
+Fresh security scans were reported at `8d95afa`: Gitleaks 8.30.1 scanned 73 commits with zero leaks (exit 0); pip-audit 2.10.1 reported no known runtime vulnerabilities (exit 0); Checkov 3.3.16 reported 36 passed / 12 failed / 0 skipped. All 12 check/resource failures match the existing finding register. Their existing development dispositions remain, including open code-signing, concurrency, and tracing gaps and pending DLQ semantics verification. No production risk acceptance or clean IaC scan is claimed. The successful Checkov run's numeric exit-code output was not included. Its earlier pyenv launcher failure was resolved by explicitly selecting Python and running the module; see [VERIFY.md](VERIFY.md).
 
 ## Active blockers
 
 1. **GitHub Actions:** the user supplied a banner stating account billing is locked and workflows cannot execute. Startup-failure runs produced no passing check evidence. Account resolution is outside a code change; recheck before claiming restoration.
 2. **AWS:** the [2026-09-18 entry gate](../../evidence/adr017-target-environment-entry-gate-2026-09-18.md) records STS `InvalidClientTokenId`. No current credential check was performed. This is independent of GitHub billing.
-3. **Final verification:** fresh security-scan evidence, final worktree cleanup, reviewed integration, and pinned transfer remain outstanding. Local evaluator, packaging, and Terraform static checks now have user-reported passing evidence.
+3. **Final verification:** local scan execution and report cleanup are recorded. Open security findings, hosted CI, reviewed integration, and pinned transfer remain outstanding. Checkov's numeric scan exit code remains unreported.
 
 These blockers do not authorize weakening tests, making the repository public, changing identity semantics, or expanding the architecture. No live cloud retry-safety, production-readiness, or customer-value claim follows from local tests.

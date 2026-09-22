@@ -365,3 +365,40 @@ and workflows cannot execute. Hosted CI remains blocked, not passing.
 The recorded Checkov result includes 12 failed checks with the dispositions
 listed above; this is not a clean infrastructure-security scan. Fresh scans
 and applicable remediation verification remain required before release.
+
+## Fresh Handover Scan Observation — 2026-09-22
+
+Aaron supplied PowerShell execution output after updating to
+`8d95afa829a2686ae50a10d57a3518ba181eb407`. The assistant reviewed the
+transcripts; these are user-reported local results, not assistant-executed
+or hosted CI results. Exact execution timestamps and raw report hashes were
+not captured.
+
+| Scanner | Scope | Reported result | Exit code |
+|---|---|---|---|
+| Gitleaks 8.30.1 | History reachable from all local Git refs; 73 commits, approximately 1.31 MB | No leaks found | 0 |
+| pip-audit 2.10.1 | Hashed locked runtime requirements from the successful Lambda build | No known vulnerabilities found | 0 |
+| Checkov 3.3.16 | infra/terraform; Terraform framework; bundled policies | 36 passed / 12 failed / 0 skipped | Not included in the successful-run transcript |
+
+All 12 Checkov check/resource pairs match the finding register above:
+CKV_AWS_28 and CKV_AWS_119 on each DynamoDB table; CKV_AWS_272,
+CKV_AWS_116, CKV_AWS_173, CKV_AWS_115, CKV_AWS_117 and CKV_AWS_50
+on the ticket-execution Lambda; CKV_AWS_158 and CKV_AWS_338 on its
+CloudWatch log group.
+
+The comparison preserves the existing dispositions. It does not close the
+code-signing, concurrency or tracing gaps, establish DLQ invocation semantics,
+or approve development exceptions for production. No suppressions or
+infrastructure changes were introduced for this scan.
+
+Checkov initially failed at its Windows launcher with a pyenv Python-selection
+message and exit 1. That was not a policy-scan result. Selecting the working
+project Python explicitly and invoking `python -m checkov.main` in uv's
+isolated tool environment produced the version and scan output above. Do not
+reuse the launcher's exit code for the completed scan.
+
+See [verification commands](../handover/VERIFY.md) and the
+[verification manifest](../handover/VERIFICATION_MANIFEST.json) for exact
+invocations, resources, provenance and limitations. Security scan execution
+has been refreshed; remediation, hosted enforcement and production acceptance
+remain outstanding. No current cloud or security-clean release claim follows.
