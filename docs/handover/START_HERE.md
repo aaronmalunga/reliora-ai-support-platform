@@ -15,7 +15,7 @@ Prepared 2026-09-22. This is an engineering continuation checkpoint, not a produ
 
 Reliora already has local deterministic safety and evaluation foundations. Preserve them. Discovery repair is recorded complete with a NARROW decision; do not repeat it because an older audit predates its completion. Trusted identity through real AgentCore/Gateway/Lambda remains unverified and requires the smallest applicable experiment after AWS authentication succeeds.
 
-The immediate handover work is to complete the applicable evaluator, packaging, infrastructure, and security evidence; record the final continuation commit; and finish a reviewed integration path. GitHub Actions billing and AWS authentication are distinct blockers. Pending cloud evidence must stay pending while independent repository work proceeds.
+The evaluator, Lambda packaging/artifact, and Terraform static checks have user-reported passing evidence at f532382. The immediate handover work is to resolve the report index/line-ending status, complete fresh security evidence, record the final continuation commit, and finish a reviewed integration path. GitHub Actions billing and AWS authentication are distinct blockers. Pending cloud evidence must stay pending while independent repository work proceeds.
 
 ## Readiness boundaries
 

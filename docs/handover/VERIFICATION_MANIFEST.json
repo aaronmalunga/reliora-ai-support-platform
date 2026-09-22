@@ -97,10 +97,6 @@
     }
   ],
   "pending_current_checkpoint_checks": [
-    "deterministic evaluator regression runner",
-    "Stage-1 reproduction runner",
-    "Lambda build and artifact inspection",
-    "Terraform fmt/init/validate",
     "secret/history scan",
     "runtime dependency vulnerability scan",
     "IaC scan with finding disposition",
@@ -119,5 +115,75 @@
     "No commercial adoption or ROI validation",
     "No current security-clean claim",
     "No final release certification"
-  ]
+  ],
+  "handover_check_observation": {
+    "source": "User-pasted PowerShell transcripts in handover conversation",
+    "observer": "Aaron (reported); assistant did not execute these checks",
+    "reported_date": "2026-09-22",
+    "execution_timestamp_utc": null,
+    "commit_at_execution": "f5323827a629e8589e3b50fb638c2e8af6133cd9",
+    "branch_at_execution": "chore/reliora-handover-readiness",
+    "environment": {
+      "os": "Windows",
+      "shell": "PowerShell",
+      "python": "3.12.10",
+      "uv": "0.12.7",
+      "terraform": "1.15.8",
+      "terraform_platform": "windows_amd64",
+      "aws_provider": "6.62.0"
+    },
+    "worktree": "Clean before evaluator execution; afterward only the two generated evaluator JSON reports marked modified. git diff -- evidence/generated/ printed CRLF-to-LF warnings and no content diff. Index normalization and final clean status not yet confirmed.",
+    "checks": [
+      {
+        "command": "uv run --frozen python evals/runners/run_deterministic_evaluator_regression.py",
+        "result": "15 total; 15 matched; 0 mismatches; FACT-001, INV-004, INV-012 each 5/5",
+        "status": "REPORTED_PASS",
+        "exit_code": null
+      },
+      {
+        "command": "uv run --frozen python evals/runners/run_stage1_reproduction.py",
+        "result": "4 total; 3 executable; 1 documented non-executable; 3 known defects detected; 0 mismatches; all executable expectations met",
+        "status": "REPORTED_PASS",
+        "exit_code": null
+      },
+      {
+        "command": ".\\scripts\\build_lambda.ps1",
+        "result": "12 production packages installed; build/lambda/reliora-ticket-execution.zip created",
+        "status": "REPORTED_PASS",
+        "exit_code": null
+      },
+      {
+        "command": "uv run --frozen python -c \"import zipfile; p=r'build\\lambda\\reliora-ticket-execution.zip'; z=zipfile.ZipFile(p); names=z.namelist(); assert any(n.endswith('reliora/adapters/aws/lambda_entrypoint.py') for n in names), 'Lambda handler missing'; assert any(n.startswith('boto3/') for n in names), 'boto3 missing'; assert any(n.startswith('pydantic/') for n in names), 'pydantic missing'; native=[n for n in names if 'pydantic_core' in n and n.endswith('.so')]; assert native, 'Linux pydantic-core binary missing'; print('Lambda artifact verification passed'); print(native[:3])\"",
+        "result": "Lambda artifact verification passed; pydantic_core/_pydantic_core.cpython-312-x86_64-linux-gnu.so present",
+        "status": "REPORTED_PASS",
+        "exit_code": null
+      },
+      {
+        "command": "terraform -chdir=infra/terraform/envs/dev fmt -check",
+        "result": "No output or reported error",
+        "status": "REPORTED_PASS",
+        "exit_code": null
+      },
+      {
+        "command": "terraform -chdir=infra/terraform/envs/dev init -backend=false -input=false",
+        "result": "Successfully initialized; reused locked hashicorp/aws 6.62.0",
+        "status": "REPORTED_PASS",
+        "exit_code": null
+      },
+      {
+        "command": "terraform -chdir=infra/terraform/envs/dev validate -no-color",
+        "result": "Success! The configuration is valid.",
+        "status": "REPORTED_PASS",
+        "exit_code": null
+      }
+    ],
+    "limitations": [
+      "Numeric exit codes and exact execution times not captured",
+      "ZIP presence checks do not prove Lambda execution",
+      "No AWS deployment, plan/apply, credential recheck, or hosted CI execution",
+      "Fresh security scans remain pending",
+      "Terraform 1.15.8 differs from existing workflow pin 1.15.9; no tool upgrade performed"
+    ],
+    "artifact_sha256": null
+  }
 }

@@ -6,15 +6,15 @@ Snapshot: 2026-09-22. Preserve the NARROW gate. Each completed item must identif
 
 | ID | Task | Acceptance evidence |
 |---|---|---|
-| H1 | Synchronize the handover branch locally after these documentation changes | Correct HEAD/upstream; no unaccounted local work. |
-| H2 | Run both evaluator runners | Actual command/result tied to HEAD; 15/15 regression expectations; zero reproduction mismatches; known historical defects retained. Review generated JSON differences. |
-| H3 | Refresh Lambda packaging and Terraform static verification | Build/artifact check and fmt/init/validate evidence with tool versions and exact SHA. No deployment claim. |
+| H1 | Synchronize the handover branch locally after these documentation changes | Fast-forward to f532382 confirmed. Only generated report line-ending/index differences remain to resolve. |
+| H2 | Run both evaluator runners | REPORTED PASS at f532382: 15/15 regression expectations; zero reproduction mismatches; three historical defects detected. No report content diff; index cleanup pending. |
+| H3 | Refresh Lambda packaging and Terraform static verification | REPORTED PASS at f532382: Lambda build and ZIP check; Terraform fmt/init/validate. Python 3.12.10, uv 0.12.7, Terraform 1.15.8, AWS provider 6.62.0. See manifest; no deployment claim. |
 | H4 | Refresh scoped security checks | Secret/history, runtime dependency, and IaC findings retained, classified, and either remediated or explicitly justified for the release scope. Do not suppress findings just to pass. |
 | H5 | Complete hosted CI evidence when billing is restored | The appropriate workflow executes on the actual candidate commit; job results and limitations retained. A billing-blocked status remains blocked. |
 | H6 | Review final integration to main | All intended branch work accounted for; existing PR #1/#2 dispositions explicit; no loss of decisions or unique changes; required checks satisfied or a permitted exception explicitly documented. Do not bypass a required gate. |
 | H7 | Pin and transfer the final checkpoint | Final commit/tag, sanitized source archive, checksum, source map/supporting references, and receiver reproduction. No production-release claim implied by a handover tag. |
 
-The observed pre-merge code baseline has passing local lint/type/unit-test evidence. Documentation changes alone do not require repeating that suite without a concrete reason. H2-H4 close specific outstanding evidence gaps rather than repeating known checks indiscriminately.
+The observed pre-merge code baseline has passing local lint/type/unit-test evidence. Documentation changes alone do not require repeating that suite without a concrete reason. H2 and H3 now have user-reported passing evidence; H4 remains the next verification task. Preserve exact evidence provenance instead of repeating known checks indiscriminately.
 
 ## Product completion
 

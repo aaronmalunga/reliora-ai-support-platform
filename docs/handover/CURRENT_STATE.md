@@ -45,14 +45,18 @@ User-reported checks on the pre-merge `0b9ab45` baseline:
 | `mypy src` | No issues in 31 source files |
 | `python -m pytest -q` | 208 passed in 16.67 seconds |
 
-Aaron invoked the latter commands directly in the active PowerShell environment after entering incomplete `uv run --frozen` prefixes. Those prefixes printed usage help and did not run checks. The successful commands above are the actual observed transcript, not rewritten as uv-wrapped executions. Exact current interpreter/tool versions and exit codes were not captured. These results were not executed by the receiving agent or hosted CI.
+Aaron invoked the latter commands directly in the active PowerShell environment after entering incomplete `uv run --frozen` prefixes. Those prefixes printed usage help and did not run checks. The successful commands above are the actual observed transcript, not rewritten as uv-wrapped executions. Interpreter/tool versions and exit codes were not captured for that earlier run. These results were not executed by the receiving agent or hosted CI.
 
-The older [2026-09-17 baseline](../../evidence/post-audit-engineering-baseline-2026-09-17.md) records evaluator, packaging, and Terraform successes for `88c13ba`; these checks have not yet been repeated on this handover checkpoint. The [September 8 security record](../security/security-scan-baseline.md) records zero Gitleaks findings, no known runtime dependency vulnerabilities at scan time, and 36 passing / 12 failing Checkov checks with dispositions. It does not certify a new release.
+Aaron subsequently fast-forwarded to `f5323827a629e8589e3b50fb638c2e8af6133cd9` and reported both evaluator runners passing: 15/15 regression expectations and zero Stage-1 mismatches, with three expected historical defects detected. Lambda packaging and the workflow-equivalent ZIP inspection passed, including the Linux x86_64 pydantic-core binary. Terraform fmt/init/validate passed using Terraform 1.15.8 and AWS provider 6.62.0; Python 3.12.10 and uv 0.12.7 were reported. Numeric exit codes and execution timestamps remain unknown. The workflow pins Terraform 1.15.9, so local and CI tool versions differ. See [the manifest](VERIFICATION_MANIFEST.json) for actual commands and limitations.
+
+The two generated JSON reports remain marked modified locally, while `git diff -- evidence/generated/` showed only CRLF-to-LF warnings and no content diff. Final index normalization and a clean worktree are pending. No application source changes were reported.
+
+The older [2026-09-17 baseline](../../evidence/post-audit-engineering-baseline-2026-09-17.md) remains historical. The [September 8 security record](../security/security-scan-baseline.md) records zero Gitleaks findings, no known runtime dependency vulnerabilities at scan time, and 36 passing / 12 failing Checkov checks with dispositions. It does not certify a new release.
 
 ## Active blockers
 
 1. **GitHub Actions:** the user supplied a banner stating account billing is locked and workflows cannot execute. Startup-failure runs produced no passing check evidence. Account resolution is outside a code change; recheck before claiming restoration.
 2. **AWS:** the [2026-09-18 entry gate](../../evidence/adr017-target-environment-entry-gate-2026-09-18.md) records STS `InvalidClientTokenId`. No current credential check was performed. This is independent of GitHub billing.
-3. **Final verification:** fresh evaluator/build/IaC/security evidence and final integration remain outstanding.
+3. **Final verification:** fresh security-scan evidence, final worktree cleanup, reviewed integration, and pinned transfer remain outstanding. Local evaluator, packaging, and Terraform static checks now have user-reported passing evidence.
 
 These blockers do not authorize weakening tests, making the repository public, changing identity semantics, or expanding the architecture. No live cloud retry-safety, production-readiness, or customer-value claim follows from local tests.
